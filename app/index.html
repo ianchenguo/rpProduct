@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title></title>
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <link href="styles/style.css" rel="stylesheet">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="styles/ionic.app.css" rel="stylesheet">
+  -->
+
+  <!-- ionic/angularjs js -->
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/ionic/release/js/ionic.js"></script>
+  <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+  <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <!-- build:js scripts/scripts.js -->
+  <script src="app.module.js"></script>
+  <script src="app.run.js"></script>
+  <script src="app.router.js"></script>
+
+  <!--core module-->
+  <script src="core/core.module.js"></script>
+  <!--file service module-->
+  <script src="core/fileService/file.module.js"></script>
+  <script src="core/fileService/fileService.js"></script>
+  <!--audio recording module-->
+  <script src="core/audioRecordingService/audioRecording.module.js"></script>
+  <script src="core/audioRecordingService/audioRecordingService.js"></script>
+
+  <!--side menu module-->
+  <script src="sideMenu/sideMenu.module.js"></script>
+  <script src="sideMenu/sideMenu.router.js"></script>
+  <script src="sideMenu/SideMenuController.js"></script>
+  <script src="sideMenu/directives/ceSideMenuMainContent/ceSideMenuMainContent.js"></script>
+  <script src="sideMenu/directives/ceSideMenuSideContent/ceSideMenuSideContent.js"></script>
+
+
+  <!--welcome module-->
+  <script src="welcome/welcome.module.js"></script>
+  <script src="welcome/welcome.router.js"></script>
+  <script src="welcome/WelcomeController.js"></script>
+
+  <!--quiz session module-->
+  <script src="quiz/quiz.module.js"></script>
+  <script src="quiz/quiz.router.js"></script>
+  <script src="quiz/QuizController.js"></script>
+
+  <!--quiz session info module-->
+  <script src="quiz/info/quizInfo.module.js"></script>
+  <script src="quiz/info/QuizInfoController.js"></script>
+
+  <script src="scripts/configuration.js"></script>
+  <!-- endbuild -->
+</head>
+
+<body ng-app="app">
+<ion-nav-view></ion-nav-view>
+</body>
+
+</html>
