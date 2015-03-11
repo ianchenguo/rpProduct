@@ -153,10 +153,9 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       }
     },
-
 
 
     // Reads HTML for usemin blocks to enable smart builds that automatically
@@ -323,7 +322,7 @@ module.exports = function (grunt) {
     karma: {
       options: {
         basePath: '',
-        frameworks: ['mocha', 'chai'],
+        frameworks: ['mocha', 'chai', 'chai-as-promised', 'sinon', 'sinon-chai'],
         files: [
           '<%= yeoman.app %>/bower_components/angular/angular.js',
           '<%= yeoman.app %>/bower_components/angular-mocks/angular-mocks.js',
@@ -332,34 +331,46 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/bower_components/angular-ui-router/release/angular-ui-router.js',
           '<%= yeoman.app %>/bower_components/ionic/release/js/ionic.js',
           '<%= yeoman.app %>/bower_components/ionic/release/js/ionic-angular.js',
-          '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
+          '<%= yeoman.app %>/bower_components/ngCordova/dist/ng-cordova.js',
+          '<%= yeoman.app %>/bower_components/ngCordova/dist/ng-cordova-mocks.js',
+
+          '<%= yeoman.app %>/**/*module.js',
+          '<%= yeoman.app %>/*.js',
+
+          '<%= yeoman.app %>/core/**/*.js',
+
+          '<%= yeoman.app %>/quiz/**/*.js',
+          '<%= yeoman.app %>/sideMenu/**/*.js',
+          '<%= yeoman.app %>/welcome/**/*.js',
+
+
           '<%= yeoman.test %>/mock/**/*.js',
           '<%= yeoman.test %>/spec/**/*.js'
         ],
-        autoWatch: false,
+        autoWatch: true,
         reporters: ['dots', 'coverage'],
         port: 8080,
         singleRun: false,
         preprocessors: {
           // Update this if you change the yeoman config path
-          '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js': ['coverage']
+          '<%= yeoman.app %>/**/*.js': ['coverage']
         },
         coverageReporter: {
           reporters: [
-            { type: 'html', dir: 'coverage/' },
-            { type: 'text-summary' }
+            {type: 'html', dir: 'coverage/'},
+            {type: 'text-summary'}
           ]
         }
       },
       unit: {
         // Change this to 'Chrome', 'Firefox', etc. Note that you will need
         // to install a karma launcher plugin for browsers other than Chrome.
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
         background: true
       },
       continuous: {
-        browsers: ['PhantomJS'],
-        singleRun: true,
+        browsers: ['Chrome'],
+        singleRun: false
       }
     },
 
@@ -446,11 +457,11 @@ module.exports = function (grunt) {
   });
 
   // Wrap ionic-cli commands
-  grunt.registerTask('ionic', function() {
+  grunt.registerTask('ionic', function () {
     var done = this.async();
     var script = path.resolve('./node_modules/ionic/bin/', 'ionic');
     var flags = process.argv.splice(3);
-    var child = spawn(script, this.args.concat(flags), { stdio: 'inherit' });
+    var child = spawn(script, this.args.concat(flags), {stdio: 'inherit'});
     child.on('close', function (code) {
       code = code ? false : true;
       done(code);
@@ -474,15 +485,15 @@ module.exports = function (grunt) {
     grunt.config('concurrent.ionic.tasks', ['ionic:serve', 'watch']);
     grunt.task.run(['wiredep', 'init', 'concurrent:ionic']);
   });
-  grunt.registerTask('emulate', function() {
+  grunt.registerTask('emulate', function () {
     grunt.config('concurrent.ionic.tasks', ['ionic:emulate:' + this.args.join(), 'watch']);
     return grunt.task.run(['init', 'concurrent:ionic']);
   });
-  grunt.registerTask('run', function() {
+  grunt.registerTask('run', function () {
     grunt.config('concurrent.ionic.tasks', ['ionic:run:' + this.args.join(), 'watch']);
     return grunt.task.run(['init', 'concurrent:ionic']);
   });
-  grunt.registerTask('build', function() {
+  grunt.registerTask('build', function () {
     return grunt.task.run(['init', 'ionic:build:' + this.args.join()]);
   });
 
@@ -515,8 +526,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('coverage',
     ['karma:continuous',
-    'connect:coverage:keepalive'
-  ]);
+      'connect:coverage:keepalive'
+    ]);
 
   grunt.registerTask('default', [
     'wiredep',

@@ -5,6 +5,6 @@
 (function () {
   'use strict';
   angular
-    .module('app.quizInfo', []);
+    .module('app.quiz.info', []);
 
 }());

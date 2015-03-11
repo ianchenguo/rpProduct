@@ -9,7 +9,8 @@
       'app.sideMenu',
       'app.welcome',
       'app.quiz',
-      'app.quizInfo'
+      'app.quiz.info',
+      'app.quiz.questions'
     ]);
 
 }());

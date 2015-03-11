@@ -5,11 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.quizInfo')
+    .module('app.quiz.info')
     .controller('QuizInfoController', QuizInfoController);
 
-  function QuizInfoController() {
+  QuizInfoController.$inject = ['quizService']
+  function QuizInfoController(quizService) {
     var vm = this;
+
+    vm.test = 'test';
 
     vm.quizInfo = {
       observer: {
@@ -24,6 +27,14 @@
         gender: ''
       }
     }
+
+    vm.submitInfo = submitInfo;
+
+    //////
+    function submitInfo(){
+      return quizService.initQuiz(vm.quizInfo);
+    }
+
   }
 
 }());

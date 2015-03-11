@@ -68,7 +68,7 @@
 
       function handleError(error) {
         console.log('getFile() Error: ' + JSON.stringify(error));
-        return error;
+        return $q.reject(error);
       }
     }
 
@@ -83,7 +83,7 @@
 
       function handleError(error) {
         console.log('checkDir() Error: ' + JSON.stringify(error));
-        return error;
+        return $q.reject(error);
       }
     }
 
@@ -98,7 +98,7 @@
 
       function handleError(error) {
         console.log('createDir() Error: ' + JSON.stringify(error));
-        return error;
+        return $q.reject(error);
       }
     }
 

@@ -7,7 +7,7 @@
     .module('app.core',[
       'ionic',
       'ngCordova',
-      'placeholders.img',
+      //'placeholders.img',
 
       'core.audioRecording',
       'core.file',
