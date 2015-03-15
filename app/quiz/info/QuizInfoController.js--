@@ -1,0 +1,43 @@
+/**
+ * Created by guochen on 5/03/15.
+ */
+
+(function () {
+  'use strict';
+  angular
+    .module('app.quiz.info')
+    .controller('QuizInfoController', QuizInfoController);
+
+  QuizInfoController.$inject = ['$state','quizService']
+  function QuizInfoController($state,quizService) {
+    var vm = this;
+
+    vm.test = 'test';
+
+    vm.quizInfo = {
+      observer: {
+        firstName: '',
+        lastName: '',
+        email: ''
+      },
+      child: {
+        firstName: '',
+        lastName: '',
+        age: '',
+        gender: ''
+      }
+    }
+
+    vm.submitInfo = submitInfo;
+
+    //////
+    function submitInfo(){
+      $state.go('app.quiz.question1');
+
+      var promise = quizService.createQuiz(vm.quizInfo);
+      promise.then($state.go('app.quiz.question1'));
+    }
+
+  }
+
+}());

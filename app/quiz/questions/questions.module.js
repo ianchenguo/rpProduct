@@ -3,8 +3,8 @@
  */
 
 (function () {
-    'use strict';
-    angular
-      .module('app.quiz.questions',[]);
+  'use strict';
+  angular
+    .module('app.quiz.questions', []);
 
 }());

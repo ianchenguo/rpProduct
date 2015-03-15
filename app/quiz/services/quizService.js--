@@ -1,0 +1,108 @@
+/**
+ * Created by guochen on 11/03/15.
+ */
+
+(function () {
+  'use strict';
+  angular
+    .module('app.quiz')
+    .factory('quizService', quizService);
+
+  quizService.$inject = ['$q', '$ionicPlatform', '$cordovaDevice', 'fileService'];
+
+  function quizService($q, $ionicPlatform, $cordovaDevice, fileService) {
+
+    //create an empty quiz object
+    var _quiz = {id: '', envInfo: {}, quizInfo: {}, startTimeStamp: '', endTimeStamp: '', questions: []};
+
+    var service = {
+      getQuiz: getQuiz,
+      createQuiz: createQuiz,
+      persistQuizInfo: persistQuizInfo
+    };
+    return service;
+    //////
+
+    //initialise a quiz
+    function createQuiz(init) {
+
+      var deferred = $q.defer();
+      //create a quiz object
+      _quiz = new _Quiz(init);
+      //persist the quiz object
+      $ionicPlatform.ready(function () {
+        _populateDeviceInfo();
+        persistQuizInfo().then(
+          function (value) {
+            q.reslove({state: 'success', detail: value})
+          },
+          function (error) {
+            q.reject({state: 'error', detail: error})
+          });
+      });
+
+      return deferred.promise;
+    }
+
+    function _populateDeviceInfo() {
+      _quiz.envInfo.uuid = $cordovaDevice.getUUID();
+      _quiz.envInfo.platform = $cordovaDevice.getPlatform();
+    }
+
+    function _Observer(init) {
+      this.firstName = init.firstName;
+      this.lastName = init.lastName;
+      this.email = init.email;
+    }
+
+    function _Child(init) {
+      this.firstName = init.firstName;
+      this.lastName = init.lastName;
+      this.age = init.age;
+      this.gender = init.gender;
+    }
+
+    function _EnvInfo() {
+      this.uuid = '';
+      this.platform = '';
+    }
+
+    function _QuizInfo(init) {
+      this.observer = new _Observer(init.observer);
+      this.child = new _Child(init.child);
+    }
+
+    function _Quiz(init) {
+      this.id = init.timeStamp;
+      this.startTimeStamp = init.timeStamp;
+      this.endTimeStamp = '';
+      this.envInfo = new _EnvInfo();
+      this.quizInfo = new _QuizInfo(init);
+    }
+
+    function persistQuizInfo() {
+
+      var
+        baseDir = 'quizzes',
+        subDir = _quiz.id,
+        relativePath = baseDir + '/' + subDir,
+        fileName = 'quiz.txt';
+
+      console.log(relativePath + '/' + fileName);
+
+      //if the directory does not exist, create it
+      fileService.setFileSystem('');
+      return fileService.checkDir('', baseDir)
+        .catch(fileService.createDir('', baseDir, false))
+        .then(fileService.checkDir('', relativePath))
+        .catch(fileService.createDir('', relativePath, false))
+        //if the file does not exist, create it
+        .then(fileService.createFile('', relativePath + '/' + fileName, false));
+    }
+
+    function getQuiz() {
+      return _quiz;
+    }
+  }
+
+}());

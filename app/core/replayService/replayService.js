@@ -138,7 +138,7 @@
 
 
               var cancelled = !angular.element('#' + s.elId)[0].dispatchEvent(e);
-              console.log(cancelled);
+              //console.log(cancelled);
             }, s.dt);
           }());
         }

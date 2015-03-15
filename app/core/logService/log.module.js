@@ -3,7 +3,7 @@
  */
 
 (function () {
-    'use strict';
-    angular
-      .module('core.log',[]);
+  'use strict';
+  angular
+    .module('core.log', []);
 }());

@@ -7,11 +7,12 @@
     .module('app.core',[
       'ionic',
       'ngCordova',
-      //'placeholders.img',
+      'pouchdb',
 
       'core.audioRecording',
       'core.file',
       'core.log',
-      'core.replay'
+      'core.replay',
+      'core.dbService'
     ]);
 }());

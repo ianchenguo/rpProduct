@@ -10,7 +10,9 @@
       'app.welcome',
       'app.quiz',
       'app.quiz.info',
-      'app.quiz.questions'
+      'app.quiz.questions',
+      'app.quiz.questions.questionA',
+      'app.quiz.questions.common'
     ]);
 
 }());

@@ -55,7 +55,7 @@
 
       if (evType === 'dragend') {
         touchSessions.push(touchSession);
-        console.log(touchSessions);
+        //console.log(touchSessions);
       }
     }
 
