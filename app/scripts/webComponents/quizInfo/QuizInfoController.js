@@ -30,6 +30,7 @@
       ///
       function handleSuccess(value) {
         deferred.resolve(value);
+        $state.go('app.quiz.questions.a.zero');
       }
       function handleError(error) {
         deferred.reject(error);

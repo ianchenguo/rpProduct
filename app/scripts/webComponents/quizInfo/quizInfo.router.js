@@ -14,7 +14,7 @@
     $stateProvider
       .state('app.quiz.info', {
         url: '/info',
-        templateUrl: 'quiz/info/quizInfo.html',
+        templateUrl: 'scripts/webComponents/quizInfo/quizInfo.html',
         controller: 'QuizInfoController as vm'
       })
   }

@@ -1,0 +1,10 @@
+<div class="row" ng-repeat="rowComponents in vm.testComponents">
+
+  <div class="col col-33" ng-repeat="c in rowComponents">
+
+    <ce-test-base ng-style="{visibility:c.visibility}"
+                       title="c.title"
+                       droppable="c.droppable"></ce-test-base>
+  </div>
+</div>
+

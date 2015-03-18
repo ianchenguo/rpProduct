@@ -1,0 +1,10 @@
+<!--desired area-->
+<ce-desired-pattern class="desired-pattern" ng-if="vm.level > 0"></ce-desired-pattern><!--desired area-->
+
+<!--droppable area-->
+<ce-test-area class="test-area" level="{{vm.level}}" ng-if="vm.level < 2"></ce-test-area><!--droppable area -->
+<ce-populated-test-area class="test-area" level="{{vm.level}}" ng-if="vm.level == 2"></ce-populated-test-area><!--droppable area -->
+
+
+<!--draggable area-->
+<ce-question-a-initial-area class="initial-area" ng-if="vm.level < 2"></ce-question-a-initial-area><!--draggable area-->

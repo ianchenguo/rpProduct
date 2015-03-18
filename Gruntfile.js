@@ -322,7 +322,8 @@ module.exports = function (grunt) {
     karma: {
       options: {
         basePath: '',
-        frameworks: ['mocha', 'chai', 'chai-as-promised', 'sinon', 'sinon-chai'],
+        //frameworks: ['mocha', 'chai', 'sinon'],
+        frameworks: ['jasmine'],
         files: [
           '<%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
           '<%= yeoman.app %>/bower_components/angular/angular.js',
@@ -334,23 +335,20 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/bower_components/ionic/release/js/ionic-angular.js',
           '<%= yeoman.app %>/bower_components/ngCordova/dist/ng-cordova.js',
           '<%= yeoman.app %>/bower_components/ngCordova/dist/ng-cordova-mocks.js',
-
           '<%= yeoman.app %>/bower_components/pouchdb/dist/pouchdb.js',
           '<%= yeoman.app %>/bower_components/angular-pouchdb/dist/angular-pouchdb.js',
+          '<%= yeoman.app %>/bower_components/relational-pouch/dist/pouchdb.relational-pouch.js',
 
-          '<%= yeoman.app %>/**/*module.js',
+
+
+          '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.module.js',
           '<%= yeoman.app %>/*.js',
-
-          '<%= yeoman.app %>/core/**/*.js',
-
-          '<%= yeoman.app %>/quiz/**/*.js',
-          '<%= yeoman.app %>/sideMenu/**/*.js',
-          '<%= yeoman.app %>/welcome/**/*.js',
-          '<%= yeoman.app %>/scripts/webComponents/**/*.js',
-
+          '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
 
           '<%= yeoman.test %>/mock/**/*.js',
           '<%= yeoman.test %>/spec/**/*.js'
+
+
         ],
         autoWatch: true,
         reporters: ['dots', 'coverage'],
@@ -358,7 +356,7 @@ module.exports = function (grunt) {
         singleRun: false,
         preprocessors: {
           // Update this if you change the yeoman config path
-          '<%= yeoman.app %>/**/*.js': ['coverage']
+          '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js': ['coverage']
         },
         coverageReporter: {
           reporters: [
@@ -367,12 +365,12 @@ module.exports = function (grunt) {
           ]
         }
       },
-      //unit: {
-      //  // Change this to 'Chrome', 'Firefox', etc. Note that you will need
-      //  // to install a karma launcher plugin for browsers other than Chrome.
-      //  browsers: ['Chrome'],
-      //  background: true
-      //},
+      unit: {
+        // Change this to 'Chrome', 'Firefox', etc. Note that you will need
+        // to install a karma launcher plugin for browsers other than Chrome.
+        browsers: ['Chrome'],
+        background: true
+      },
       continuous: {
         browsers: ['Chrome'],
         singleRun: false

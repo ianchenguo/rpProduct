@@ -8,9 +8,9 @@
     .module('app.quiz')
     .factory('quizDbService', quizDbService);
 
-  quizDbService.$inject = ['Quiz','dbService'];
+  quizDbService.$inject = ['dbService'];
 
-  function quizDbService(Quiz,dbService) {
+  function quizDbService(dbService) {
 
     var service = {
       getQuiz: getQuiz,
@@ -24,7 +24,10 @@
     }
 
     function createQuiz(quiz) {
-      return dbService.db.put(quiz);
+      return dbService.db.put(quiz)
+        .then(function(value){
+          return value;
+        });
     }
 
   }

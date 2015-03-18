@@ -33,21 +33,13 @@
       observer = new Observer(observerData);
       child = new Child(childData);
 
-      var test = $cordovaDevice.getUUID();
-
+      device = {};
       //device = new Device(
       //  {
       //    platform: $cordovaDevice.getPlatform(),
       //    uuid: $cordovaDevice.getUUID(),
       //    version: $cordovaDevice.getVersion()
       //  });
-
-      device = new Device(
-        {
-          platform: 'dummy',
-          uuid: 'dummy',
-          version: 'dummy'
-        });
 
       _quiz = new Quiz({
         endTimeStamp:'',
