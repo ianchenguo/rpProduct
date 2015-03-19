@@ -11,8 +11,8 @@
   dbService.$inject = ['pouchDB']
   function dbService(pouchDB) {
 
-    //PouchDB.debug.disable();
-    PouchDB.debug.enable('*');
+    PouchDB.debug.disable();
+    //PouchDB.debug.enable('*');
 
     var db = pouchDB('cedb', {adapter: 'websql'});
 

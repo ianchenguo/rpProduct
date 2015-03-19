@@ -340,7 +340,6 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/bower_components/relational-pouch/dist/pouchdb.relational-pouch.js',
 
 
-
           '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.module.js',
           '<%= yeoman.app %>/*.js',
           '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.js',
@@ -364,17 +363,19 @@ module.exports = function (grunt) {
             {type: 'text-summary'}
           ]
         }
-      },
-      unit: {
+      }
+      , unit: {
         // Change this to 'Chrome', 'Firefox', etc. Note that you will need
         // to install a karma launcher plugin for browsers other than Chrome.
         browsers: ['Chrome'],
-        background: true
-      },
-      continuous: {
-        browsers: ['Chrome'],
-        singleRun: false
+        //background: true,
+        //logLevel: 'DEBUG',
+        singleRun:false
       }
+      //, continuous: {
+      //  browsers: ['Chrome'],
+      //  singleRun: false
+      //}
     },
 
     // ngAnnotate tries to make the code safe for minification automatically by

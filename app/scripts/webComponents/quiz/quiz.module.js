@@ -6,5 +6,4 @@
   'use strict';
   angular
     .module('app.quiz', []);
-
 }());

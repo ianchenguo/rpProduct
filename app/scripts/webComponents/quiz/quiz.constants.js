@@ -9,12 +9,21 @@
     .constant({
       STATE: {
         created: 'created',
-        initialised: 'initialised',
-        finalised: 'finalised'
+        finished: 'finished'
       },
       GENDER: {
         male: 'male',
         female: 'female'
+      },
+      QUESTION_TYPE: {
+        a: 'a',
+        b: 'b',
+        c: 'c'
+      },
+      LEVEL_TYPE: {
+        zero: 0,
+        one: 1,
+        two: 2
       }
     });
 }());

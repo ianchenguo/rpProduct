@@ -19,19 +19,19 @@
         controller: 'QuestionAController as vm',
         data:{question:QUESTION_TYPE.a}
       })
-      .state('app.quiz.questions.a.zero', {
+      .state('app.quiz.questions.a.level0', {
         url: '/level0',
         templateUrl: 'scripts/webComponents/questionA/questionA.html',
         controller: 'QuestionAController as vm',
         data:{level:LEVEL_TYPE.zero}
       })
-      .state('app.quiz.questions.a.one', {
+      .state('app.quiz.questions.a.level1', {
         url: '/level1',
         templateUrl: 'scripts/webComponents/questionA/questionA.html',
         controller: 'QuestionAController as vm',
         data:{level:LEVEL_TYPE.one}
       })
-      .state('app.quiz.questions.a.two', {
+      .state('app.quiz.questions.a.level2', {
         url: '/level2',
         templateUrl: 'scripts/webComponents/questionA/questionA.html',
         controller: 'QuestionAController as vm',

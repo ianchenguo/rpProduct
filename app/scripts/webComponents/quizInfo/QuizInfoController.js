@@ -23,14 +23,14 @@
       var deferred = $q.defer();
 
       $ionicPlatform.ready(function(){
-        quizService.initQuiz(vm.child,vm.observer).then(handleSuccess,handleError);
+        quizService.createQuiz(vm.child,vm.observer).then(handleSuccess,handleError);
       });
 
       return deferred.promise;
       ///
       function handleSuccess(value) {
         deferred.resolve(value);
-        $state.go('app.quiz.questions.a.zero');
+        $state.go('app.quiz.questions.a.level0');
       }
       function handleError(error) {
         deferred.reject(error);

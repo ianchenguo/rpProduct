@@ -11,8 +11,7 @@
   function Child() {
 
     var Child = function Child(init) {
-      this._id = 'child_' + init.gender + '_' + init.age + '_' + init.firstName.toLowerCase()  + '_' + init.lastName.toLowerCase();
-      this._rev = '';
+
       this.firstName = init.firstName;
       this.lastName = init.lastName;
       this.age = init.age;
