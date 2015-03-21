@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.questions.common')
+    .module('app.quiz.questions')
     .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider'];

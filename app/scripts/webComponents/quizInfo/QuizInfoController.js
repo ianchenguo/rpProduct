@@ -8,8 +8,8 @@
     .module('app.quiz.info')
     .controller('QuizInfoController', QuizInfoController);
 
-  QuizInfoController.$inject = ['$q','$state', '$ionicPlatform', 'quizService']
-  function QuizInfoController($q,$state, $ionicPlatform, quizService) {
+  QuizInfoController.$inject = ['$scope', '$q', '$state', 'quizService'];
+  function QuizInfoController($scope, $q, $state, quizService) {
     var vm = this;
 
     vm.child = {firstName: '', lastName: '', age: '', gender: ''};
@@ -19,21 +19,20 @@
 
     //////
     function submitInfo() {
+      return quizService
+        .createQuiz(vm.child, vm.observer)
+        .then(handleSuccess)
+        .catch(handleError);
 
-      var deferred = $q.defer();
-
-      $ionicPlatform.ready(function(){
-        quizService.createQuiz(vm.child,vm.observer).then(handleSuccess,handleError);
-      });
-
-      return deferred.promise;
       ///
       function handleSuccess(value) {
-        deferred.resolve(value);
         $state.go('app.quiz.questions.a.level0');
+        $scope.$apply();
+        return value;
       }
+
       function handleError(error) {
-        deferred.reject(error);
+        $q.reject(error);
       }
     }
 

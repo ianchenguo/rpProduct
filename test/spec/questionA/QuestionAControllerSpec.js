@@ -5,8 +5,8 @@
 (function () {
   'use strict';
 
-  //tests QuizInfoController
-  describe('QuizInfoController', function () {
+  //tests QuestionAController
+  describe('QuestionAController', function () {
 
     var $templateCache, $state, $scope, vm, quizService;
 
@@ -17,7 +17,7 @@
         $templateCache = _$templateCache_;
         $state = _$state_;
         $scope = $rootScope.$new();
-        vm = $controller('QuizInfoController', {$scope: $scope, quizService: quizService});
+        vm = $controller('QuestionAController', {$scope: $scope, quizService: quizService});
       })
     );
 
@@ -33,33 +33,30 @@
       quizService = $injector.get('quizService');
     });
 
-    it('should have a child property', function(){
-      expect(vm.child).toBeDefined;
+    beforeEach(function() {
+      spyOn($state,'current.data.question').and.returnValue(QUESTION_LEVEL.a);
     });
 
-    it('should have an observer property', function(){
-      expect(vm.observer).toBeDefined;
-    });
 
-    describe('submitInfo()',function(){
 
-      function shouldNotBeCalled(rejection) {
-        console.log(rejection);
-        self.fail(rejection);
-      }
-
-      function shouldBeOK(response) {
-        expect(response.ok).toBe(true);
-        expect($state.current.name).toBe('app.quiz.questions.a.level0');
-      }
-
-      it('should create a quiz document in database and transit to the correct state', function(done){
-        vm.submitInfo()
-          .then(shouldBeOK)
-          .catch(shouldNotBeCalled)
-          .finally(done);
-      });
-    });
+    //describe('initialise()',function(){
+    //
+    //  function shouldNotBeCalled(rejection) {
+    //    console.log(rejection);
+    //    self.fail(rejection);
+    //  }
+    //
+    //  function shouldBeOK(response) {
+    //    expect(response.ok).toBe(true);
+    //  }
+    //
+    //  it('should create a question document and a level document in database', function(done){
+    //    vm.initialise()
+    //      .then(shouldBeOK)
+    //      .catch(shouldNotBeCalled)
+    //      .finally(done);
+    //  });
+    //});
 
 
   });

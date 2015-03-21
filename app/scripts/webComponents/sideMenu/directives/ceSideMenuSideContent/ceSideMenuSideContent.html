@@ -5,8 +5,12 @@
       Question A
     </div>
 
-    <a menu-close class="item" ui-sref="app.quiz.questions.a.level0">
-      Level 0
+    <!--<a menu-close class="item" ui-sref="app.quiz.questions.a.level0">-->
+      <!--Level 0-->
+    <!--</a>-->
+
+    <a menu-close class="item" ng-click="vm.goTo(QUESTION_TYPE.a, LEVEL_TYPE.zero)">
+    Level 0
     </a>
 
     <a menu-close class="item" ui-sref="app.quiz.questions.a.level1">

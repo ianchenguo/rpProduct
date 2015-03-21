@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.questions.common')
+    .module('app.quiz.questions')
     .directive('ceTestBase', ceTestBase);
 
   //////
@@ -13,7 +13,7 @@
     return {
       transclude:true,
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionsCommon/directives/ceTestBase/ceTestBase.html',
+      templateUrl: 'scripts/webComponents/questions/directives/ceTestBase/ceTestBase.html',
       scope: {
         title: '=',
         droppable: '='

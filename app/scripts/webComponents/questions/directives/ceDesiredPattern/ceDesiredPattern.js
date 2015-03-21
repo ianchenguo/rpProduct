@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.questions.common')
+    .module('app.quiz.questions')
     .directive('ceDesiredPattern', ceDesiredPattern);
 
   //////
   function ceDesiredPattern() {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionsCommon/directives/ceDesiredPattern/ceDesiredPattern.html',
+      templateUrl: 'scripts/webComponents/questions/directives/ceDesiredPattern/ceDesiredPattern.html',
       scope: {
         content: '@'
       },

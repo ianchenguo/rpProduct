@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.questions.common')
-    .directive('ceCard', ceCard);
+    .module('app.quiz.questions')
+    .directive('ceCardBase', ceCardBase);
 
   //////
-  function ceCard() {
+  function ceCardBase() {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionsCommon/directives/ceCard/ceCard.html',
+      templateUrl: 'scripts/webComponents/questions/directives/ceCardBase/ceCardBase.html',
       //replace:true,
       scope: {
         content: '='

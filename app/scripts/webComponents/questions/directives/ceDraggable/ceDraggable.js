@@ -2,7 +2,7 @@
  * Created by guochen on 25/02/15.
  */
 angular
-  .module('app.quiz.questions.common')
+  .module('app.quiz.questions')
   .directive('ceDraggable', ceDraggable);
 
 ceDraggable.$inject = ['$document', '$ionicGesture', 'logService'];
