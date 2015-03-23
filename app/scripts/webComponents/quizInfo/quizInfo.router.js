@@ -5,17 +5,21 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.info')
+    .module('app.quizInfo')
     .config(routeConfig);
 
   routeConfig.$inject = ['$stateProvider'];
   function routeConfig($stateProvider) {
 
     $stateProvider
-      .state('app.quiz.info', {
-        url: '/info',
-        templateUrl: 'scripts/webComponents/quizInfo/quizInfo.html',
-        controller: 'QuizInfoController as vm'
+      .state('app.quizInfo', {
+        url: '/quizInfo',
+        views: {
+          'menuMainContent': {
+            templateUrl: 'scripts/webComponents/quizInfo/quizInfo.html',
+            controller: 'QuizInfoController as vm'
+          }
+        }
       })
   }
 

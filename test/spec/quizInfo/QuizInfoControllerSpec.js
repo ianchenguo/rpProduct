@@ -29,16 +29,16 @@
     });
 
     beforeEach(function () {
-      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.dbService', 'app.quiz']);
+      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.db', 'app.quiz']);
       quizService = $injector.get('quizService');
     });
 
     it('should have a child property', function(){
-      expect(vm.child).toBeDefined;
+      expect(vm.child).toBeDefined();
     });
 
     it('should have an observer property', function(){
-      expect(vm.observer).toBeDefined;
+      expect(vm.observer).toBeDefined();
     });
 
     describe('submitInfo()',function(){
@@ -49,8 +49,9 @@
       }
 
       function shouldBeOK(response) {
+        $scope.$apply();
         expect(response.ok).toBe(true);
-        expect($state.current.name).toBe('app.quiz.questions.a.level0');
+        expect($state.current.name).toBe('app.quiz.questionA.level0');
       }
 
       it('should create a quiz document in database and transit to the correct state', function(done){

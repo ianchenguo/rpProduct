@@ -1,5 +1,5 @@
 /**
- * Created by guochen on 9/03/15.
+ * Created by guochen on 12/03/15.
  */
 
 (function () {
@@ -13,15 +13,14 @@
 
     $stateProvider
       .state('app.quiz', {
-        abstract: true,
         url: '/quiz',
         views: {
           'menuMainContent': {
-
-            template: '<ion-nav-view></ion-nav-view>',
-            controller: 'QuizController as vm'
+            abstract: true,
+            template: '<ion-nav-view></ion-nav-view>'
           }
         }
       })
   }
+
 }());

@@ -8,60 +8,67 @@
     .module('core.log')
     .factory('logService', logService);
 
-  function logService() {
+  logService.$inject = ['Directive', 'questionLevelService', 'STATE', 'directiveDbService'];
+  function logService(Directive, questionLevelService, STATE, directiveDbService) {
 
-    //basic log object
-    function TouchLog(timeStamp, evType, elId, x, y, dx, dy, dt) {
-      this.timeStamp = timeStamp;
-      this.evType = evType;
-      this.elId = elId;
-      this.x = x;
-      this.y = y;
-      this.dx = dx;
-      this.dy = dy;
-      this.dt = dt;
+    var _directive;
+
+    var _utils = {
+      initDirective: _initDirective,
+      pushTouch: _pushTouch,
+      finishDirective: _finishDirective,
+      persistDirective: _persistDirective,
+      updateDirectiveStub: _updateDirectiveStub
     }
 
-    //log array
-    //var logs = [];
-
-
-    //function TouchLog(timeStamp, evType, x, y) {
-    //  this.timeStamp = timeStamp;
-    //  this.evType = evType;
-    //  this.x = x;
-    //  this.y = y;
-    //}
-
-    var touchSession = [], touchSessions = [];
-
-
     var service = {
-      logTouch: logTouch,
-      //this use is not good, need to be refactored
-      touchSessions: touchSessions
+      getCurrentDirective: getCurrentDirective,
+      logTouch: logTouch
     }
     return service;
 
     //////
-    function logTouch(timeStamp, evType, elId, x, y, dx, dy, dt) {
+    function getCurrentDirective() {
+      return _directive;
+    }
 
-      if (evType === 'dragstart') {
-        initTouchSession();
+    function logTouch(touch) {
+      if (touch.evType === 'dragstart') {
+        _utils.initDirective();
       }
 
-      touchSession.push(new TouchLog(timeStamp, evType, elId, x, y, dx, dy, dt));
-      //console.log(touchSession);
+      _utils.pushTouch(touch);
 
-      if (evType === 'dragend') {
-        touchSessions.push(touchSession);
-        //console.log(touchSessions);
+      if (touch.evType === 'dragend') {
+        _utils.finishDirective();
+        return _utils.persistDirective();
       }
     }
 
-    function initTouchSession() {
-      touchSession = [];
+    function _initDirective() {
+      var questionLevel = questionLevelService.getLocalQuestionLevel()._id;
+      _directive = new Directive({endTimeStamp: '', touches: [], questionLevel: questionLevel, state: STATE.created});
     }
 
+    function _pushTouch(touch) {
+      _directive.touches.push(touch);
+    }
+
+    function _finishDirective() {
+      _directive.endTimeStamp = new Date().toJSON();
+      _directive.state = STATE.finished;
+    }
+
+    function _persistDirective() {
+      return directiveDbService
+        .putDirective(_directive)
+        .then(_updateDirectiveStub);
+    }
+
+    function _updateDirectiveStub(stub) {
+      _directive._id = stub.id;
+      _directive._rev = stub.rev;
+      return stub;
+    }
   }
 }());

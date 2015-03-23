@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   angular
-    .module('core.dbService')
+    .module('core.db')
     .config(config);
 
 

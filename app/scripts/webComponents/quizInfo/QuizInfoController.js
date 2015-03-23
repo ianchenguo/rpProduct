@@ -5,11 +5,11 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.info')
+    .module('app.quizInfo')
     .controller('QuizInfoController', QuizInfoController);
 
-  QuizInfoController.$inject = ['$scope', '$q', '$state', 'quizService'];
-  function QuizInfoController($scope, $q, $state, quizService) {
+  QuizInfoController.$inject = ['$q', '$state', 'quizService'];
+  function QuizInfoController($q, $state, quizService) {
     var vm = this;
 
     vm.child = {firstName: '', lastName: '', age: '', gender: ''};
@@ -26,8 +26,7 @@
 
       ///
       function handleSuccess(value) {
-        $state.go('app.quiz.questions.a.level0');
-        $scope.$apply();
+        $state.go('app.quiz.questionA.level0');
         return value;
       }
 

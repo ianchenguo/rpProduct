@@ -8,9 +8,12 @@
     .module('app.welcome')
     .controller('WelcomeController', WelcomeController);
 
-  function WelcomeController() {
+  function WelcomeController(dbService) {
     var vm = this;
 
+    vm.deleteDb = function() {
+      dbService.deleteDb();
+      dbService.createDb();
+    }
   }
-
 }());

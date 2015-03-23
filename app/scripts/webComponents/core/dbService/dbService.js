@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   angular
-    .module('core.dbService')
+    .module('core.db')
     .factory('dbService', dbService);
 
   dbService.$inject = ['pouchDB']
@@ -13,67 +13,75 @@
 
     PouchDB.debug.disable();
     //PouchDB.debug.enable('*');
-
     var db = pouchDB('cedb', {adapter: 'websql'});
+    //db.destroy();
+    //db = pouchDB('cedb', {adapter: 'websql'});
 
-    db.setSchema([
-      {
-        singular: 'quiz',
-        plural: 'quizzes',
-        relations: {
-          questions: {hasMany: 'question'},
-          child: {belongsTo: 'child'},
-          observer: {belongsTo: 'observer'},
-          device: {belongsTo: 'device'}
-        }
-      },
-      {
-        singular: 'child',
-        plural: 'children',
-        relations: {
-          quiz: {belongsTo: 'quiz'}
-        }
-      },
-      {
-        singular: 'observer',
-        plural: 'observers',
-        relations: {
-          quiz: {belongsTo: 'quiz'}
-        }
-      },
-      {
-        singular: 'device',
-        plural: 'devices',
-        relations: {
-          quiz: {belongsTo: 'quiz'}
-        }
-      },
-      {
-        singular: 'question',
-        plural: 'questions',
-        relations: {
-          quiz: {belongsTo: 'quiz'}
-        }
-      },
-      {
-        singular: 'questionLevel',
-        plural: 'questionLevels',
-        relations: {
-          question: {belongsTo: 'question'},
-          directives: {hasMany: 'directives'}
-        }
-      },
-      {
-        singular: 'directive',
-        plural: 'directives',
-        relations: {
-          questionLevel: {belongsTo: 'questionLevel'}
-        }
-      }
-    ]);
+    //db.setSchema([
+    //  {
+    //    singular: 'quiz',
+    //    plural: 'quizzes',
+    //    relations: {
+    //      questions: {hasMany: 'question'},
+    //      child: {belongsTo: 'child'},
+    //      observer: {belongsTo: 'observer'},
+    //      device: {belongsTo: 'device'}
+    //    }
+    //  },
+    //  {
+    //    singular: 'child',
+    //    plural: 'children',
+    //    relations: {
+    //      quiz: {belongsTo: 'quiz'}
+    //    }
+    //  },
+    //  {
+    //    singular: 'observer',
+    //    plural: 'observers',
+    //    relations: {
+    //      quiz: {belongsTo: 'quiz'}
+    //    }
+    //  },
+    //  {
+    //    singular: 'device',
+    //    plural: 'devices',
+    //    relations: {
+    //      quiz: {belongsTo: 'quiz'}
+    //    }
+    //  },
+    //  {
+    //    singular: 'question',
+    //    plural: 'questions',
+    //    relations: {
+    //      quiz: {belongsTo: 'quiz'}
+    //    }
+    //  },
+    //  {
+    //    singular: 'questionLevel',
+    //    plural: 'questionLevels',
+    //    relations: {
+    //      question: {belongsTo: 'question'},
+    //      directives: {hasMany: 'directives'}
+    //    }
+    //  },
+    //  {
+    //    singular: 'directive',
+    //    plural: 'directives',
+    //    relations: {
+    //      questionLevel: {belongsTo: 'questionLevel'}
+    //    }
+    //  }
+    //]);
 
     var service = {
-      db: db
+      db: db,
+      deleteDB: function() {
+        return db.destroy();
+
+      },
+      createDB: function() {
+        return db = pouchDB('cedb', {adapter: 'websql'});
+      }
     };
 
     return service;

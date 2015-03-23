@@ -8,15 +8,25 @@
   describe('quizService', function () {
 
     //prepares testing env
-    var quizService, Quiz, GENDER;
+    var dbService, quizService, Quiz, GENDER;
 
     beforeEach(function () {
 
-      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.dbService', 'app.quiz']);
+      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.db', 'app.quiz']);
       quizService = $injector.get('quizService');
       Quiz = $injector.get('Quiz');
       GENDER = $injector.get('GENDER');
+      dbService = $injector.get('dbService');
+
     });
+
+    beforeEach(function(done){
+      dbService.deleteDB()
+        .then(function(){
+          return dbService.createDB();
+        })
+        .finally(done);
+    })
 
     //prepares mock data
     var mockChildData, mockObserverData;

@@ -5,7 +5,7 @@
 //(function () {
 //  'use strict';
 //  angular
-//    .module('app.quiz.questions')
+//    .module('app.quiz.questionCommon')
 //    .factory('Question',Question);
 //
 //  function Question(){

@@ -12,7 +12,7 @@
 
   function quizService(Quiz, Observer, Child, quizDbService, STATE) {
 
-    var _quiz = new Quiz();
+    var _quiz;
     var _utils = {
       createChild: _createChild,
       createObserver: _createObserver,

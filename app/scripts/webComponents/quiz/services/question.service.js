@@ -12,7 +12,8 @@
 
   function questionService(quizService, Question, questionDbService, STATE) {
 
-    var _question = new Question();
+    //var _question = new Question();
+    var _question;
 
     var _utils = {
       updateQuestionStub: _updateQuestionStub

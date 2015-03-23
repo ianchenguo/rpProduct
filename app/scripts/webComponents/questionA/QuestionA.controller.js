@@ -5,37 +5,25 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.questions.questionA')
+    .module('app.questionA')
     .controller('QuestionAController', QuestionAController);
 
-  QuestionAController.$inject = ['$state','replayService','QUESTION_TYPE'];
+  QuestionAController.$inject = ['$state','switchStageService'];
 
-  function QuestionAController($state,replayService,QUESTION_TYPE) {
+  function QuestionAController($state,switchStageService) {
+    console.log($state.current.data);
     var vm = this;
-    vm.level = $state.current.data.level;
-    console.log('vm.level: ' + vm.level);
+    vm.levelType = $state.current.data.levelType;
+    vm.questionType = $state.current.data.questionType;
+    console.log('vm.levelType: ' + vm.levelType);
+    console.log('vm.questionType: ' + vm.questionType);
 
-    initialise();
 
+    activate();
 
     //////
-    //function test() {
-    //  replayService.playCursor();
-    //}
-
-    function initialise() {
-
-
-
-
-
-
-      questionService
-        .createQuestion(QUESTION_TYPE.a)
-        .then(function(){
-          return questionLevelService.createQuestionLevel(vm.level);
-        });
-
+    function activate() {
+      return switchStageService.switchStage(vm.questionType,vm.levelType);
     }
   }
 }());

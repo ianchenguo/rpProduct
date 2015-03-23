@@ -9,17 +9,25 @@
   describe('questionDbService', function () {
 
     //prepares testing env
-    var questionDbService, Question, STATE, QUESTION_TYPE;
+    var questionDbService, Question, STATE, QUESTION_TYPE, dbService;
 
     beforeEach(function () {
 
-      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.dbService', 'app.quiz']);
+      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.db', 'app.quiz']);
       questionDbService = $injector.get('questionDbService');
       Question = $injector.get('Question');
       STATE = $injector.get('STATE');
       QUESTION_TYPE = $injector.get('QUESTION_TYPE');
+      dbService = $injector.get('dbService');
     });
 
+    beforeEach(function(done){
+      dbService.deleteDB()
+        .then(function(){
+          return dbService.createDB();
+        })
+        .finally(done);
+    })
 
     //prepares mock data
     var mockQuestion;

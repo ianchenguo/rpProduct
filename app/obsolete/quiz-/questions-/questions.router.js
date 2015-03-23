@@ -14,7 +14,7 @@
     $stateProvider
       .state('app.quiz.questions', {
         abstract: true,
-        url: '/questions',
+        url: '/questionCommon',
         template: '<ion-nav-view></ion-nav-view>',
         controller: 'QuestionsController as vm'
       })

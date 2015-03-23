@@ -14,6 +14,7 @@
 
     var service = {
       getQuestionLevel: getQuestionLevel,
+      getLastQuestionLevel: getLastQuestionLevel,
       putQuestionLevel: putQuestionLevel
     };
     return service;
@@ -27,6 +28,16 @@
       return dbService.db.put(questionLevel);
     }
 
+    function getLastQuestionLevel() {
+      return dbService.db.allDocs({
+        descending : true,
+        include_docs: true,
+        startkey: 'level\uffff',
+        endkey: 'level',
+        limit:1
+      });
+
+    }
   }
 
 }());

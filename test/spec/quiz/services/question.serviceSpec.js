@@ -8,15 +8,30 @@
   describe('questionService', function () {
 
     //prepares testing env
-    var questionService, Question, STATE, QUESTION_TYPE;
+    var dbService, quizService, questionService, Question, STATE, QUESTION_TYPE;
 
     beforeEach(function () {
 
-      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.dbService', 'app.quiz']);
+      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.db', 'app.quiz']);
+      quizService = $injector.get('quizService');
       questionService = $injector.get('questionService');
       Question = $injector.get('Question');
       STATE = $injector.get('STATE');
       QUESTION_TYPE = $injector.get('QUESTION_TYPE');
+      dbService = $injector.get('dbService');
+    });
+
+    beforeEach(function(done){
+      dbService.deleteDB()
+        .then(function(){
+          return dbService.createDB();
+        })
+        .finally(done);
+    })
+
+    //stubs parent quiz id
+    beforeEach(function () {
+      spyOn(quizService,'getLocalQuiz').and.returnValue({_id:'dummy-quiz-id'});
     });
 
     function shouldNotBeCalled(rejection) {

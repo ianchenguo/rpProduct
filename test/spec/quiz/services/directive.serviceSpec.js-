@@ -1,0 +1,97 @@
+/**
+ * Created by guochen on 15/03/15.
+ */
+
+(function () {
+  'use strict';
+  //tests directiveService
+  describe('directiveService', function () {
+
+    //prepares testing env
+    var directiveService, questionLevelService, Directive, STATE, LEVEL_TYPE;
+
+    beforeEach(function () {
+
+      var $injector = angular.injector(['ui.router', 'pouchdb', 'ng', 'core.db', 'app.quiz']);
+      directiveService = $injector.get('directiveService');
+      questionLevelService = $injector.get('questionLevelService');
+      Directive = $injector.get('Directive');
+      STATE = $injector.get('STATE');
+      LEVEL_TYPE = $injector.get('LEVEL_TYPE');
+    });
+
+    //stubs parent question id
+    beforeEach(function () {
+      spyOn(questionLevelService,'getLocalQuestionLevel').and.returnValue({_id:'dummy-question-id'});
+    });
+
+    function shouldNotBeCalled(rejection) {
+      console.log(rejection);
+      self.fail(rejection);
+    }
+
+    function shouldBeOK(response) {
+      expect(response.ok).toBe(true);
+    }
+
+    //tests createDirective()
+    describe('createDirective()', function () {
+
+      var promise;
+      beforeEach(function () {
+        promise = directiveService.createDirective(LEVEL_TYPE.zero);
+      });
+
+      it('should create a Directive document in database', function (done) {
+
+        promise
+          .then(shouldBeOK)
+          .catch(shouldNotBeCalled)
+          .finally(done);
+      });
+
+      it('should sync local Directive object with a returned rev', function (done) {
+        promise
+          .then(shouldSyncDirectiveState)
+          .catch(shouldNotBeCalled)
+          .finally(done);
+
+        function shouldSyncDirectiveState(response) {
+          expect(response.rev).toBe(directiveService.getLocalDirective()._rev);
+        }
+      });
+    });
+
+    //tests finishDirective()
+    describe('finishDirective()', function () {
+
+      var promise;
+      beforeEach(function () {
+        promise = directiveService
+          .createDirective()
+          .then(function () {
+            return directiveService.finishDirective();
+          });
+      });
+
+      it('should update directive document in database', function (done) {
+        promise
+          .then(shouldBeOK)
+          .catch(shouldNotBeCalled)
+          .finally(done);
+      });
+
+      it('should sync local Directive object with a latest rev', function (done) {
+        promise
+          .then(shouldSyncDirectiveState)
+          .catch(shouldNotBeCalled)
+          .finally(done);
+
+        function shouldSyncDirectiveState(response) {
+          expect(response.rev).toBe(directiveService.getLocalDirective()._rev);
+        }
+      });
+    });
+  });
+}());
+

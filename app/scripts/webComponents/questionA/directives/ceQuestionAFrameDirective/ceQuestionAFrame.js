@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz.questions.questionA')
+    .module('app.questionA')
     .directive('ceQuestionAFrame', ceQuestionAFrame);
 
   function ceQuestionAFrame() {
     return {
       restrict: 'E',
       scope: {
-        level: '@'
+        levelType: '@'
       },
       templateUrl: 'scripts/webComponents/questionA/directives/ceQuestionAFrameDirective/ceQuestionAFrame.html',
       controller: controller,
@@ -23,11 +23,11 @@
     function controller(){
       var vm = this;
 
-      vm.showDesiredPattern = vm.level > 0;
-      console.log('vm.level: ' + vm.level);
+      vm.showDesiredPattern = vm.levelType > 0;
+      console.log('vm.level: ' + vm.levelType);
       console.log('vm.showDesiredPattern: ' + vm.showDesiredPattern);
 
-      vm.showInitialArea = vm.level < 2;
+      vm.showInitialArea = vm.levelType < 2;
       console.log('vm.showInitialArea: ' + vm.showInitialArea);
     }
   }

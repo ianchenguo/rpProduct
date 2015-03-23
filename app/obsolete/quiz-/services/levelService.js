@@ -36,7 +36,7 @@
     /**
      * @ngdoc method
      * @name _checkLevel
-     * @methodOf app.questions.levelService
+     * @methodOf app.questionCommon.levelService
      * @private
      * @description
      * lazily calls _createLevel() to instantiates _level with an empty _Level object, if _level is null
@@ -50,7 +50,7 @@
     /**
      * @ngdoc method
      * @name _createLevel
-     * @methodOf app.questions.levelService
+     * @methodOf app.questionCommon.levelService
      * @private
      * @description
      * instantiates _level with an empty _Level object
@@ -78,7 +78,7 @@
     /**
      * @ngdoc method
      * @name clearLevel
-     * @methodOf app.questions.levelService
+     * @methodOf app.questionCommon.levelService
      * @description
      * replaces _level with a new empty _Level object
      *

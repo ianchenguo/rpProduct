@@ -13,6 +13,6 @@
       'core.file',
       'core.log',
       'core.replay',
-      'core.dbService'
+      'core.db'
     ]);
 }());

@@ -1,0 +1,67 @@
+/**
+ * Created by guochen on 15/03/15.
+ */
+
+(function () {
+  'use strict';
+  angular
+    .module('app.quiz')
+    .factory('directiveService', directiveService);
+
+  directiveService.$inject = ['questionLevelService', 'Directive', 'directiveDbService', 'STATE'];
+
+  function directiveService(questionLevelService, Directive, directiveDbService, STATE) {
+
+    var _directive;
+
+    var _utils = {
+      updateDirectiveStub:_updateDirectiveStub
+    }
+
+    var service = {
+      getLocalDirective: getLocalDirective,
+      createDirective: createDirective,
+      finishDirective: finishDirective,
+      addTouch:addTouch
+    };
+    return service;
+    //////
+
+    function getLocalDirective() {
+      return _directive;
+    }
+
+    function createDirective() {
+
+      var questionLevelId = questionLevelService.getLocalQuestionLevel()._id;
+
+      _directive = new Directive({
+        endTimeStamp: '',
+        state: STATE.created,
+        questionLevel:questionLevelId
+      });
+
+      return directiveDbService.putDirective(_directive)
+        .then(_utils.updateDirectiveStub);
+    }
+
+    function _updateDirectiveStub(stub){
+      _directive._id = stub.id;
+      _directive._rev = stub.rev;
+      return stub;
+    }
+
+
+    function finishDirective() {
+      _directive.endTimeStamp = new Date().toJSON();
+      _directive.state = STATE.finished;
+      return directiveDbService.putDirective(_directive, _directive._id, _directive._rev)
+        .then(_utils.updateDirectiveStub);
+    }
+
+    function addTouch(touch) {
+      _directive.touches.push(touch);
+    }
+  };
+
+}());

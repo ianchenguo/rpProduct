@@ -12,7 +12,7 @@
 
   function questionLevelService(questionService, QuestionLevel, questionLevelDbService, STATE) {
 
-    var _questionLevel = new QuestionLevel();
+    var _questionLevel;
 
     var _utils = {
       updateQuestionLevelStub:_updateQuestionLevelStub

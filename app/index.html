@@ -66,11 +66,13 @@
 
   <!--side menu module-->
   <script src="scripts/webComponents/sideMenu/sideMenu.module.js"></script>
+  <script src="scripts/webComponents/sideMenu/sideMenu.constants.js"></script>
   <script src="scripts/webComponents/sideMenu/sideMenu.router.js"></script>
-  <script src="scripts/webComponents/sideMenu/sideMenuService.js"></script>
   <script src="scripts/webComponents/sideMenu/SideMenuController.js"></script>
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuMainContent/ceSideMenuMainContent.js"></script>
-  <script src="scripts/webComponents/sideMenu/directives/ceSideMenuSideContent/ceSideMenuSideContent.js"></script>
+  <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideFrame/ceSideMenuAsideFrame.js"></script>
+  <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.js"></script>
+  <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideGeneral/ceSideMenuAsideGeneral.js"></script>
 
   <!--welcome module-->
   <script src="scripts/webComponents/welcome/welcome.module.js"></script>
@@ -81,7 +83,6 @@
   <script src="scripts/webComponents/quiz/quiz.module.js"></script>
   <script src="scripts/webComponents/quiz/quiz.constants.js"></script>
   <script src="scripts/webComponents/quiz/quiz.router.js"></script>
-  <script src="scripts/webComponents/quiz/QuizController.js"></script>
   <!--quiz module services-->
   <script src="scripts/webComponents/quiz/services/quiz.service.js"></script>
   <script src="scripts/webComponents/quiz/services/quiz.db.service.js"></script>
@@ -89,33 +90,34 @@
   <script src="scripts/webComponents/quiz/services/question.db.service.js"></script>
   <script src="scripts/webComponents/quiz/services/questionLevel.service.js"></script>
   <script src="scripts/webComponents/quiz/services/questionLevel.db.service.js"></script>
+  <script src="scripts/webComponents/quiz/services/directive.db.service.js"></script>
+  <script src="scripts/webComponents/quiz/services/switchStage.service.js"></script>
+
   <!--quiz module view models-->
   <script src="scripts/webComponents/quiz/viewModels/Child.js"></script>
   <script src="scripts/webComponents/quiz/viewModels/Quiz.js"></script>
   <script src="scripts/webComponents/quiz/viewModels/Observer.js"></script>
   <script src="scripts/webComponents/quiz/viewModels/Question.js"></script>
   <script src="scripts/webComponents/quiz/viewModels/QuestionLevel.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/Directive.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/Touch.js"></script>
 
-  <!--quiz info module-->
+  <!--quizInfo module-->
   <script src="scripts/webComponents/quizInfo/quizInfo.module.js"></script>
   <script src="scripts/webComponents/quizInfo/quizInfo.router.js"></script>
   <script src="scripts/webComponents/quizInfo/QuizInfoController.js"></script>
 
-  <!--quiz questions module-->
-  <script src="scripts/webComponents/questions/questions.module.js"></script>
-  <script src="scripts/webComponents/questions/questions.router.js"></script>
-  <script src="scripts/webComponents/questions/Questions.controller.js"></script>
-  <script src="scripts/webComponents/questions/services/switchLevel.service.js"></script>
+  <!--questionCommon module-->
+  <script src="scripts/webComponents/questionCommon/questions.module.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/ceDesiredPattern/ceDesiredPattern.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/ceTestArea/ceTestArea.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/cePopulatedTestArea/cePopulatedTestArea.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/ceTestBase/ceTestBase.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/ceDraggable/ceDraggable.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/ceCardBase/ceCardBase.js"></script>
+  <script src="scripts/webComponents/questionCommon/directives/ceCard/ceCard.js"></script>
 
-  <script src="scripts/webComponents/questions/directives/ceDesiredPattern/ceDesiredPattern.js"></script>
-  <script src="scripts/webComponents/questions/directives/ceTestArea/ceTestArea.js"></script>
-  <script src="scripts/webComponents/questions/directives/cePopulatedTestArea/cePopulatedTestArea.js"></script>
-  <script src="scripts/webComponents/questions/directives/ceTestBase/ceTestBase.js"></script>
-  <script src="scripts/webComponents/questions/directives/ceDraggable/ceDraggable.js"></script>
-  <script src="scripts/webComponents/questions/directives/ceCardBase/ceCardBase.js"></script>
-  <script src="scripts/webComponents/questions/directives/ceCard/ceCard.js"></script>
-
-  <!--quiz questions questionA module-->
+  <!--questionA module-->
   <script src="scripts/webComponents/questionA/questionA.module.js"></script>
   <script src="scripts/webComponents/questionA/questionA.router.js"></script>
   <script src="scripts/webComponents/questionA/QuestionA.controller.js"></script>
