@@ -24,6 +24,12 @@
         zero: 0,
         one: 1,
         two: 2
+      },
+      DOC_TYPE: {
+        quiz: 'quiz',
+        question: 'question',
+        questionLevel: 'questionLevel',
+        directive: 'directive'
       }
     });
 }());

@@ -8,11 +8,12 @@
     .module('app.quiz')
     .factory('Quiz', Quiz);
 
-  function Quiz() {
+  Quiz.$inject = ['STATE','DOC_TYPE'];
+  function Quiz(STATE,DOC_TYPE) {
 
     var Quiz = function Quiz(init) {
 
-      var args = init || {endTimeStamp: '', state: '', child: '', observer: ''},
+      var args = init || {endTimeStamp: '', child: '', observer: '',state: STATE.created, docType: DOC_TYPE.quiz},
         now = new Date().toJSON();
 
       this._id = 'quiz_' + now + Math.random();
@@ -22,6 +23,8 @@
       this.state = args.state;
       this.child = args.child;
       this.observer = args.observer;
+      this.docType = args.docType;
+
     };
     return Quiz;
   }

@@ -8,22 +8,9 @@
     .module('app.questionA')
     .controller('QuestionAController', QuestionAController);
 
-  QuestionAController.$inject = ['$state','switchStageService'];
-
-  function QuestionAController($state,switchStageService) {
-    console.log($state.current.data);
+  QuestionAController.$inject = ['$stateParams'];
+  function QuestionAController($stateParams) {
     var vm = this;
-    vm.levelType = $state.current.data.levelType;
-    vm.questionType = $state.current.data.questionType;
-    console.log('vm.levelType: ' + vm.levelType);
-    console.log('vm.questionType: ' + vm.questionType);
-
-
-    activate();
-
-    //////
-    function activate() {
-      return switchStageService.switchStage(vm.questionType,vm.levelType);
-    }
+    vm.levelType = $stateParams.level;
   }
 }());

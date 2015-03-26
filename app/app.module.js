@@ -11,7 +11,9 @@
       'app.quiz',
       'app.quizInfo',
       'app.questionCommon',
-      'app.questionA'
+      'app.questionA',
+
+      'test.playground'
     ]);
 
 }());

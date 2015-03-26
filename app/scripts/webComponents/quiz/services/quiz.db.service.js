@@ -15,7 +15,8 @@
     var service = {
       getQuiz: getQuiz,
       putQuiz: putQuiz,
-      listQuizzes:listQuizzes
+      listQuizzes: listQuizzes,
+      queryQuizzesByState: queryQuizzesByState
     };
     return service;
     //////
@@ -35,6 +36,22 @@
         startkey: 'quiz',
         endkey: 'quiz\uffff'
       });
+    }
+
+    //temporary implementation
+    function queryQuizzesByState(state) {
+
+      return dbService.db
+        .query(function (doc) {
+          if(doc.state === state) {
+            emit(doc._id);
+          }
+        },
+        {
+          startkey: 'quiz',
+          endkey: 'quiz\uffff',
+          include_docs: true
+        });
     }
   }
 

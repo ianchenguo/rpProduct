@@ -8,21 +8,35 @@
     .module('app.sideMenu')
     .directive('ceSideMenuAsideQuiz', ceSideMenuAsideQuiz);
 
-  function ceSideMenuAsideQuiz(){
+  ceSideMenuAsideQuiz.$inject = ['$state', 'questionLevelService', 'questionService', 'quizService']
+  function ceSideMenuAsideQuiz($state, questionLevelService, questionService, quizService) {
     return {
       restrict: 'E',
-      templateUrl:'scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.html',
+      templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.html',
       scope: {},
       controllerAs: 'vm',
       controller: controller,
       bindToController: true
     }
 
+    function controller() {
+      var vm = this;
+      vm.endQuiz = endQuiz;
+    }
 
     //////
-    function controller(){
-      var vm = this;
-
+    function endQuiz() {
+      return questionLevelService
+        .finishQuestionLevel()
+        .then(function () {
+          return questionService.finishQuestion();
+        })
+        .then(function () {
+          return quizService.finishQuiz();
+        })
+        .then(function () {
+          $state.go('app.welcome');
+        })
     }
   }
 

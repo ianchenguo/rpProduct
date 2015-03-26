@@ -43,24 +43,24 @@
       });
     });
 
-    describe('/quiz/questionA/level0', function(){
-      it('should change state to app.quiz.questionA.level0', function(){
-        goTo('/quiz/questionA/level0');
-        expect($state.current.name).toEqual('app.quiz.questionA.level0');
+    describe('/quiz/questionA/levels/0', function(){
+      it('should change state to app.quiz.questionA.levels.0', function(){
+        goTo('/quiz/questionA/levels/0');
+        expect($state.current.name).toEqual('app.quiz.questionA.levels.0');
       });
     });
 
-    describe('/quiz/questionA/level1', function(){
-      it('should change state to app.quiz.questionA.level1', function(){
-        goTo('/quiz/questionA/level1');
-        expect($state.current.name).toEqual('app.quiz.questionA.level1');
+    describe('/quiz/questionA/levels/1', function(){
+      it('should change state to app.quiz.questionA.levels.1', function(){
+        goTo('/quiz/questionA/levels/1');
+        expect($state.current.name).toEqual('app.quiz.questionA.levels.1');
       });
     });
 
-    describe('/quiz/questionA/level2', function(){
-      it('should change state to app.quiz.questionA.level2', function(){
-        goTo('/quiz/questionA/level2');
-        expect($state.current.name).toEqual('app.quiz.questionA.level2');
+    describe('/quiz/questionA/levels/2', function(){
+      it('should change state to app.quiz.questionA.levels.2', function(){
+        goTo('/quiz/questionA/levels/2');
+        expect($state.current.name).toEqual('app.quiz.questionA.levels.2');
       });
     });
 

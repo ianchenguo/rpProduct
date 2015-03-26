@@ -8,9 +8,9 @@
     .module('app.quiz')
     .factory('questionService', questionService);
 
-  questionService.$inject = ['quizService', 'Question', 'questionDbService', 'STATE'];
+  questionService.$inject = ['quizService', 'Question', 'questionDbService', 'STATE', 'DOC_TYPE'];
 
-  function questionService(quizService, Question, questionDbService, STATE) {
+  function questionService(quizService, Question, questionDbService, STATE, DOC_TYPE) {
 
     //var _question = new Question();
     var _question;
@@ -39,7 +39,8 @@
         endTimeStamp: '',
         state: STATE.created,
         type: questionType,
-        quiz:quizId
+        quiz:quizId,
+        docType: DOC_TYPE.question
       });
 
       return questionDbService.putQuestion(_question)

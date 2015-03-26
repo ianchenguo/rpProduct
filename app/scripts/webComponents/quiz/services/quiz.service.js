@@ -8,9 +8,9 @@
     .module('app.quiz')
     .factory('quizService', quizService);
 
-  quizService.$inject = ['Quiz', 'Observer', 'Child', 'quizDbService', 'STATE'];
+  quizService.$inject = ['Quiz', 'Observer', 'Child', 'quizDbService', 'STATE', 'DOC_TYPE'];
 
-  function quizService(Quiz, Observer, Child, quizDbService, STATE) {
+  function quizService(Quiz, Observer, Child, quizDbService, STATE, DOC_TYPE) {
 
     var _quiz;
     var _utils = {
@@ -22,7 +22,8 @@
     var service = {
       createQuiz: createQuiz,
       finishQuiz: finishQuiz,
-      getLocalQuiz: getLocalQuiz
+      getLocalQuiz: getLocalQuiz,
+      queryQuizzesByState: queryQuizzesByState
     };
     return service;
     //////
@@ -33,7 +34,8 @@
         endTimeStamp: '',
         state: STATE.created,
         observer: _utils.createObserver(observerData),
-        child: _utils.createChild(childData)
+        child: _utils.createChild(childData),
+        docType: DOC_TYPE.quiz
       });
       return quizDbService.putQuiz(_quiz).then(_utils.updateQuizStub);
     }
@@ -61,6 +63,10 @@
 
     function getLocalQuiz() {
       return _quiz;
+    }
+
+    function queryQuizzesByState(state){
+      return quizDbService.queryQuizzesByState(state);
     }
   };
 
