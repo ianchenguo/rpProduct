@@ -1,17 +1,18 @@
-<div class="row" ng-repeat="rowComponents in vm.testComponents">
+<div class="row" ng-repeat="rowComponents in vm.testComponents[vm.direction]">
 
   <div class="col col-33" ng-repeat="c in rowComponents">
 
     <ce-test-base ng-style="{visibility:c.visibility}"
-                       title="c.title"
-                       droppable="c.droppable">
+                  title="c.title"
+                  droppable="c.droppable"
+                  droppable-id="c.droppableId">
 
-      <ce-card ng-if="c.card"
+      <ce-card ng-if="c.cardVisibility"
                id={{c.card.id}}
-               content="c.card.content"
+               card-img-url="{{c.card.cardImgUrl}}"
                class="ce-card"
-               ce-draggable
-               ng-style="{'background-color':c.card.color}"></ce-card>
+               ce-draggable>
+      </ce-card>
 
 
     </ce-test-base>

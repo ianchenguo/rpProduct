@@ -15,7 +15,8 @@
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceCard/ceCard.html',
       //replace:true,
       scope: {
-        content: '='
+        //content: '='
+        cardImgUrl:'@'
       },
       controller: controller,
       controllerAs: 'vm',

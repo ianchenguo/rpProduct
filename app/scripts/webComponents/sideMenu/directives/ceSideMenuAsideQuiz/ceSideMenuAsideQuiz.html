@@ -4,7 +4,7 @@
     Quiz
   </div>
 
-  <a menu-close class="item" >
+  <a menu-close class="item">
     Alter Quiz Info
   </a>
 
@@ -13,17 +13,32 @@
     Question A
   </div>
 
-  <a menu-close class="item" ui-sref="app.quiz.questionA.levels({ level:0 })">
+  <a class="item item-button-right" menu-close
+       ui-sref="app.quiz.questionA.levels.directions({level:0,direction:0})">
     Level 0
-  </a>
 
-  <a menu-close class="item" ui-sref="app.quiz.questionA.levels({ level:1 })">
+  </a>
+  <button menu-close class="button button-positive" ui-sref="app.quiz.questionA.levels.directions({level:0,direction:1})">
+    Reverse
+  </button>
+
+  <a class="item item-button-right" menu-close
+       ui-sref="app.quiz.questionA.levels.directions({level:1,direction:0})">
     Level 1
-  </a>
 
-  <a menu-close class="item" ui-sref="app.quiz.questionA.levels({ level:2 })">
-    Level 2
   </a>
+  <button menu-close class="button button-positive" ui-sref="app.quiz.questionA.levels.directions({level:1,direction:1})">
+    Reverse
+  </button>
+
+  <a class="item item-button-right" menu-close
+       ui-sref="app.quiz.questionA.levels.directions({level:2,direction:0})">
+    Level 2
+
+  </a>
+  <button menu-close class="button button-positive" ui-sref="app.quiz.questionA.levels.directions({level:2,direction:1})">
+    Reverse
+  </button>
 
   <a menu-close class="item" ng-click="vm.endQuiz()">
     End Quiz

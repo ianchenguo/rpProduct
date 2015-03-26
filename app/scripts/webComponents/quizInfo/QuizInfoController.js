@@ -26,9 +26,9 @@
 
       ///
       function handleSuccess(value) {
-        console.log(value);
-        console.log($state.href('app.quiz.questionA.levels', {level:LEVEL_TYPE.zero}));
-        $state.go('app.quiz.questionA.levels',{level:LEVEL_TYPE.zero});
+        //console.log(value);
+        //console.log($state.href('app.quiz.questionA.levels.directions', {level:LEVEL_TYPE.zero,direction:0}));
+        $state.go('app.quiz.questionA.levels.directions',{level:LEVEL_TYPE.zero,direction:0});
 
         return value;
       }

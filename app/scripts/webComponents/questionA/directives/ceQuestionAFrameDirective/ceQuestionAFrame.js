@@ -12,7 +12,8 @@
     return {
       restrict: 'E',
       scope: {
-        levelType: '@'
+        levelType: '@',
+        direction: '@'
       },
       templateUrl: 'scripts/webComponents/questionA/directives/ceQuestionAFrameDirective/ceQuestionAFrame.html',
       controller: controller,

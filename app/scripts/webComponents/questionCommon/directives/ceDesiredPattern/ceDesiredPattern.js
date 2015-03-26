@@ -14,7 +14,8 @@
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceDesiredPattern/ceDesiredPattern.html',
       scope: {
-        content: '@'
+        content: '@',
+        direction: '@'
       },
       controller: controller,
       controllerAs: 'vm',
@@ -26,11 +27,15 @@
       var vm = this;
 
       //the desired pattern contains three components
-      vm.components = [
-        {id: 'q-a-p-01', content: 'A', color: 'red'},
-        {id: 'q-a-p-02', content: 'B', color: 'green'},
-        {id: 'q-a-p-03', content: 'C', color: 'blue'}
-      ]
+      vm.components = [[
+        {id:'question-a-img-a1',cardImgUrl:'images/card-img-a1.png'},
+        {id:'question-a-img-a2',cardImgUrl:'images/card-img-a2.png'},
+        {id:'question-a-img-a3',cardImgUrl:'images/card-img-a3.png'}
+      ],[
+        {id:'question-a-img-a1',cardImgUrl:'images/card-img-b1.png'},
+        {id:'question-a-img-a2',cardImgUrl:'images/card-img-b2.png'},
+        {id:'question-a-img-a3',cardImgUrl:'images/card-img-b3.png'}
+      ]];
     }
   }
 

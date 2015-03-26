@@ -16,7 +16,8 @@
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceTestBase/ceTestBase.html',
       scope: {
         title: '=',
-        droppable: '='
+        droppable: '=',
+        droppableId:'='
       },
       controller: controller,
       controllerAs: 'vm',

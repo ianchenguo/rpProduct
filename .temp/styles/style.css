@@ -1,15 +1,18 @@
 /* Empty. Add your own CSS if you like */
 
-.dummy-welcome {
-  height: 400px;
-  width: 200px;
-  left: auto;
-  right:auto;
+.scroll-content > .scroll {
+  height: 100%;
 }
 
-/* Empty. Add your own CSS if you like */
+.scroll-content > .scroll > .question-frame {
+height: 100%;
+}
+
 .question-frame {
-  position:relative;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: lavender;
 }
 
 .desired-pattern {
@@ -27,12 +30,12 @@
 
 }
 
-.ce-card {
-  position:relative;
-  display:inline-block;
-  height:auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-}
+/*.ce-card {*/
+  /*position:relative;*/
+  /*display:inline-block;*/
+  /*height:auto;*/
+  /*box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);*/
+/*}*/
 
 .ce-test-base {
   position:relative;

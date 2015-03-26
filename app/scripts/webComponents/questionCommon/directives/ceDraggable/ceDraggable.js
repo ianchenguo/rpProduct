@@ -5,9 +5,9 @@ angular
   .module('app.questionCommon')
   .directive('ceDraggable', ceDraggable);
 
-ceDraggable.$inject = ['$document', '$ionicGesture', 'logService', 'Touch'];
+ceDraggable.$inject = ['$document', '$ionicGesture', 'logService', 'Touch','patternMatchService'];
 
-function ceDraggable($document, $ionicGesture, logService, Touch) {
+function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchService) {
 
   //define _utils functions
   var _utils = {
@@ -129,7 +129,21 @@ function ceDraggable($document, $ionicGesture, logService, Touch) {
       if (underneathEl.attr('droppable')) {
         //test if the underneath element already contains current element
         if (underneathEl.children(0) !== element[0]) {
+
+          //console.log(underneathEl);
+          //console.log(element);
+          //console.log(element.parent());
+          var targetId = underneathEl[0].id,
+            cardId = element[0].id,
+            sourceId = element.parent()[0].id;
+
           underneathEl.append(element[0]);
+
+          patternMatchService.testPattern(targetId,cardId,sourceId);
+
+
+
+
         }
       }
 

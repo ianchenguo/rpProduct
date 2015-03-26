@@ -1,11 +1,11 @@
-<div class="row" ng-repeat="c in vm.components">
+<div class="row" ng-repeat="c in vm.components[vm.direction]">
   <div class="col col-33 col-offset-33">
 
     <ce-card id={{c.id}}
-             content="c.content"
+             card-img-url="{{c.cardImgUrl}}"
              class="ce-card"
-             ce-draggable
-              ng-style="{'background-color':c.color}"></ce-card>
+             ce-draggable>
 
+    </ce-card>
   </div>
 </div>
