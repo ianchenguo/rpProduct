@@ -46,11 +46,11 @@
       //console.log('target index: ' + targetIndex);
       currentPattern[targetIndex - 1] = cardId;
 
-      console.log('current pattern: ');
-      console.log(currentPattern);
-
-      console.log('desired pattern: ');
-      console.log(desiredPattern[desiredPatternIdx]);
+      //console.log('current pattern: ');
+      //console.log(currentPattern);
+      //
+      //console.log('desired pattern: ');
+      //console.log(desiredPattern[desiredPatternIdx]);
 
       for (var i = 0; i < desiredPattern[0].length - 1; i++) {
 

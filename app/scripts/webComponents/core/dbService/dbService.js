@@ -77,7 +77,6 @@
       db: db,
       deleteDB: function() {
         return db.destroy();
-
       },
       createDB: function() {
         return db = pouchDB('cedb', {adapter: 'websql'});

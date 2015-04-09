@@ -5,5 +5,5 @@
 (function () {
     'use strict';
     angular
-      .module('core.db',[]);
+      .module('core.db',['pouchdb']);
 }());

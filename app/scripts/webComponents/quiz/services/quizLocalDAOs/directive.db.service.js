@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz')
+    .module('app.quiz.localDAO')
     .factory('directiveDbService', directiveDbService);
 
   directiveDbService.$inject = ['dbService'];

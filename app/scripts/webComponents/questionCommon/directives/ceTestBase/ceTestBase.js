@@ -17,7 +17,8 @@
       scope: {
         title: '=',
         droppable: '=',
-        droppableId:'='
+        droppableId:'=',
+        shouldMatch:'@'
       },
       controller: controller,
       controllerAs: 'vm',

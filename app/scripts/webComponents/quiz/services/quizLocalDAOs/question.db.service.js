@@ -5,7 +5,7 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz')
+    .module('app.quiz.localDAO')
     .factory('questionDbService', questionDbService);
 
   questionDbService.$inject = ['dbService'];
@@ -20,11 +20,25 @@
     //////
 
     function getQuestion(id) {
-      return dbService.db.get(id);
+      return dbService.db
+        .get(id)
+        .then(function (value) {
+          return value;
+        })
+        .catch(function (error) {
+          throw new Error(error);
+        });
     }
 
     function putQuestion(question) {
-      return dbService.db.put(question);
+      return dbService.db
+        .put(question)
+        .then(function (value) {
+          return value;
+        })
+        .catch(function (error) {
+          throw new Error(error);
+        });
     }
   }
 

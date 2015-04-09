@@ -61,8 +61,6 @@
   questionLevelPrepService.$inject = ['questionLevelService', '$stateParams'];
   function questionLevelPrepService(questionLevelService, $stateParams) {
 
-
-
     if (!questionLevelService.getLocalQuestionLevel()) {
       return questionLevelService.createQuestionLevel($stateParams.level);
     }

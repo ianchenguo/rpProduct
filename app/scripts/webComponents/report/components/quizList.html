@@ -1,0 +1,16 @@
+<ion-view view-title="Report - Quiz List">
+  <ion-content>
+    <div class="list list-inset">
+
+      <div class="item" ng-repeat="item in vm.quizList" ng-click="vm.showDetail(item.id)">
+        Start:
+        {{vm.formatTimeStamp(item.doc.startTimeStamp)}}
+        <hr/>
+        End:
+        {{vm.formatTimeStamp(item.doc.endTimeStamp)}}
+      </div>
+
+
+    </div>
+  </ion-content>
+</ion-view>

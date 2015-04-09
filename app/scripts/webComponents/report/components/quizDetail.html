@@ -1,0 +1,16 @@
+<ion-view view-title="Report - Quiz Detail">
+  <ion-content>
+    <div class="list list-inset">
+
+      <div class="item" ng-repeat="item in vm.quizReport">
+        <strong>TimeStamp: </strong> {{item.timeStamp}}
+        <br/>
+        <strong>Target: </strong> {{item.subject}}
+        <br/>
+        <strong>Event: </strong> {{item.detail}}
+      </div>
+
+
+    </div>
+  </ion-content>
+</ion-view>

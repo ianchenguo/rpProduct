@@ -32,7 +32,7 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz')
+    .module('app.quiz.viewModel')
     .factory('Touch', Touch);
 
   function Touch() {
@@ -46,6 +46,7 @@
       this.dx = init.dx;
       this.dy = init.dy;
       this.dt = init.dt;
+      this.success = init.success;
     };
 
     return Touch;

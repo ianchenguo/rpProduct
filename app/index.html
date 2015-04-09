@@ -82,26 +82,30 @@
 
   <!--quiz module-->
   <script src="scripts/webComponents/quiz/quiz.module.js"></script>
-  <script src="scripts/webComponents/quiz/quiz.constants.js"></script>
-  <script src="scripts/webComponents/quiz/quiz.router.js"></script>
+  <!--quiz router module-->
+  <script src="scripts/webComponents/quiz/router/quiz.router.module.js"></script>
+  <script src="scripts/webComponents/quiz/router/quiz.router.js"></script>
   <!--quiz module services-->
   <script src="scripts/webComponents/quiz/services/quiz.service.js"></script>
-  <script src="scripts/webComponents/quiz/services/quiz.db.service.js"></script>
   <script src="scripts/webComponents/quiz/services/question.service.js"></script>
-  <script src="scripts/webComponents/quiz/services/question.db.service.js"></script>
   <script src="scripts/webComponents/quiz/services/questionLevel.service.js"></script>
-  <script src="scripts/webComponents/quiz/services/questionLevel.db.service.js"></script>
-  <script src="scripts/webComponents/quiz/services/directive.db.service.js"></script>
-  <script src="scripts/webComponents/quiz/services/switchStage.service.js-"></script>
+
+  <script src="scripts/webComponents/quiz/services/quizLocalDAOs/quiz.localDAO.module.js"></script>
+  <script src="scripts/webComponents/quiz/services/quizLocalDAOs/quiz.db.service.js"></script>
+  <script src="scripts/webComponents/quiz/services/quizLocalDAOs/question.db.service.js"></script>
+  <script src="scripts/webComponents/quiz/services/quizLocalDAOs/questionLevel.db.service.js"></script>
+  <script src="scripts/webComponents/quiz/services/quizLocalDAOs/directive.db.service.js"></script>
 
   <!--quiz module view models-->
-  <script src="scripts/webComponents/quiz/viewModels/Child.js"></script>
-  <script src="scripts/webComponents/quiz/viewModels/Quiz.js"></script>
-  <script src="scripts/webComponents/quiz/viewModels/Observer.js"></script>
-  <script src="scripts/webComponents/quiz/viewModels/Question.js"></script>
-  <script src="scripts/webComponents/quiz/viewModels/QuestionLevel.js"></script>
-  <script src="scripts/webComponents/quiz/viewModels/Directive.js"></script>
-  <script src="scripts/webComponents/quiz/viewModels/Touch.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/quiz.viewModel.module.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/quiz.viewModel.constants.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/Child.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/Quiz.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/Observer.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/Question.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/QuestionLevel.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/Directive.js"></script>
+  <script src="scripts/webComponents/quiz/viewModels/models/Touch.js"></script>
 
   <!--quizInfo module-->
   <script src="scripts/webComponents/quizInfo/quizInfo.module.js"></script>
@@ -132,6 +136,24 @@
   <script src="scripts/webComponents/test/playground.router.js"></script>
   <script src="scripts/webComponents/test/PlaygroundController.js"></script>
   <script src="scripts/webComponents/test/playground.service.js"></script>
+
+
+
+  <!--report module-->
+  <script src="scripts/webComponents/report/report.module.js"></script>
+
+  <script src="scripts/webComponents/report/router/report.router.module.js"></script>
+  <script src="scripts/webComponents/report/router/report.router.js"></script>
+
+  <script src="scripts/webComponents/report/components/QuizListController.js"></script>
+  <script src="scripts/webComponents/report/components/QuizDetailController.js"></script>
+
+  <script src="scripts/webComponents/report/services/reportService.js"></script>
+  <script src="scripts/webComponents/report/services/report.localDAO.services/report.localDAO.module.js"></script>
+  <script src="scripts/webComponents/report/services/report.localDAO.services/report.db.service.js"></script>
+  <script src="scripts/webComponents/report/viewModels/report.viewModel.module.js"></script>
+  <script src="scripts/webComponents/report/viewModels/ReportRecord.js"></script>
+
 
   <script src="scripts/configuration.js"></script>
   <!-- endbuild -->

@@ -9,14 +9,12 @@ ceDraggable.$inject = ['$document', '$ionicGesture', 'logService', 'Touch','patt
 
 function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchService) {
 
-  //define _utils functions
   var _utils = {
     setCss: _setCss,
     getUnderneathEl: _getUnderneathEl,
     logTouch:_logTouch
   };
 
-  //define directive object
   var directive = {
     restrict: 'A',
     link: link
@@ -28,7 +26,12 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
   //implement link function
   function link(scope, element, attrs) {
 
-    var touchX, touchY, dx, dy, dt, isDummy;
+    var touchX;
+    var touchY;
+    var dx;
+    var dy;
+    var dt;
+    var isDummy;
 
     var dragStart = $ionicGesture.on
     ('dragstart dummydragstart', onTouchStart, element);
@@ -67,7 +70,7 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
       });
 
       //refactor this later
-      _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt)
+      _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt, true)
 
     }
 
@@ -95,12 +98,15 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
         {transform: 'translate3D(' + dx + 'px, ' + dy + 'px, 0px) scale(1.1)'});
 
       //refactor this later
-      _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt)
+      _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt, true);
 
       return false;
     }
 
     function onTouchEnd(event) {
+
+      var isSucceeded = false;
+      var underneathEl;
 
       if (event.gesture) {
         event.gesture.srcEvent.preventDefault();
@@ -122,7 +128,7 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
 
 
       //console.log('<<underneath: ');
-      var underneathEl = _utils.getUnderneathEl(element[0], touchX, touchY);
+      underneathEl = _utils.getUnderneathEl(element[0], touchX, touchY);
       //console.log('underneath>>');
 
       //test if the underneath element is droppable
@@ -138,19 +144,19 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
             sourceId = element.parent()[0].id;
 
           underneathEl.append(element[0]);
+          isSucceeded = true;
 
-          patternMatchService.testPattern(targetId,cardId,sourceId);
-
-
-
-
+          //console.log('should match: '+ underneathEl.attr('should-match'));
+          if(underneathEl.attr('should-match') !== 'false') {
+            patternMatchService.testPattern(targetId,cardId,sourceId);
+          }
         }
       }
 
       _utils.setCss(element, {transform: '', opacity: '', zIndex: '', position: ''});
 
       //refactor this later
-      _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt)
+      _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt, isSucceeded);
 
 
       touchX = touchY = dx = dy = dt = isDummy = '';
@@ -181,7 +187,7 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
     return angular.element(wrapperEl);
   }
 
-  function _logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt) {
+  function _logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt, isSucceeded) {
     if (!isDummy) {
       var touch = new Touch({
         timeStamp: event.timeStamp,
@@ -191,7 +197,8 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
         y: touchY,
         dx: dx,
         dy: dy,
-        dt: dt
+        dt: dt,
+        success:isSucceeded
       });
       logService.logTouch(touch);
     }

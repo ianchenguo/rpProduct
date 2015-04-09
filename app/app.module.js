@@ -13,6 +13,8 @@
       'app.questionCommon',
       'app.questionA',
 
+      'app.report',
+
       'test.playground'
     ]);
 

@@ -14,8 +14,9 @@
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceTestArea/ceTestArea.html',
       scope: {
-        content: '@',
-        level: '@'
+        //content: '@',
+        level: '@',
+        shouldMatch:'@'
       },
       controller: controller,
       controllerAs: 'vm',
@@ -37,7 +38,10 @@
         , [{title: 'placeholder', droppable: false, visibility: 'hidden'},
           {title: 'X', droppable: true, droppableId: 'droppable4', visibility: 'visible'},
           {title: 'placeholder', droppable: false, visibility: 'hidden'}]
-      ]
+      ];
+
+
+      vm.shouldMatch = vm.level > 0;
     }
 
     function link(scope, el, attrs) {

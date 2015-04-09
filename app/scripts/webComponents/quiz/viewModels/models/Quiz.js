@@ -5,15 +5,15 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz')
+    .module('app.quiz.viewModel')
     .factory('Quiz', Quiz);
 
-  Quiz.$inject = ['STATE','DOC_TYPE'];
-  function Quiz(STATE,DOC_TYPE) {
+  Quiz.$inject = ['STATE', 'DOC_TYPE'];
+  function Quiz(STATE, DOC_TYPE) {
 
     var Quiz = function Quiz(init) {
 
-      var args = init || {endTimeStamp: '', child: '', observer: '',state: STATE.created, docType: DOC_TYPE.quiz},
+      var args = init || {endTimeStamp: '', child: '', observer: '', state: STATE.created, docType: DOC_TYPE.quiz},
         now = new Date().toJSON();
 
       this._id = 'quiz_' + now + Math.random();

@@ -5,10 +5,10 @@
 (function () {
   'use strict';
   angular
-    .module('app.quiz')
+    .module('app.quiz.viewModel')
     .factory('Question', Question);
 
-  Question.$inject = ['STATE','DOC_TYPE'];
+  Question.$inject = ['STATE', 'DOC_TYPE'];
   function Question(STATE, DOC_TYPE) {
 
     var Question = function Question(init) {

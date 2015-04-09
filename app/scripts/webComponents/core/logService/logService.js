@@ -8,8 +8,8 @@
     .module('core.log')
     .factory('logService', logService);
 
-  logService.$inject = ['Directive', 'questionLevelService', 'STATE', 'directiveDbService', 'DOC_TYPE'];
-  function logService(Directive, questionLevelService, STATE, directiveDbService, DOC_TYPE) {
+  logService.$inject = ['quizService','questionService', 'Directive', 'questionLevelService', 'STATE', 'directiveDbService', 'DOC_TYPE'];
+  function logService(quizService, questionService, Directive, questionLevelService, STATE, directiveDbService, DOC_TYPE) {
 
     var _directive;
 
@@ -46,11 +46,17 @@
     }
 
     function _initDirective() {
-      var questionLevel = questionLevelService.getLocalQuestionLevel()._id;
+
+      var quizId = quizService.getLocalQuiz()._id;
+      var questionId = questionService.getLocalQuestion()._id;
+      var questionLevelId = questionLevelService.getLocalQuestionLevel()._id;
+
       _directive = new Directive({
         endTimeStamp: '',
         touches: [],
-        questionLevel: questionLevel,
+        quiz:quizId,
+        question:questionId,
+        questionLevel: questionLevelId,
         state: STATE.created,
         docType:DOC_TYPE.directive});
     }

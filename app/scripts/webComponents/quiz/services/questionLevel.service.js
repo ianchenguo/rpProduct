@@ -8,9 +8,9 @@
     .module('app.quiz')
     .factory('questionLevelService', questionLevelService);
 
-  questionLevelService.$inject = ['questionService', 'QuestionLevel', 'questionLevelDbService', 'STATE', 'DOC_TYPE'];
+  questionLevelService.$inject = ['quizService','questionService', 'QuestionLevel', 'questionLevelDbService', 'STATE', 'DOC_TYPE'];
 
-  function questionLevelService(questionService, QuestionLevel, questionLevelDbService, STATE,DOC_TYPE) {
+  function questionLevelService(quizService, questionService, QuestionLevel, questionLevelDbService, STATE,DOC_TYPE) {
 
     var _questionLevel;
 
@@ -32,12 +32,15 @@
 
     function createQuestionLevel(questionLevelType) {
 
+      var quizId = quizService.getLocalQuiz()._id;
       var questionId = questionService.getLocalQuestion()._id;
+      console.log('quizId: ' + quizId);
 
       _questionLevel = new QuestionLevel({
         endTimeStamp: '',
         state: STATE.created,
         type: questionLevelType,
+        quiz:quizId,
         question:questionId,
         docType: DOC_TYPE.questionLevel
       });

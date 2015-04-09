@@ -18,7 +18,17 @@
     //prepares mock data
     var mockTouchData;
     beforeEach(function () {
-      mockTouchData = {timeStamp: 'dummy-time-stamp', evType: 'touchstart', elId:'dummy-element', x: 0, y: 0, dx: 0, dy: 0, dt: 10};
+      mockTouchData = {
+        timeStamp: 'dummy-time-stamp',
+        evType: 'dragstart',
+        elId: 'dummy-element',
+        x: 0,
+        y: 0,
+        dx: 0,
+        dy: 0,
+        dt: 10,
+        success:true
+      };
     });
 
 
@@ -31,7 +41,7 @@
       expect(new Touch(mockTouchData).evType).toEqual(mockTouchData.evType);
     });
 
-    it('should have an element id', function(){
+    it('should have an element id', function () {
       expect(new Touch(mockTouchData).elId).toEqual(mockTouchData.elId);
     });
 
@@ -55,5 +65,8 @@
       expect(new Touch(mockTouchData).dt).toEqual(mockTouchData.dt);
     });
 
+    it('should have a success', function () {
+      expect(new Touch(mockTouchData).success).toEqual(mockTouchData.success);
+    });
   });
 }());
