@@ -17,7 +17,7 @@
       scope: {
         content: '@',
         level: '@',
-        direction:'@'
+        levelCards: '='
       },
       controller: controller,
       controllerAs: 'vm',
@@ -29,78 +29,73 @@
     //////
     function controller() {
       var vm = this;
+      vm.setCards = setCards;
+      vm.deployedCards = vm.setCards();
 
-      //console.log('vm.level: ' + vm.level);
+      vm.testComponents = [
+        [
+          {
+            title: '1',
+            droppable: true,
+            droppableId: 'droppable1',
+            visibility: 'visible',
+            card: vm.deployedCards[0],
+            cardVisibility: true
 
-      vm.testComponents = [[[{
-        title: '1',
-        droppable: true,
-        droppableId: 'droppable1',
-        visibility: 'visible',
-        card: {id: 'question-a-img-a3', cardImgUrl: 'images/card-img-a3.png'},
-        cardVisibility:true
-
-      },
-        {
-          title: '2',
-          droppable: true,
-          droppableId: 'droppable2',
-          visibility: 'visible',
-          card: {id: 'question-a-img-a2', cardImgUrl: 'images/card-img-a2.png'},
-          cardVisibility:true
-        },
-        {
-          title: '3',
-          droppable: true,
-          droppableId: 'droppable3',
-          visibility: 'visible',
-          card: {id: 'question-a-img-a1', cardImgUrl: 'images/card-img-a1.png'},
-          cardVisibility:true
-        }
-      ],
-        [{title: 'placeholder', droppable: true, visibility: 'hidden'},
-          {title: 'X', droppable: true,droppableId: 'droppable4', visibility: 'visible', cardVisibility:false},
-          {title: 'placeholder', droppable: true, visibility: 'hidden'}]],
-        [[{
-          title: '1',
-          droppable: true,
-          droppableId: 'droppable1',
-          visibility: 'visible',
-          card: {id: 'question-a-img-b3', cardImgUrl: 'images/card-img-b3.png'},
-          cardVisibility:true
-        },
+          },
           {
             title: '2',
             droppable: true,
             droppableId: 'droppable2',
             visibility: 'visible',
-            card: {id: 'question-a-img-b2', cardImgUrl: 'images/card-img-b2.png'},
-            cardVisibility:true
+            card: vm.deployedCards[1],
+            cardVisibility: true
           },
           {
             title: '3',
             droppable: true,
             droppableId: 'droppable3',
             visibility: 'visible',
-            card: {id: 'question-a-img-b1', cardImgUrl: 'images/card-img-b1.png'},
-            cardVisibility:true
+            card: vm.deployedCards[2],
+            cardVisibility: true
           }
         ],
-          [{title: 'placeholder', droppable: true, visibility: 'hidden'},
-            {title: 'X', droppable: true,droppableId: 'droppable4', visibility: 'visible', cardVisibility:false},
-            {title: 'placeholder', droppable: true, visibility: 'hidden'}]]
-
+        [
+          {title: 'placeholder', droppable: true, visibility: 'hidden'},
+          {title: 'X', droppable: true, droppableId: 'droppable4', visibility: 'visible', cardVisibility: false},
+          {title: 'placeholder', droppable: true, visibility: 'hidden'}
+        ]
       ];
 
-      vm.initPatternMatchService = function() {
+      vm.initPatternMatchService = function () {
 
-        var patterns = [['question-a-img-a3','question-a-img-a2','question-a-img-a1'],
-        ['question-a-img-b3','question-a-img-b2','question-a-img-b1']];
+        var patterns = [['question-a-img-a3', 'question-a-img-a2', 'question-a-img-a1'],
+          ['question-a-img-b3', 'question-a-img-b2', 'question-a-img-b1']];
 
-
-
-        patternMatchService.initMatch(patterns[vm.direction],vm.direction);
+        patternMatchService.initMatch(patterns[vm.direction], vm.direction);
       }();
+
+      //////
+      function setCards() {
+
+        var manipulatedCards = angular.copy(vm.levelCards);
+        var tempCard;
+        //remove this magic number later
+        if (vm.level == 1) {
+          tempCard = manipulatedCards.pop();
+          manipulatedCards.unshift(tempCard);
+        }
+        else if (vm.level == 2) {
+          tempCard = manipulatedCards.shift();
+          manipulatedCards.push(tempCard);
+        }
+        else if (vm.level == 3) {
+          tempCard = manipulatedCards[0];
+          manipulatedCards[0] = manipulatedCards[manipulatedCards.length - 1];
+          manipulatedCards[manipulatedCards.length - 1] = tempCard;
+        }
+        return manipulatedCards;
+      }
     }
 
     function link(scope, el, attrs) {

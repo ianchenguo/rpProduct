@@ -13,7 +13,8 @@
     var vm = this;
     vm.levelType = $stateParams.level;
     vm.direction = $stateParams.direction;
-    //console.log('direction????? ' + vm.direction);
+
+    console.log('guess how many times i am in');
   }
 
 }());

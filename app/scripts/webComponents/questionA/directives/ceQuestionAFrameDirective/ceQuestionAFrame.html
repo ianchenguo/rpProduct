@@ -1,26 +1,30 @@
-<!--desired area-->
-<ce-desired-pattern class="desired-pattern" ng-if="vm.levelType > 0"
-                    direction="{{vm.direction}}">
+<ce-desired-pattern class="desired-pattern"
+                    ng-if="vm.levelType > 0"
+                    level="{{vm.levelType}}"
+                    level-cards="vm.levelCards">
+</ce-desired-pattern>
 
-</ce-desired-pattern><!--desired area-->
 
-<!--droppable area-->
+<!--droppable area for exploration level-->
 <ce-test-area class="test-area"
               level="{{vm.levelType}}"
-              ng-if="vm.levelType < 2">
+              ng-if="vm.levelType < 1"> <!--magic number should be replaced -->
+</ce-test-area>
+<!--droppable area for exploration level-->
 
-</ce-test-area><!--droppable area -->
 
+<!--droppable area for testing levels-->
 <ce-populated-test-area class="test-area"
+                        ng-if="vm.levelType > 0"
                         level="{{vm.levelType}}"
-                        ng-if="vm.levelType == 2"
-                        direction="{{vm.direction}}">
-</ce-populated-test-area><!--droppable area -->
+                        level-cards="vm.levelCards">
+</ce-populated-test-area>
+<!--droppable area for testing levels-->
 
 
-<!--draggable area-->
+<!--draggable area only for exploration level-->
 <ce-question-a-initial-area class="initial-area"
-                            ng-if="vm.levelType < 2"
+                            ng-if="vm.levelType < 1"
                             direction="{{vm.direction}}">
-
-</ce-question-a-initial-area><!--draggable area-->
+</ce-question-a-initial-area>
+<!--draggable area only for exploration level-->
