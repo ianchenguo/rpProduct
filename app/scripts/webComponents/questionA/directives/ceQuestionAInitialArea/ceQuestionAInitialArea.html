@@ -1,11 +1,18 @@
-<div class="row" ng-repeat="c in vm.components[vm.direction]">
-  <div class="col col-33 col-offset-33">
+<div layout="column"
+     layout-margin
+     layout-wrap
+     layout-align="center center">
+
+  <div flex="80"
+       ng-repeat="c in vm.components">
 
     <ce-card id={{c.id}}
              card-img-url="{{c.cardImgUrl}}"
              class="ce-card"
              ce-draggable>
-
     </ce-card>
+
   </div>
+
 </div>
+

@@ -1,0 +1,22 @@
+<ion-header-bar class="bar-stable">
+  <h1 class="title">Command List</h1>
+</ion-header-bar>
+
+<ion-content>
+  <ion-list>
+    <ion-item ng-repeat="cmd in vm.commands">
+      <ce-question-b-command></ce-question-b-command>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<div class="bar bar-footer bar-stable">
+  <div class="button button-positive"
+       ng-click="vm.addCommand()">
+    Add
+  </div>
+  <div class="button button-energized"
+       ng-click="vm.deleteLastCommand()">
+    Delete Last
+  </div>
+</div>

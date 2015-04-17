@@ -1,58 +1,152 @@
-<ion-view view-title="Quiz Info">
+<ion-view>
+  <ion-nav-title>
+    <h1 class="title">Quiz Info</h1>
+  </ion-nav-title>
+
   <ion-content>
+    <div layout="row"
+         layout-align="center center"
+         layout-margin
+         layout-wrap>
 
-    <div class="row">
-      <div class="col">
-        <h1>Observer Info</h1>
-        <!--adult observer info-->
-        <div class="list list-inset">
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">First Name</span>
-            <input type="text" placeholder="First Name" ng-model="vm.observer.firstName">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Last Name</span>
-            <input type="text" placeholder="Last Name" ng-model="vm.observer.lastName">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Email</span>
-            <input type="text" placeholder="Email Address" ng-model="vm.observer.email">
-          </label>
+
+      <form name="quizInfoForm"
+            flex="60">
+
+
+        <md-whitefram class="md-whiteframe-z1 ce-title-stripe"
+                      layout
+                      layout-margin
+                      layout-align="center center">
+          <h4 class="md-subhead">Observer Info</h4>
+        </md-whitefram>
+
+
+        <md-whitefram class="md-whiteframe-z1"
+                      layout
+                      layout-margin
+                      layout-wrap
+                      layout-align="center center">
+
+          <md-input-container flex="100">
+            <label>First Name</label>
+            <input required name="observerFirstName" ng-model="vm.observer.firstName">
+
+            <div ng-messages="quizInfoForm.observerFirstName.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+
+          <md-input-container flex="100">
+            <label>Last Name</label>
+            <input required name="observerLastName" ng-model="vm.observer.lastName">
+
+            <div ng-messages="quizInfoForm.observerLastName.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+
+          <md-input-container flex="100">
+            <label>Email</label>
+            <input required name="observerEmail" ng-model="vm.observer.email">
+
+            <div ng-messages="quizInfoForm.observerEmail.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </md-whitefram>
+
+
+        <md-whitefram class="md-whiteframe-z1 ce-title-stripe"
+                      layout
+                      layout-margin
+                      layout-align="center center">
+
+          <h4 class="md-subhead">Child Info</h4>
+        </md-whitefram>
+
+
+        <md-whitefram class="md-whiteframe-z1"
+                      layout
+                      layout-margin
+                      layout-wrap
+                      layout-align="center center">
+
+          <md-input-container flex="100">
+            <label>First Name</label>
+            <input required name="childFirstName" ng-model="vm.child.firstName">
+
+            <div ng-messages="quizInfoForm.childFirstName.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+
+          <md-input-container flex="100">
+            <label>Last Name</label>
+            <input required name="childLastName" ng-model="vm.child.lastName">
+
+            <div ng-messages="quizInfoForm.childLastName.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+
+          <md-input-container flex="100">
+            <label>Age</label>
+            <input required name="childAge" ng-model="vm.child.age">
+
+            <div ng-messages="quizInfoForm.childAge.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+
+
+          <md-input-container flex="100">
+            <md-select name="childGender"
+                       ng-model="vm.child.gender"
+                       placeholder="Select a Gender"
+                       required>
+
+              <md-option ng-value="opt"
+                         ng-repeat="opt in vm.gender"
+                >
+                {{ opt }}
+              </md-option>
+            </md-select>
+
+            <div ng-messages="quizInfoForm.childGender.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
+          </md-input-container>
+        </md-whitefram>
+
+
+        <div layout="row"
+             layout-align="space-around center">
+
+          <!--<md-button ng-click="vm.submitInfo()"-->
+                     <!--ng-disabled="quizInfoForm.$invalid"-->
+                     <!--class="md-primary md-raised"-->
+                     <!--flex>-->
+            <!--Start Quiz-->
+          <!--</md-button> -->
+          <md-button ng-click="vm.submitInfo()"
+                     class="md-primary md-raised"
+                     flex>
+            Start Quiz
+          </md-button>
+
+          <md-button ui-sref="app.welcome"
+                     class="md-raised"
+                     flex>
+            Back
+          </md-button>
         </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col">
-        <h1>Child Info</h1>
-        <!--child under test info-->
-        <div class="list list-inset">
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">First Name</span>
-            <input type="text" placeholder="First Name" ng-model="vm.child.firstName">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Last Name</span>
-            <input type="text" placeholder="Last Name" ng-model="vm.child.lastName">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Age</span>
-            <input type="text" placeholder="Age" ng-model="vm.child.age">
-          </label>
-          <label class="item item-input item-stacked-label">
-            <span class="input-label">Gender</span>
-            <input type="text" placeholder="Gender" ng-model="vm.child.gender">
-          </label>
-        </div>
-      </div>
+      </form>
     </div>
-
-    <div class="row">
-      <div class="col">
-        <button class="button button-royal" ng-click="vm.submitInfo()">Start</button>
-        <button class="button button-energized" ui-sref="app.welcome">Back</button>
-      </div>
-    </div>
-
   </ion-content>
 </ion-view>

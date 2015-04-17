@@ -9,8 +9,8 @@
     .directive('cePopulatedTestArea', cePopulatedTestArea);
 
   //////
-  cePopulatedTestArea.$inject = ['patternMatchService'];
-  function cePopulatedTestArea(patternMatchService) {
+  cePopulatedTestArea.$inject = ['patternRandomisationService'];
+  function cePopulatedTestArea(patternRandomisationService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/cePopulatedTestArea/cePopulatedTestArea.html',
@@ -29,8 +29,9 @@
     //////
     function controller() {
       var vm = this;
-      vm.setCards = setCards;
-      vm.deployedCards = vm.setCards();
+      //vm.setCards = setCards;
+      //vm.deployedCards = vm.setCards();
+      vm.deployedCards = patternRandomisationService.pickDeployedCards(vm.levelCards,vm.level);
 
       vm.testComponents = [
         [
@@ -62,18 +63,10 @@
         ],
         [
           {title: 'placeholder', droppable: true, visibility: 'hidden'},
-          {title: 'X', droppable: true, droppableId: 'droppable4', visibility: 'visible', cardVisibility: false},
+          {title: 'X', droppable: true, droppableId: 'droppableX', visibility: 'visible', cardVisibility: false},
           {title: 'placeholder', droppable: true, visibility: 'hidden'}
         ]
       ];
-
-      vm.initPatternMatchService = function () {
-
-        var patterns = [['question-a-img-a3', 'question-a-img-a2', 'question-a-img-a1'],
-          ['question-a-img-b3', 'question-a-img-b2', 'question-a-img-b1']];
-
-        patternMatchService.initMatch(patterns[vm.direction], vm.direction);
-      }();
 
       //////
       function setCards() {

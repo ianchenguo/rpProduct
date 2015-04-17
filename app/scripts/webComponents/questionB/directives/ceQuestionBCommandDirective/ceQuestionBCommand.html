@@ -1,0 +1,20 @@
+<label class="item item-input item-select">
+  <div class="input-label">
+    From Position
+  </div>
+  <select ng-model="vm.fromPosition"
+          ng-options="pos as pos for pos in vm.positions"
+          ng-change="vm.update()">
+  </select>
+</label>
+
+
+<label class="item item-input item-select">
+  <div class="input-label">
+    To Position
+  </div>
+  <select ng-model="vm.toPosition"
+          ng-options="pos as pos for pos in vm.positions"
+          ng-change="vm.update()">
+  </select>
+</label>

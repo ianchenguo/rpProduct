@@ -10,30 +10,51 @@
 
 
   <div class="item item-divider">
-    Question A
+    Level A
   </div>
 
   <a class="item item-button-right" menu-close
-       ui-sref="app.quiz.questionA.levels.directions({level:0,direction:0})">
-    Level 0
-
+     ui-sref="app.quiz.questionA.levels({level:0})">
+    Stage Exploration
   </a>
 
   <a class="item item-button-right" menu-close
-       ui-sref="app.quiz.questionA.levels.directions({level:1,direction:0})">
-    Level 1
-
+     ui-sref="app.quiz.questionA.levels({level:1})">
+    Stage Left Shift
   </a>
 
   <a class="item item-button-right" menu-close
-       ui-sref="app.quiz.questionA.levels.directions({level:2,direction:0})">
-    Level 2
-
+     ui-sref="app.quiz.questionA.levels({level:2})">
+    Stage Right Shift
   </a>
-  <a class="item item-button-right" menu-close
-     ui-sref="app.quiz.questionA.levels.directions({level:3,direction:0})">
-    Level 3
 
+  <a class="item item-button-right" menu-close
+     ui-sref="app.quiz.questionA.levels({level:3})">
+    Stage Symmetry Swap
+  </a>
+
+  <div class="item item-divider">
+    Level B
+  </div>
+
+  <a class="item item-button-right" menu-close
+     ui-sref="app.quiz.questionB.levels({level:0})">
+    Stage Exploration
+  </a>
+
+  <a class="item item-button-right" menu-close
+     ui-sref="app.quiz.questionB.levels({level:1})">
+    Stage Left Shift
+  </a>
+
+  <a class="item item-button-right" menu-close
+     ui-sref="app.quiz.questionB.levels({level:2})">
+    Stage Right Shift
+  </a>
+
+  <a class="item item-button-right" menu-close
+     ui-sref="app.quiz.questionB.levels({level:3})">
+    Stage Symmetry Swap
   </a>
 
   <a menu-close class="item" ng-click="vm.endQuiz()">

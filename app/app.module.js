@@ -12,6 +12,8 @@
       'app.quizInfo',
       'app.questionCommon',
       'app.questionA',
+      'app.questionB',
+
 
       'app.report',
 

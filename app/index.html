@@ -8,8 +8,10 @@
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
   <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <!-- endbower -->
   <!-- endbuild -->
+  <link href="bower_components/ionic-material/dist/material-ionic.min.css">
   <link href="styles/style.css" rel="stylesheet">
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -31,6 +33,10 @@
   <script src="bower_components/angular-pouchdb/dist/angular-pouchdb.js"></script>
   <script src="bower_components/relational-pouch/dist/pouchdb.relational-pouch.js"></script>
   <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/ramda/dist/ramda.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -119,9 +125,11 @@
   <script src="scripts/webComponents/questionCommon/directives/cePopulatedTestArea/cePopulatedTestArea.js"></script>
   <script src="scripts/webComponents/questionCommon/directives/ceTestBase/ceTestBase.js"></script>
   <script src="scripts/webComponents/questionCommon/directives/ceDraggable/ceDraggable.js"></script>
-  <script src="scripts/webComponents/questionCommon/directives/ceCardBase/ceCardBase.js"></script>
+  <!--<script src="scripts/webComponents/questionCommon/directives/ceCardBase/ceCardBase.js"></script>-->
   <script src="scripts/webComponents/questionCommon/directives/ceCard/ceCard.js"></script>
   <script src="scripts/webComponents/questionCommon/patternMatchService.js"></script>
+  <script src="scripts/webComponents/questionCommon/patternRandomisationService.js"></script>
+  <script src="scripts/webComponents/questionCommon/movePieceService.js"></script>
 
   <!--questionA module-->
   <script src="scripts/webComponents/questionA/questionA.module.js"></script>
@@ -129,6 +137,15 @@
   <script src="scripts/webComponents/questionA/QuestionA.controller.js"></script>
   <script src="scripts/webComponents/questionA/directives/ceQuestionAFrameDirective/ceQuestionAFrame.js"></script>
   <script src="scripts/webComponents/questionA/directives/ceQuestionAInitialArea/ceQuestionAInitialArea.js"></script>
+
+  <!--questionB module-->
+  <script src="scripts/webComponents/questionB/questionB.module.js"></script>
+  <script src="scripts/webComponents/questionB/questionB.router.js"></script>
+  <script src="scripts/webComponents/questionB/QuestionB.controller.js"></script>
+  <script src="scripts/webComponents/questionB/directives/ceQuestionBFrameDirective/ceQuestionBFrame.js"></script>
+  <script src="scripts/webComponents/questionB/directives/ceQuestionBCommandDirective/ceQuestionBCommand.directive.js"></script>
+  <script src="scripts/webComponents/questionB/directives/ceQuestionBCommandListDirective/ceQuestionBCommandList.directive.js"></script>
+  <script src="scripts/webComponents/questionB/directives/ceQuestionBTestAreaDirective/ceQuestionBTestArea.js"></script>
 
 
   <!--testing playground-->

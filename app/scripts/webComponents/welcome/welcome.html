@@ -1,10 +1,19 @@
-<ion-view view-title="Welcome">
-  <ion-content>
-    <div class="row">
-      <div class="col">
-        <h1>Instruction</h1>
+<ion-view>
 
-        <p>
+  <ion-nav-title>
+    <h1 class="title">Welcome</h1>
+  </ion-nav-title>
+
+  <ion-content>
+    <div layout="column"
+         layout-margin
+         layout-align="center center"
+         class="ce-main-content">
+
+      <div>
+        <h1 class="md-display-3">Instruction</h1>
+
+        <p class="md-body-1">
           Press the button below to start a new quiz session<br/>
           At the beginning of the quiz, the adult observer is required to provide some basic information <br/>
           The whole quiz session will be recorded in audio and screen play <br/>
@@ -13,14 +22,16 @@
           However, each of the questions and levels can be tried more than one times <br/>
           When the session is finished, the adult observer is required to send quiz data manually via an email interface
         </p>
+
+
+        <md-button class="md-raised md-primary" style="float:right;"
+                   ui-sref="app.quizInfo">
+          Start a new quiz
+        </md-button>
+
       </div>
     </div>
 
-    <div class="row">
-      <div class="col">
-        <button class="button button-royal" ui-sref="app.quizInfo">Start a new quiz</button>
-      </div>
-    </div>
   </ion-content>
 </ion-view>
 

@@ -36,7 +36,7 @@
           {title: '2', droppable: true, droppableId: 'droppable2', visibility: 'visible'},
           {title: '3', droppable: true, droppableId: 'droppable3', visibility: 'visible'}]
         , [{title: 'placeholder', droppable: false, visibility: 'hidden'},
-          {title: 'X', droppable: true, droppableId: 'droppable4', visibility: 'visible'},
+          {title: 'X', droppable: true, droppableId: 'droppableX', visibility: 'visible'},
           {title: 'placeholder', droppable: false, visibility: 'hidden'}]
       ];
 

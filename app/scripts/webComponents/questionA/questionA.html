@@ -1,14 +1,27 @@
-<ion-view view-title="The 1st Question - Level {{vm.levelType}}">
+<ion-view>
+
+  <ion-nav-title>
+    <h1 class="title">The 1st Level - Stage {{vm.levelType}}</h1>
+  </ion-nav-title>
+
   <ion-content>
-
-
     <!--<span id="cursor" ng-click="vm.test()" style="position:fixed;z-index:9999">cursor</span>-->
 
-    <ce-question-a-frame
-      class="question-frame"
-      level-type="{{vm.levelType}}"
-      direction="{{vm.direction}}">
-    </ce-question-a-frame>
+    <!--<div layout="column"-->
+         <!--layout-margin-->
+         <!--layout-fill-->
+         <!--layout-align="center center"-->
+         <!--class="ce-main-content">-->
+
+      <ce-question-a-frame class="question-frame"
+                           level-type="{{vm.levelType}}">
+      </ce-question-a-frame>
+
+    <!--</div>-->
+
 
   </ion-content>
 </ion-view>
+
+
+

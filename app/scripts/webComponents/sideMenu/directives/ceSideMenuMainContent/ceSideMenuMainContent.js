@@ -11,7 +11,7 @@
   function ceSideMenuMainContent() {
     return {
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuMainContent/ceSideMenuMainContent.html',
-      replace:true
+      replace: true
     }
   }
 }());

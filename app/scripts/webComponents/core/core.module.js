@@ -8,6 +8,8 @@
       'ionic',
       'ngCordova',
       'pouchdb',
+      'ngMaterial',
+      'ngMessages',
 
       'core.audioRecording',
       'core.file',
@@ -15,4 +17,5 @@
       'core.replay',
       'core.db'
     ]);
+
 }());
