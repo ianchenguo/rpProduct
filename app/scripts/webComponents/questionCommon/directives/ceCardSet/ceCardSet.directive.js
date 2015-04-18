@@ -6,12 +6,12 @@
   'use strict';
   angular
     .module('app.questionCommon')
-    .directive('ceDesiredPattern', ceDesiredPattern);
+    .directive('ceCardSet', ceCardSet);
 
-  function ceDesiredPattern() {
+  function ceCardSet() {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionCommon/directives/ceDesiredPattern/ceDesiredPattern.html',
+      templateUrl: 'scripts/webComponents/questionCommon/directives/ceCardSet/ceCardSet.html',
       scope: {
         content: '@',
         level: '@',

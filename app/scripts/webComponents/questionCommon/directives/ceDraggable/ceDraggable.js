@@ -5,14 +5,14 @@ angular
   .module('app.questionCommon')
   .directive('ceDraggable', ceDraggable);
 
-ceDraggable.$inject = ['$document', '$ionicGesture', 'logService', 'Touch','patternMatchService'];
+ceDraggable.$inject = ['$document', '$ionicGesture', 'logService', 'Touch', 'patternMatchService'];
 
-function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchService) {
+function ceDraggable($document, $ionicGesture, logService, Touch, patternMatchService) {
 
   var _utils = {
     setCss: _setCss,
     getUnderneathEl: _getUnderneathEl,
-    logTouch:_logTouch
+    logTouch: _logTouch
   };
 
   var directive = {
@@ -57,17 +57,28 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
 
 
       //console.log(event);
-      //console.log(element);
+      console.log(element);
 
       touchX = event.gesture ? event.gesture.center.pageX : event.detail.pageX;
       touchY = event.gesture ? event.gesture.center.pageY : event.detail.pageY;
+
+      var storedElPositionX = element.position().left;
+      var storedElPositionY = element.position().top;
+
+
+      console.log(storedElPositionX, storedElPositionY);
 
       _utils.setCss(element, {
         transform: 'scale(1.1)',
         opacity: 0.8,
         zIndex: 99,
-        position: 'absolute'
+        position: 'absolute',
+        left: storedElPositionX,
+        top: storedElPositionY
       });
+
+
+      //element.offset({top:storedElPositionY,left:storedElPositionX});
 
       //refactor this later
       _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt, true)
@@ -147,13 +158,13 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
           isSucceeded = true;
 
           //console.log('should match: '+ underneathEl.attr('should-match'));
-          if(underneathEl.attr('should-match') !== 'false') {
-            patternMatchService.testPattern(targetId,cardId,sourceId);
+          if (underneathEl.attr('should-match') !== 'false') {
+            patternMatchService.testPattern(targetId, cardId, sourceId);
           }
         }
       }
 
-      _utils.setCss(element, {transform: '', opacity: '', zIndex: '', position: ''});
+      _utils.setCss(element, {transform: '', opacity: '', zIndex: '', position: '', left: '', top: ''});
 
       //refactor this later
       _utils.logTouch(isDummy, event, element, touchX, touchY, dx, dy, dt, isSucceeded);
@@ -171,7 +182,9 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
       webkitTransform: styles.transform,
       opacity: styles.opacity,
       zIndex: styles.zIndex,
-      position: styles.position
+      position: styles.position,
+      left: styles.left,
+      top: styles.top
     });
   }
 
@@ -198,7 +211,7 @@ function ceDraggable($document, $ionicGesture, logService, Touch,patternMatchSer
         dx: dx,
         dy: dy,
         dt: dt,
-        success:isSucceeded
+        success: isSucceeded
       });
       logService.logTouch(touch);
     }

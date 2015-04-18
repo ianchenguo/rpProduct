@@ -1,0 +1,21 @@
+<md-whiteframe class="md-whiteframe-z1 ce-card-set"
+               flex
+               layout>
+
+  <!-- deliberately insert an intermediate div to uphold the place-->
+  <div flex
+       layout
+       layout-align="center center"
+       class="center-align-parent"
+       ng-repeat="c in vm.levelCards">
+
+    <ce-card-new id={{c.id}}
+                 class="ce-card-new center-align"
+                 card-img-url="{{c.cardImgUrl}}"
+                 ce-draggable>
+    </ce-card-new>
+
+  </div>
+
+
+</md-whiteframe>

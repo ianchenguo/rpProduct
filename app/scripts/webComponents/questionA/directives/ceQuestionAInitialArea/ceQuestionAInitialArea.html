@@ -1,18 +1,17 @@
-<div layout="column"
-     layout-margin
-     layout-wrap
-     layout-align="center center">
 
-  <div flex="80"
+  <div id="c.base.id"
+       class="ce-card-parent"
        ng-repeat="c in vm.components">
 
-    <ce-card id={{c.id}}
-             card-img-url="{{c.cardImgUrl}}"
+    <ce-card id={{c.card.id}}
+             card-img-url="{{c.card.cardImgUrl}}"
              class="ce-card"
              ce-draggable>
     </ce-card>
 
   </div>
 
-</div>
+
+
+
 

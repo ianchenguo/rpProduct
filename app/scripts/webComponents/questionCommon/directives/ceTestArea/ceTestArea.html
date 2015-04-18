@@ -1,12 +1,18 @@
-<div class="row" ng-repeat="rowComponents in vm.testComponents">
+<div flex
+     layout="row"
+     layout-align="center"
+     layout-margin
+     ng-repeat="rowComponents in vm.testComponents">
 
-  <div class="col col-33" ng-repeat="c in rowComponents">
 
-    <ce-test-base ng-style="{visibility:c.visibility}"
-                  title="c.title"
-                  droppable="c.droppable"
-                  droppable-id="c.droppableId"
-                  should-match="{{vm.shouldMatch}}"></ce-test-base>
-  </div>
+  <ce-test-base flex
+                ng-repeat="c in rowComponents"
+                ng-style="{visibility:c.visibility}"
+                title="c.title"
+                droppable="c.droppable"
+                droppable-id="c.droppableId"
+                should-match="{{vm.shouldMatch}}"
+                class="ce-test-base ce-card-parent">
+  </ce-test-base>
 </div>
 

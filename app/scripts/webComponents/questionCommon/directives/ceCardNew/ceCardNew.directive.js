@@ -1,31 +1,30 @@
 /**
- * Created by guochen on 4/03/15.
+ * Created by guochen on 5/03/15.
  */
 
 (function () {
   'use strict';
   angular
     .module('app.questionCommon')
-    .directive('ceDesiredPattern', ceDesiredPattern);
+    .directive('ceCardNew', ceCardNew);
 
-  function ceDesiredPattern() {
+  //////
+  function ceCardNew() {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionCommon/directives/ceDesiredPattern/ceDesiredPattern.html',
+      templateUrl: 'scripts/webComponents/questionCommon/directives/ceCardNew/ceCardNew.html',
       scope: {
-        content: '@',
-        level: '@',
-        levelCards: '='
+        cardImgUrl:'@'
       },
       controller: controller,
       controllerAs: 'vm',
       bindToController: true
-    };
+    }
 
     //////
     function controller() {
       var vm = this;
-
+      console.log(vm.cardImgUrl);
     }
   }
 
