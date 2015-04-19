@@ -338,6 +338,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/bower_components/pouchdb/dist/pouchdb.js',
           '<%= yeoman.app %>/bower_components/angular-pouchdb/dist/angular-pouchdb.js',
           '<%= yeoman.app %>/bower_components/relational-pouch/dist/pouchdb.relational-pouch.js',
+          '<%= yeoman.app %>/bower_components/ramda/dist/ramda.js',
 
 
           '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.module.js',

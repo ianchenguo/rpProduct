@@ -1,11 +1,22 @@
-<h4 class="ce-test-base-title">
-  {{vm.title}}
-</h4>
-<div class="ce-test-base-droppable-area"
-     droppable="{{vm.droppable}}"
-     id="{{vm.droppableId}}"
-     should-match="{{vm.shouldMatch}}">
-  <div ng-transclude></div>
+<div>
+  <h4 class="ce-test-base-title">
+    {{vm.title}}
+  </h4>
+
+  <div layout
+       layout-align="center center"
+
+       id="{{vm.droppableId}}"
+       class="ce-test-base-droppable-area"
+       should-match="{{vm.shouldMatch}}"
+       droppable="true">
+
+    <div ng-transclude>
+    </div>
+  </div>
+
 </div>
+
+
 
 

@@ -67,28 +67,6 @@
           {title: 'placeholder', droppable: true, visibility: 'hidden'}
         ]
       ];
-
-      //////
-      function setCards() {
-
-        var manipulatedCards = angular.copy(vm.levelCards);
-        var tempCard;
-        //remove this magic number later
-        if (vm.level == 1) {
-          tempCard = manipulatedCards.pop();
-          manipulatedCards.unshift(tempCard);
-        }
-        else if (vm.level == 2) {
-          tempCard = manipulatedCards.shift();
-          manipulatedCards.push(tempCard);
-        }
-        else if (vm.level == 3) {
-          tempCard = manipulatedCards[0];
-          manipulatedCards[0] = manipulatedCards[manipulatedCards.length - 1];
-          manipulatedCards[manipulatedCards.length - 1] = tempCard;
-        }
-        return manipulatedCards;
-      }
     }
 
     function link(scope, el, attrs) {

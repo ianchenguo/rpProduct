@@ -14,6 +14,7 @@
       'core.audioRecording',
       'core.file',
       'core.log',
+      'core.readableLog',
       'core.replay',
       'core.db'
     ]);

@@ -16,7 +16,6 @@
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceTestBase/ceTestBase.html',
       scope: {
         title: '=',
-        droppable: '=',
         droppableId:'=',
         shouldMatch:'@'
       },

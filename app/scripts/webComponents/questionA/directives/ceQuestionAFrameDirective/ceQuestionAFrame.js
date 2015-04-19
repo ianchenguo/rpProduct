@@ -34,7 +34,7 @@
       //////
 
       function activate() {
-        vm.levelCards = vm.levelType > 0 ? patternRandomisationService.pickLevelCards(vm.levelType): null;
+        vm.levelCards = patternRandomisationService.pickLevelCards(vm.levelType);
       }
     }
   }

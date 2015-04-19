@@ -37,11 +37,14 @@ height: 100%;
   position:relative;
 }
 
-.ce-test-base {
+
+/*ce-test-base*/
+.ce-test-base, .ce-test-base-droppable-area {
   position:relative;
 }
 
 .ce-test-base-title {
+  color:white;
   background-color:rgba(0,0,0,0.54);
   display:block;
   height:auto;
@@ -50,7 +53,6 @@ height: 100%;
 }
 
 .ce-test-base-droppable-area {
-  position:relative;
   background-color: rgba(0,0,0,0.12);
   margin:0 0 0 0;
   padding:0;
@@ -83,12 +85,8 @@ height: 100%;
 /*}*/
 
 
-.ce-card-set {
+.ce-card-set, ce-test-area {
   background-color: rgba(0,0,0,0.12);
-  position:relative;
-}
-
-.ce-card-new {
   position:relative;
 }
 

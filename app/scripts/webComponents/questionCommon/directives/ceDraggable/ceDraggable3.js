@@ -141,10 +141,9 @@ function ceDraggable($document, $ionicGesture, logService, Touch, patternMatchSe
 
       //test if the underneath element is droppable
       if (underneathEl.attr('droppable')) {
-        console.log(underneathEl);
-        console.log(underneathEl.find('.ce-card')[0]);
+        //test if the underneath element already contains current element
+        if (underneathEl.children(0) !== element[0]) {
 
-        if(!underneathEl.find('.ce-card')[0]) {
           //console.log(underneathEl);
           //console.log(element);
           //console.log(element.parent());
@@ -159,28 +158,7 @@ function ceDraggable($document, $ionicGesture, logService, Touch, patternMatchSe
           if (underneathEl.attr('should-match') !== 'false') {
             patternMatchService.testPattern(targetId, cardId, sourceId);
           }
-
         }
-
-
-        //test if the underneath element already contains current element
-        //if (underneathEl.children(0) !== element[0]) {
-        //
-        //  //console.log(underneathEl);
-        //  //console.log(element);
-        //  //console.log(element.parent());
-        //  var targetId = underneathEl[0].id,
-        //    cardId = element[0].id,
-        //    sourceId = element.parent()[0].id;
-        //
-        //  underneathEl.append(element[0]);
-        //  isSucceeded = true;
-        //
-        //  //console.log('should match: '+ underneathEl.attr('should-match'));
-        //  if (underneathEl.attr('should-match') !== 'false') {
-        //    patternMatchService.testPattern(targetId, cardId, sourceId);
-        //  }
-        //}
       }
 
       _utils.setCss(element, {transform: '', opacity: '', zIndex: '', position: '', left: '', top: ''});

@@ -13,7 +13,7 @@
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceCardSet/ceCardSet.html',
       scope: {
-        content: '@',
+        question:'@',
         level: '@',
         levelCards: '='
       },
@@ -26,6 +26,7 @@
     function controller() {
       var vm = this;
 
+      vm.draggable = !!(vm.question == 'a' && vm.level == 0);
     }
   }
 

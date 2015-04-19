@@ -1,18 +1,39 @@
-<div flex
-     layout="row"
-     layout-align="center"
-     layout-margin
-     ng-repeat="rowComponents in vm.testComponents">
+<md-whiteframe class="md-whiteframe-z1 ce-test-area"
+
+               flex
+               layout="column"
+               layout-align="center">
+
+  <div flex
+       layout="row"
+       layout-align="center"
+       layout-margin
+
+       ng-repeat="rowComponents in vm.testComponents">
 
 
-  <ce-test-base flex
-                ng-repeat="c in rowComponents"
-                ng-style="{visibility:c.visibility}"
-                title="c.title"
-                droppable="c.droppable"
-                droppable-id="c.droppableId"
-                should-match="{{vm.shouldMatch}}"
-                class="ce-test-base ce-card-parent">
-  </ce-test-base>
-</div>
+    <ce-test-base flex="30"
+                  layout="column"
+                  layout-align="center"
+
+                  ng-repeat="c in rowComponents"
+                  title="c.title"
+                  droppable-id="c.droppableId"
+                  should-match="{{vm.shouldMatch}}"
+                  class="ce-test-base">
+
+      <ce-card ng-if="vm.shouldShowCards() && c.title != 'X'"
+               id={{c.card.id}}
+               card-img-url="{{c.card.cardImgUrl}}"
+               class="ce-card"
+               ce-draggable>
+      </ce-card>
+
+    </ce-test-base>
+  </div>
+
+
+</md-whiteframe>
+
+
 

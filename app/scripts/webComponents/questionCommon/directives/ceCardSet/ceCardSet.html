@@ -9,13 +9,25 @@
        class="center-align-parent"
        ng-repeat="c in vm.levelCards">
 
-    <ce-card-new id={{c.id}}
-                 class="ce-card-new center-align"
-                 card-img-url="{{c.cardImgUrl}}"
-                 ce-draggable>
-    </ce-card-new>
 
+    <ng-switch on="vm.draggable">
+      <ce-card ng-switch-when="true"
+               id={{c.id}}
+               class="ce-card center-align"
+               card-img-url="{{c.cardImgUrl}}"
+               ce-draggable="">
+      </ce-card>
+
+      <ce-card ng-switch-when="false"
+               id={{c.id}}
+               class="ce-card center-align"
+               card-img-url="{{c.cardImgUrl}}">
+      </ce-card>
+    </ng-switch>
   </div>
 
 
 </md-whiteframe>
+
+
+

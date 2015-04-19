@@ -6,13 +6,13 @@
   'use strict';
   angular
     .module('app.questionCommon')
-    .directive('ceCardNew', ceCardNew);
+    .directive('ceCard', ceCard);
 
   //////
-  function ceCardNew() {
+  function ceCard() {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionCommon/directives/ceCardNew/ceCardNew.html',
+      templateUrl: 'scripts/webComponents/questionCommon/directives/ceCard/ceCard.html',
       scope: {
         cardImgUrl:'@'
       },
@@ -24,7 +24,6 @@
     //////
     function controller() {
       var vm = this;
-      console.log(vm.cardImgUrl);
     }
   }
 

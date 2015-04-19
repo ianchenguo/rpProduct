@@ -1,59 +1,53 @@
 <div layout="column"
-     layout-margin
      layout-fill
+     layout-margin
      layout-align="center"
      class="ce-main-content">
 
   <ce-card-set flex="25"
-               layout
+               layout="row"
+
+               question="a"
                level="{{vm.levelType}}"
                level-cards="vm.levelCards">
   </ce-card-set>
 
-
-
-  <!--<ce-desired-pattern flex-->
-                      <!--class="desired-pattern"-->
-                      <!--ng-if="vm.levelType > 0"-->
-                      <!--level="{{vm.levelType}}"-->
-                      <!--level-cards="vm.levelCards"-->
-                      <!--layout="row">-->
-  <!--</ce-desired-pattern>-->
-
-
   <!--droppable area for exploration level-->
-  <ce-test-area flex
-                class="test-area"
-                level="{{vm.levelType}}"
-                ng-if="vm.levelType < 1"
+  <ce-test-area flex="75"
                 layout="column"
-                layout-margin> <!--magic number should be replaced -->
+
+                class="test-area"
+                question="a"
+                level="{{vm.levelType}}"
+                level-cards="vm.levelCards"> <!--magic number should be replaced -->
   </ce-test-area>
   <!--droppable area for exploration level-->
 
 
-  <!--droppable area for testing levels-->
-  <ce-populated-test-area flex
-                          class="test-area"
-                          ng-if="vm.levelType > 0"
-                          level="{{vm.levelType}}"
-                          level-cards="vm.levelCards"
-                          layout="column">
-  </ce-populated-test-area>
-  <!--droppable area for testing levels-->
+  <!--&lt;!&ndash;droppable area for testing levels&ndash;&gt;-->
+  <!--<ce-populated-test-area flex="75"-->
+                          <!--layout="column"-->
+                          <!--layout-margin-->
+
+                          <!--class="test-area"-->
+                          <!--ng-if="vm.levelType > 0"-->
+                          <!--level="{{vm.levelType}}"-->
+                          <!--level-cards="vm.levelCards">-->
+  <!--</ce-populated-test-area>-->
+  <!--&lt;!&ndash;droppable area for testing levels&ndash;&gt;-->
 
 
-  <!--draggable area only for exploration level-->
-  <ce-question-a-initial-area flex
+  <!--&lt;!&ndash;draggable area only for exploration level&ndash;&gt;-->
+  <!--<ce-question-a-initial-area flex-->
 
-                              class="initial-area"
-                              ng-if="vm.levelType < 1"
+                              <!--class="initial-area"-->
+                              <!--ng-if="vm.levelType < 1"-->
 
-                              layout="row"
-                              layout-align="center"
-                              layout-margin>
-  </ce-question-a-initial-area>
-  <!--draggable area only for exploration level-->
+                              <!--layout="row"-->
+                              <!--layout-align="center"-->
+                              <!--layout-margin>-->
+  <!--</ce-question-a-initial-area>-->
+  <!--&lt;!&ndash;draggable area only for exploration level&ndash;&gt;-->
 
 </div>
 
