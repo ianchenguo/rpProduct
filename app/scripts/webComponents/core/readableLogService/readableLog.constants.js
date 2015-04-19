@@ -15,6 +15,7 @@
         questionStart: 'level start',
         questionEnd: 'level end',
         levelStart: 'stage start',
+        levelMatched: 'stage match',
         levelEnd: 'stage end',
         dragStart: 'drag start',
         dragEndSuccess: 'succeeded drag end',

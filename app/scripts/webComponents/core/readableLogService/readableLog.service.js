@@ -123,7 +123,19 @@
         levelContent.detail = READABLE_LOG_DETAIL_SUBJECT.level + ' ' + level._id;
       };
 
-      level.endTimeStamp === '' ? createLevelStartLog() : createLevelEndLog();
+      var createLevelMatchedLog = function createLevelMatchedLog() {
+        levelContent.timeStamp = level.timeStamp;
+        levelContent.event = READABLE_LOG_EVENTS.levelMatched;
+        levelContent.detail = READABLE_LOG_DETAIL_SUBJECT.level + ' ' + level._id;
+      }
+
+      if (level.timeStamp) {
+        createLevelMatchedLog();
+      } else {
+        level.endTimeStamp === '' ? createLevelStartLog() : createLevelEndLog();
+      }
+
+
       return new ReadableLogEntry(levelContent);
     }
 

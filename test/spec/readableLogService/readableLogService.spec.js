@@ -32,6 +32,7 @@
     var mockQuestionStartData;
     var mockQuestionEndData;
     var mockLevelStartData;
+    var mockLevelMatchedData;
     var mockLevelEndData;
 
     beforeEach(function () {
@@ -75,8 +76,13 @@
         endTimeStamp: ''
       };
 
+      mockLevelMatchedData = {
+        _id: 'mock_level_matched_id',
+        timeStamp: new Date().toJSON()
+      };
+
       mockLevelEndData = {
-        _id: 'mock_level_start_id',
+        _id: 'mock_level_end_id',
         startTimeStamp: new Date().toJSON(),
         endTimeStamp: new Date().toJSON()
       };
@@ -206,6 +212,22 @@
         );
 
         var createdEntry = readableLogService.createLevelLog(mockLevelStartData);
+        expect(createdEntry.timeStamp).toEqual(targetEntry.timeStamp);
+        expect(createdEntry.event).toEqual(targetEntry.event);
+        expect(createdEntry.detail).toEqual(targetEntry.detail);
+      });
+
+      it('should create a level hit entry when a level is matched', function() {
+
+        var targetEntry = new ReadableLogEntry(
+          {
+            timeStamp: mockLevelMatchedData.timeStamp,
+            event: READABLE_LOG_EVENTS.levelMatched,
+            detail: READABLE_LOG_DETAIL_SUBJECT.level + ' ' + mockLevelMatchedData._id
+          }
+        );
+
+        var createdEntry = readableLogService.createLevelLog(mockLevelMatchedData);
         expect(createdEntry.timeStamp).toEqual(targetEntry.timeStamp);
         expect(createdEntry.event).toEqual(targetEntry.event);
         expect(createdEntry.detail).toEqual(targetEntry.detail);
