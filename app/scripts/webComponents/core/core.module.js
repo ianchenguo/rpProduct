@@ -16,7 +16,8 @@
       'core.log',
       'core.readableLog',
       'core.replay',
-      'core.db'
+      'core.db',
+      'core.emailComposer'
     ]);
 
 }());

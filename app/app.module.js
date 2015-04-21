@@ -13,9 +13,6 @@
       'app.questionCommon',
       'app.questionA',
       'app.questionB',
-      'app.layout',
-
-
       'app.report',
 
       'test.playground'

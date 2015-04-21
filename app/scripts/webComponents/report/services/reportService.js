@@ -8,12 +8,13 @@
     .module('app.report')
     .factory('reportService', reportService);
 
-  reportService.$inject = ['ReportRecord', 'reportDbService'];
-  function reportService(ReportRecord, reportDbService) {
+  reportService.$inject = ['ReportRecord', 'reportDbService', 'readableLogService'];
+  function reportService(ReportRecord, reportDbService,readableLogService) {
     var service = {
       listAllEndedQuizzes: listAllEndedQuizzes,
       createReport: createReport,
-      getQuizDetail: getQuizDetail
+      getQuizDetail: getQuizDetail,
+      loadSingQuizReport:loadSingQuizReport
     };
 
     return service;
@@ -169,6 +170,10 @@
 
     function getQuizDetail(id) {
       return reportDbService.getQuizDetailById(id);
+    }
+
+    function loadSingQuizReport(quizId) {
+      return readableLogService.getQuizLogs(quizId);
     }
   }
 }());

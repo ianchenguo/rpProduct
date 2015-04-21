@@ -32,7 +32,7 @@
             <label>First Name</label>
             <input required name="observerFirstName" ng-model="vm.observer.firstName">
 
-            <div ng-messages="quizInfoForm.observerFirstName.$error">
+            <div ng-messages="quizInfoForm.observerFirstName.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -42,7 +42,7 @@
             <label>Last Name</label>
             <input required name="observerLastName" ng-model="vm.observer.lastName">
 
-            <div ng-messages="quizInfoForm.observerLastName.$error">
+            <div ng-messages="quizInfoForm.observerLastName.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -52,7 +52,7 @@
             <label>Email</label>
             <input required name="observerEmail" ng-model="vm.observer.email">
 
-            <div ng-messages="quizInfoForm.observerEmail.$error">
+            <div ng-messages="quizInfoForm.observerEmail.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -78,7 +78,7 @@
             <label>First Name</label>
             <input required name="childFirstName" ng-model="vm.child.firstName">
 
-            <div ng-messages="quizInfoForm.childFirstName.$error">
+            <div ng-messages="quizInfoForm.childFirstName.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -88,7 +88,7 @@
             <label>Last Name</label>
             <input required name="childLastName" ng-model="vm.child.lastName">
 
-            <div ng-messages="quizInfoForm.childLastName.$error">
+            <div ng-messages="quizInfoForm.childLastName.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -98,7 +98,7 @@
             <label>Age</label>
             <input required name="childAge" ng-model="vm.child.age">
 
-            <div ng-messages="quizInfoForm.childAge.$error">
+            <div ng-messages="quizInfoForm.childAge.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -117,7 +117,7 @@
               </md-option>
             </md-select>
 
-            <div ng-messages="quizInfoForm.childGender.$error">
+            <div ng-messages="quizInfoForm.childGender.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -127,17 +127,17 @@
         <div layout="row"
              layout-align="space-around center">
 
-          <!--<md-button ng-click="vm.submitInfo()"-->
-                     <!--ng-disabled="quizInfoForm.$invalid"-->
-                     <!--class="md-primary md-raised"-->
-                     <!--flex>-->
-            <!--Start Quiz-->
-          <!--</md-button> -->
           <md-button ng-click="vm.submitInfo()"
+                     ng-disabled="quizInfoForm.$invalid"
                      class="md-primary md-raised"
                      flex>
             Start Quiz
           </md-button>
+          <!--<md-button ng-click="vm.submitInfo()"-->
+                     <!--class="md-primary md-raised"-->
+                     <!--flex>-->
+            <!--Start Quiz-->
+          <!--</md-button>-->
 
           <md-button ui-sref="app.welcome"
                      class="md-raised"

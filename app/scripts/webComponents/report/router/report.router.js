@@ -47,10 +47,16 @@
     }
 
     prepareQuizReport.$inject = ['reportService','$stateParams'];
+    //function prepareQuizReport(reportService,$stateParams) {
+    //  return reportService.getQuizDetail($stateParams.quizId)
+    //    .then(function(value) {
+    //      return reportService.createReport(value);
+    //    });
+    //}
     function prepareQuizReport(reportService,$stateParams) {
-      return reportService.getQuizDetail($stateParams.quizId)
+      return reportService.loadSingQuizReport($stateParams.quizId)
         .then(function(value) {
-          return reportService.createReport(value);
+          return value;
         });
     }
   }

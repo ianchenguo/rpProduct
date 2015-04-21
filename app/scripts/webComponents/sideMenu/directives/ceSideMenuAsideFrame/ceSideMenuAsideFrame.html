@@ -1,11 +1,18 @@
 <ion-side-menu side="left" ng-switch="vm.mode">
 
-  <ion-header-bar class="bar-stable">
+  <ion-header-bar class="bar bar-header bar-positive expanded ce-nav-bar">
     <h1 class="title">Menu</h1>
   </ion-header-bar>
 
   <ion-content>
-    <ce-side-menu-aside-general ng-switch-when="general"></ce-side-menu-aside-general>
-    <ce-side-menu-aside-quiz ng-switch-when="quiz"></ce-side-menu-aside-quiz>
+    <ce-side-menu-aside-general ng-switch-when="general"
+                                layout="column"
+                                class="ce-aside-frame">
+    </ce-side-menu-aside-general>
+
+    <ce-side-menu-aside-quiz ng-switch-when="quiz"
+                             layout="column"
+                             class="ce-aside-frame">
+    </ce-side-menu-aside-quiz>
   </ion-content>
 </ion-side-menu>

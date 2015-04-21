@@ -7,85 +7,86 @@
     .module('core.audioRecording')
     .factory('audioRecordingService', audioRecordingService);
 
-  audioRecordingService.$inject = ['$q','$ionicPlatform', '$cordovaMedia'];
+  audioRecordingService.$inject = ['$q', '$ionicPlatform', '$cordovaMedia'];
 
-  function audioRecordingService($q,$ionicPlatform, $cordovaMedia) {
+  function audioRecordingService($q, $ionicPlatform, $cordovaMedia) {
 
-    var src, media;
+    var _src;
+    var _media;
+    var _isRecording = false;
+    var _isRecorded = false;
+    var _fileRawPath = '';
 
     var service = {
+      isRecording: isRecording,
+      isRecorded: isRecorded,
       startRecord: startRecord,
       stopRecord: stopRecord,
       play: play,
-      stop:stop
+      stop: stop,
+      getFilePath: getFilePath
     };
 
     return service;
 
+
     ///////
+    function getFilePath() {
+      var fileName = R.replace(/^documents:\/\//, '', _fileRawPath);
+      console.log(fileName);
+      return cordova.file.documentsDirectory + fileName;
+    }
+
+    function isRecording() {
+      return _isRecording;
+    }
+
+    function isRecorded() {
+      return _isRecorded;
+    }
+
     function startRecord(path) {
 
-      console.log('i am in start record');
-      src = path;
-      console.log(prepareMedia(src));
-      console.log('outer');
-      console.log(media);
-      media.startRecord();
-      console.log(media);
+      _src = path;
+      prepareMedia(_src);
+      _media.startRecord();
+      _fileRawPath = _media.media.src;
+      _isRecording = true;
     }
 
-    function stopRecord(){
+    function stopRecord() {
 
-      console.log('stop record:');
-      media.stopRecord();
-      console.log(media);
-
-      console.log('release media');
-      media.release();
-      console.log(media);
+      _media.stopRecord();
+      _media.release();
+      _isRecording = false;
+      _isRecorded = true;
     }
 
-    function play(){
+    function play() {
       console.log('play record');
       prepareMedia();
-      media.play();
+      _media.play();
     }
 
-    function stop(){
+    function stop() {
       console.log('play record');
-      media.stop();
-      media.release();
+      _media.stop();
+      _media.release();
     }
 
-    function prepareMedia() {
+    function prepareMedia(src) {
       $ionicPlatform.ready(function () {
-        console.log('hardware ready');
-        media =  $cordovaMedia.newMedia('documents://test.m4a');
-        return media.then(function (success) {
-          // success
-          console.log('newMedia(): Media success');
-          return success;
-        }, function (error) {
-          // error
-          console.log('newMedia(): Media error: ' + error);
-          return $q.reject(error);
-        });
-
-        //console.log('hardware ready');
-        //media = new Voice('test.amr',handleSuccess,handleError,handleStatus);
-        ////////
-        //
-        //function handleSuccess(value) {
-        //  console.log('voice success: ' + JSON.stringify(value));
-        //}
-        //
-        //function handleError(error) {
-        //  console.log('voice error: ' + JSON.stringify(error));
-        //}
-        //
-        //function handleStatus(status) {
-        //  console.log('voice status: ' + JSON.stringify(status));
-        //}
+        _media = $cordovaMedia.newMedia(src);
+        return _media.then(
+          function (success) {
+            // success
+            return success;
+          },
+          function (error) {
+            // error
+            console.log('newMedia(): Media error: ' + error);
+            return $q.reject(error);
+          });
       });
     }
   }

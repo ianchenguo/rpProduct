@@ -24,7 +24,7 @@
       };
       now = new Date().toJSON();
 
-      this._id = 'level_' + now + Math.random();
+      this._id = 'stage_' + now + Math.random();
       this._rev = '';
       this.startTimeStamp = now;
       this.endTimeStamp = args.endTimeStamp;

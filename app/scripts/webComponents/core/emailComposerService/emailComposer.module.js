@@ -5,9 +5,5 @@
 (function () {
   'use strict';
   angular
-    .module('core.readableLog',
-    [
-      'core.db',
-      'core.file',
-    ]);
+    .module('core.emailComposer', []);
 }());

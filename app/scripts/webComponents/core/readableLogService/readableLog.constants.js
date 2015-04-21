@@ -22,14 +22,15 @@
         dragEndFailed: 'failed drag end'
       },
       READABLE_LOG_DETAIL_SUBJECT: {
-        quiz: 'quiz id',
-        question: 'level id',
+        quiz: 'quiz',
+        question: 'level',
+        level: 'stage',
         drag: 'element'
       },
       READABLE_LOG_DETAIL_PREP: {
-        dragStart: 'from',
-        dragEnd: 'to',
-        dragFailed: 'back'
+        dragStart: 'FROM',
+        dragEnd: 'TO',
+        dragFailed: 'BACK'
       }
     });
 }());

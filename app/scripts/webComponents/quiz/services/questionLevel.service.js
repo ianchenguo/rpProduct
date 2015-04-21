@@ -8,15 +8,30 @@
     .module('app.quiz')
     .factory('questionLevelService', questionLevelService);
 
-  questionLevelService.$inject = ['quizService','questionService', 'QuestionLevel', 'questionLevelDbService', 'STATE', 'DOC_TYPE'];
+  questionLevelService.$inject = [
+    'quizService',
+    'questionService',
+    'QuestionLevel',
+    'questionLevelDbService',
+    'STATE',
+    'DOC_TYPE',
+    'readableLogService'];
 
-  function questionLevelService(quizService, questionService, QuestionLevel, questionLevelDbService, STATE,DOC_TYPE) {
+  function questionLevelService(quizService,
+                                questionService,
+                                QuestionLevel,
+                                questionLevelDbService,
+                                STATE,
+                                DOC_TYPE,
+                                readableLogService) {
 
     var _questionLevel;
 
     var _utils = {
-      updateQuestionLevelStub:_updateQuestionLevelStub
-    }
+      postProcess:_postProcess,
+      updateQuestionLevelStub: _updateQuestionLevelStub,
+      logQuestionLevel:_logQuestionLevel
+    };
 
     var service = {
       getLocalQuestionLevel: getLocalQuestionLevel,
@@ -40,19 +55,31 @@
         endTimeStamp: '',
         state: STATE.created,
         type: questionLevelType,
-        quiz:quizId,
-        question:questionId,
+        quiz: quizId,
+        question: questionId,
         docType: DOC_TYPE.questionLevel
       });
 
       return questionLevelDbService.putQuestionLevel(_questionLevel)
-        .then(_utils.updateQuestionLevelStub);
+        .then(_utils.postProcess);
     }
 
-    function _updateQuestionLevelStub(stub){
+    function _postProcess(value) {
+      var stub = _utils.updateQuestionLevelStub(value);
+      _utils.logQuestionLevel();
+      return stub;
+    }
+
+    function _updateQuestionLevelStub(stub) {
       _questionLevel._id = stub.id;
       _questionLevel._rev = stub.rev;
       return stub;
+    }
+
+    function _logQuestionLevel() {
+      readableLogService.saveLog(
+        readableLogService.createLevelLog(_questionLevel)
+      );
     }
 
 
@@ -60,8 +87,8 @@
       _questionLevel.endTimeStamp = new Date().toJSON();
       _questionLevel.state = STATE.finished;
       return questionLevelDbService.putQuestionLevel(_questionLevel, _questionLevel._id, _questionLevel._rev)
-        .then(_utils.updateQuestionLevelStub);
+        .then(_utils.postProcess);
     }
-  };
+  }
 
 }());

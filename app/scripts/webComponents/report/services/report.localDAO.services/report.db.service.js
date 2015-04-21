@@ -13,7 +13,7 @@
   function reportDbService(dbService) {
 
     var service = {
-      listAllEndedQuizzes:listAllEndedQuizzes,
+      listAllEndedQuizzes: listAllEndedQuizzes,
       getQuizDetailById: getQuizDetailById
     };
     return service;
@@ -47,21 +47,63 @@
     }
 
     function listAllEndedQuizzes() {
-      return dbService.db
-        .query(function (doc) {
-          if (doc.state === 'finished' && doc.docType === 'quiz') {
-            emit(doc.endTimeStamp);
+
+
+      // create a design doc
+      var ddoc = {
+        _id: '_design/report_quiz_index',
+        views: {
+          by_state_and_docType: {
+            map: function (doc) {
+              emit([doc.state, doc.docType]);
+            }.toString()
+          },
+          by_docType_and_state: {
+            map: function (doc) {
+              emit([doc.docType, doc.state]);
+            }.toString()
           }
-        },
-        {
-          include_docs: true
+        }
+      };
+
+      // save the design doc
+      return dbService.db
+        .put(ddoc).catch(function (err) {
+          if (err.status !== 409) {
+            throw err;
+          }
+          // ignore if doc already exists
         })
-        .then(function (value) {
+        .then(function () {
+
+          return dbService.db
+            .query('report_quiz_index/by_docType_and_state', {
+              include_docs: true,
+              key: ['quiz', 'finished']
+            });
+        }).then(function (value) {
+          // handle result
           return value.rows;
-        })
-        .catch(function (error) {
+        }).catch(function (error) {
           throw new Error(error);
         });
+
+
+      //return dbService.db
+      //  .query(function (doc) {
+      //    if (doc.state === 'finished' && doc.docType === 'quiz') {
+      //      emit(doc.endTimeStamp);
+      //    }
+      //  },
+      //  {
+      //    include_docs: true
+      //  })
+      //  .then(function (value) {
+      //    return value.rows;
+      //  })
+      //  .catch(function (error) {
+      //    throw new Error(error);
+      //  });
     }
 
   }

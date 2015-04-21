@@ -8,8 +8,11 @@
     .module('app.questionCommon')
     .directive('ceTestArea', ceTestArea);
 
-  ceTestArea.$inject = ['patternRandomisationService'];
-  function ceTestArea(patternRandomisationService) {
+  ceTestArea.$inject = [
+    'patternMatchService',
+    'patternRandomisationService'];
+  function ceTestArea(patternMatchService,
+                      patternRandomisationService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceTestArea/ceTestArea.html',
@@ -29,7 +32,6 @@
     //////
     function controller() {
       var vm = this;
-
       var rawComponents = [
         [
           {title: '1', droppable: true, droppableId: 'droppable1'},
@@ -41,39 +43,41 @@
         ]
       ];
 
-      var populateComponent = function populateComponent() {
-
-        var deployedCards;
-        function attachCard(value,index) {
-          value.card = deployedCards[index];
-          return value;
-        }
-
-        deployedCards = patternRandomisationService.pickDeployedCards(vm.levelCards,vm.level);
-
-        return rawComponents[0].map(attachCard);
-      };
-
       vm.shouldMatch = vm.level > 0;
       vm.testComponents = [[],[]];
-
-      vm.shouldShowCards = function() {
-        if(vm.question == 'a' && vm.level > 0) {
-          return true;
-        }
-
-        return false;
-      };
+      vm.shouldShowCards = shouldShowCards;
 
       activate();
 
+      //////
+
+      function shouldShowCards() {
+         return vm.question == 'a' && vm.level > 0;
+      }
+
       function activate() {
         if(vm.question == 'a' && vm.level > 0) {
-          vm.testComponents[0] = populateComponent();
+          vm.testComponents[0] = prepareComponents();
           vm.testComponents[1] = rawComponents[1];
         } else {
           vm.testComponents = rawComponents;
         }
+      }
+
+      function prepareComponents() {
+        var deployedCards = patternRandomisationService.pickDeployedCards(vm.levelCards,vm.level);
+        patternMatchService.initMatch(deployedCards);
+        return populateComponents(deployedCards);
+
+      }
+
+      function populateComponents(deployedCards) {
+
+        function attachCard(value,index) {
+          value.card = deployedCards[index];
+          return value;
+        }
+        return rawComponents[0].map(attachCard);
       }
     }
 

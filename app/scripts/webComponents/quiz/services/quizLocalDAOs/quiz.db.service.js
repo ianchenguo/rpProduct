@@ -61,23 +61,61 @@
     //temporary implementation
     function queryQuizzesByState(state) {
 
-      return dbService.db
-        .query(function (doc) {
-          if (doc.state === state) {
-            emit(doc._id);
+
+
+
+      // create a design doc
+      var ddoc = {
+        _id: '_design/quiz_index',
+        views: {
+          by_state_and_docType: {
+            map: function (doc) { emit([doc.state,doc.docType]); }.toString()
+          },
+          by_docType_and_state: {
+            map: function (doc) { emit([doc.docType,doc.state]); }.toString()
           }
-        },
-        {
-          startkey: 'quiz',
-          endkey: 'quiz\uffff',
-          include_docs: true
+        }
+      };
+
+      // save the design doc
+      dbService.db
+        .put(ddoc).catch(function (err) {
+          if (err.status !== 409) {
+            throw err;
+          }
+          // ignore if doc already exists
         })
-        .then(function (value) {
+        .then(function () {
+          // find docs where title === 'Lisa Says'
+          return db.query('by_docType_and_state', {
+            include_docs: true,
+            startkey:['quiz','finished'],
+            endkey:['quiz','finished',{}]
+          });
+        }).then(function (value) {
+          // handle result
           return value.rows;
-        })
-        .catch(function (error) {
+        }).catch(function (error) {
           throw new Error(error);
         });
+
+      //return dbService.db
+      //  .query(function (doc) {
+      //    if (doc.state === state) {
+      //      emit(doc._id);
+      //    }
+      //  },
+      //  {
+      //    startkey: 'quiz',
+      //    endkey: 'quiz\uffff',
+      //    include_docs: true
+      //  })
+      //  .then(function (value) {
+      //    return value.rows;
+      //  })
+      //  .catch(function (error) {
+      //    throw new Error(error);
+      //  });
     }
 
     function queryEndedQuizzesByDate(startDate, endDate) {

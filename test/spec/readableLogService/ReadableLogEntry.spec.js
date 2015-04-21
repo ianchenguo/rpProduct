@@ -23,7 +23,8 @@
       mockEntryData = {
         timeStamp: new Date().toJSON(),
         event:'quiz start',
-        detail: 'quiz (id: dummy-quiz) starts'
+        detail: 'quiz (id: mock quiz id) starts',
+        quiz:'mock-quiz-id'
       }
     });
 
@@ -46,6 +47,10 @@
 
     it('should have a detail', function () {
       expect(new ReadableLogEntry(mockEntryData).detail).toEqual(mockEntryData.detail);
+    });
+
+    it('should have a quiz id', function () {
+      expect(new ReadableLogEntry(mockEntryData).quiz).toEqual(mockEntryData.quiz);
     });
   });
 }());

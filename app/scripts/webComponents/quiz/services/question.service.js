@@ -8,16 +8,29 @@
     .module('app.quiz')
     .factory('questionService', questionService);
 
-  questionService.$inject = ['quizService', 'Question', 'questionDbService', 'STATE', 'DOC_TYPE'];
+  questionService.$inject = [
+    'quizService',
+    'Question',
+    'questionDbService',
+    'STATE',
+    'DOC_TYPE',
+    'readableLogService'];
 
-  function questionService(quizService, Question, questionDbService, STATE, DOC_TYPE) {
+  function questionService(quizService,
+                           Question,
+                           questionDbService,
+                           STATE,
+                           DOC_TYPE,
+                           readableLogService) {
 
     //var _question = new Question();
     var _question;
 
     var _utils = {
-      updateQuestionStub: _updateQuestionStub
-    }
+      postProcess: _postProcess,
+      updateQuestionStub: _updateQuestionStub,
+      logQuestion: _logQuestion
+    };
 
     var service = {
       getLocalQuestion: getLocalQuestion,
@@ -39,15 +52,27 @@
         endTimeStamp: '',
         state: STATE.created,
         type: questionType,
-        quiz:quizId,
+        quiz: quizId,
         docType: DOC_TYPE.question
       });
 
       return questionDbService.putQuestion(_question)
-        .then(_utils.updateQuestionStub);
+        .then(_utils.postProcess);
     }
 
-    function _updateQuestionStub(stub){
+    function _postProcess(value) {
+      var stub = _utils.updateQuestionStub(value);
+      _utils.logQuestion();
+      return stub;
+    }
+
+    function _logQuestion() {
+      readableLogService.saveLog(
+        readableLogService.createQuestionLog(_question)
+      );
+    }
+
+    function _updateQuestionStub(stub) {
       _question._id = stub.id;
       _question._rev = stub.rev;
       return stub;
@@ -57,8 +82,8 @@
       _question.endTimeStamp = new Date().toJSON();
       _question.state = STATE.finished;
       return questionDbService.putQuestion(_question, _question._id, _question._rev)
-        .then(_utils.updateQuestionStub);
+        .then(_utils.postProcess);
     }
-  };
+  }
 
 }());

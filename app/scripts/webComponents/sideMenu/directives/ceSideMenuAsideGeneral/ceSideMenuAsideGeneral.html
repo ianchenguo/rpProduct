@@ -1,19 +1,33 @@
-<div class="list">
+<md-whiteframe class="md-whiteframe-z2"
+               flex
+               layout="column">
+  <md-list>
 
-  <a menu-close class="item" ui-sref="app.welcome">
-    Home
-  </a>
+    <md-subheader class="md-no-sticky">Main Menu</md-subheader>
 
-  <a menu-close class="item" ui-sref="app.report.quizList">
-    Report
-  </a>
+    <md-list-item layout>
+      <md-button
+        menu-close
+        flex
+        ui-sref="app.welcome">
+        <span class="ce-menu-button-text">Home</span>
+      </md-button>
+    </md-list-item>
 
-  <!--<a menu-close class="item" >-->
-    <!--Replay Mode-->
-  <!--</a>-->
+    <md-divider></md-divider>
 
-  <!--<a menu-close class="item" ui-sref="app.playground">-->
-    <!--TESTING PLAYGROUND-->
-  <!--</a>-->
+    <md-list-item layout>
+      <md-button
+        flex
+        menu-close
+        ui-sref="app.report.quizList">
+        <span class="ce-menu-button-text">Report</span>
+      </md-button>
+    </md-list-item>
 
-</div>
+  </md-list>
+
+
+</md-whiteframe>
+
+

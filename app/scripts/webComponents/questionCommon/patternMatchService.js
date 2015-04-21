@@ -8,8 +8,15 @@
     .module('app.questionCommon')
     .factory('patternMatchService', patternMatchService);
 
-  patternMatchService.$inject = ['$cordovaNativeAudio', '$ionicPlatform'];
-  function patternMatchService($cordovaNativeAudio, $ionicPlatform) {
+  patternMatchService.$inject = [
+    '$cordovaNativeAudio',
+    '$ionicPlatform',
+    'readableLogService',
+    'questionLevelService'];
+  function patternMatchService($cordovaNativeAudio,
+                               $ionicPlatform,
+                               readableLogService,
+                               questionLevelService) {
 
     var desiredPattern = [];
     var currentPattern = [];
@@ -22,12 +29,9 @@
 
     return service;
 
+
     //////
     function testPattern(targetId, cardId, sourceId) {
-
-
-      console.log(desiredPattern);
-
 
       var targetIndex = targetId.charAt(targetId.length - 1),
         sourceIndex;
@@ -40,63 +44,79 @@
 
         currentPattern[sourceIndex - 1] = '';
       }
-
       currentPattern[targetIndex - 1] = cardId;
-
-      console.log(currentPattern);
-      console.log(desiredPattern);
+      //console.log(currentPattern);
+      //console.log(desiredPattern);
 
       for (var i = 0; i < desiredPattern.length - 1; i++) {
-        console.log('desiredCards: ' + desiredPattern[i]);
-        console.log('currentPattern: ' + currentPattern[i]);
+        //console.log('desiredCards: ' + desiredPattern[i]);
+        //console.log('currentPattern: ' + currentPattern[i]);
         if (!currentPattern[i] || currentPattern[i] !== desiredPattern[i]) {
           return;
         }
       }
-
-      //$ionicPlatform.ready(function () {
-      //  //console.log('hardware ready');
-      //  //buggy!!!!
-      //  $cordovaNativeAudio.unload('click');
-      //  $cordovaNativeAudio
-      //    .preloadSimple('click', 'media/audio.mp3')
-      //    .then(function (msg) {
-      //      //console.log('msg: ');
-      //      //console.log(msg);
-      //      return $cordovaNativeAudio.play('click');
-      //    })
-      //    .then(function(msg) {
-      //      //console.log('msg: ');
-      //      //console.log(msg);
-      //      return $cordovaNativeAudio.unload('click');
-      //    })
-      //    .catch(function(error){
-      //      //console.log('error: ' + JSON.stringify(error));
-      //    });
-      //});
+      _logLevelMatch();
+      _ring();
       return true;
     }
 
-    function initMatch(args,index) {
 
-      if (args) {
-        currentPattern = args;
-      } else {
-        currentPattern = [];
-      }
-      //console.log('match init');
+    function initMatch(cards) {
+      currentPattern = _createPattern(cards);
     }
+
 
     function setDesiredPattern(cards) {
-      var desiredCards = angular.copy(cards);
-
-      function extractCardId(value) {
-        return value.id;
-      }
-
-      desiredPattern = desiredCards.map(extractCardId);
-      desiredPattern.push('');
+      desiredPattern = _createPattern(cards);
     }
+
+
+    function _createPattern(cards) {
+      var tempCards = angular.copy(cards);
+      var tempPattern = tempCards.map(_extractCardId);
+      tempPattern.push(' ');
+      return tempPattern;
+    }
+
+
+    function _extractCardId(value) {
+      return value.id;
+    }
+
+
+    function _ring() {
+      $ionicPlatform.ready(function () {
+        //console.log('hardware ready');
+        //buggy!!!!
+        $cordovaNativeAudio.unload('click');
+        $cordovaNativeAudio
+          .preloadSimple('click', 'media/audio.mp3')
+          .then(function (msg) {
+            //console.log('msg: ');
+            //console.log(msg);
+            return $cordovaNativeAudio.play('click');
+          })
+          .then(function (msg) {
+            //console.log('msg: ');
+            //console.log(msg);
+            return $cordovaNativeAudio.unload('click');
+          })
+          .catch(function (error) {
+            //console.log('error: ' + JSON.stringify(error));
+          });
+      });
+    }
+
+
+    function _logLevelMatch() {
+      var logData = R.clone(questionLevelService.getLocalQuestionLevel());
+      logData.timeStamp = new Date().toJSON();
+
+      readableLogService.saveLog(
+        readableLogService.createLevelLog(logData)
+      );
+    }
+
 
   }
 }());

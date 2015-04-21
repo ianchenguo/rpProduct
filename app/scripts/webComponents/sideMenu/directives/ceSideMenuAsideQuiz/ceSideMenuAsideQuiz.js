@@ -8,8 +8,19 @@
     .module('app.sideMenu')
     .directive('ceSideMenuAsideQuiz', ceSideMenuAsideQuiz);
 
-  ceSideMenuAsideQuiz.$inject = ['$state', 'questionLevelService', 'questionService', 'quizService']
-  function ceSideMenuAsideQuiz($state, questionLevelService, questionService, quizService) {
+  ceSideMenuAsideQuiz.$inject = [
+    '$state',
+    'questionLevelService',
+    'questionService',
+    'quizService',
+    'audioRecordingService',
+    '$mdToast'];
+  function ceSideMenuAsideQuiz($state,
+                               questionLevelService,
+                               questionService,
+                               quizService,
+                               audioRecordingService,
+                               $mdToast) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.html',
@@ -17,11 +28,12 @@
       controllerAs: 'vm',
       controller: controller,
       bindToController: true
-    }
+    };
 
     function controller() {
       var vm = this;
       vm.endQuiz = endQuiz;
+      //vm.test = _showRecordEndingToast;
     }
 
     //////
@@ -35,8 +47,25 @@
           return quizService.finishQuiz();
         })
         .then(function () {
+          _stopRecording();
           $state.go('app.welcome');
         })
+    }
+
+    function _stopRecording() {
+      if (audioRecordingService.isRecording()) {
+        audioRecordingService.stopRecord();
+        _showRecordEndingToast();
+      }
+    }
+
+    function _showRecordEndingToast() {
+      $mdToast.show(
+        $mdToast.simple()
+          .content('Audio recording finished!')
+          .position('false true false true')
+          .hideDelay(3000)
+      );
     }
   }
 

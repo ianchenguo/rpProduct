@@ -5,5 +5,8 @@
 (function () {
   'use strict';
   angular
-    .module('core.file',[]);
+    .module('core.file',
+    [
+      'ngCordova'
+    ]);
 }());

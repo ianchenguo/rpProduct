@@ -12,29 +12,22 @@
 
   function fileService($q, $cordovaFile, cordovaFileExtension) {
 
-    var _defaultFileSystem = '';
-
     var service = {
-      setFileSystem: setFileSystem,
       createFile: createFile,
       checkFile: checkFile,
       getFile: getFile,
       checkDir: checkDir,
       createDir: createDir,
-      createPath: createPath
+      writeFile: writeFile
 
     };
     return service;
 
     //////
-    function setFileSystem(root) {
-      _defaultFileSystem = root || cordova.file.documentsDirectory;
-    }
 
     function createFile(fileSystem, fileName, canReplace) {
-      var path = fileSystem || _defaultFileSystem;
       //delegate to cordovaFile
-      return $cordovaFile.createFile(path, fileName, canReplace)
+      return $cordovaFile.createFile(fileSystem, fileName, canReplace)
         .then(handleSuccess, handleError);
 
       //////
@@ -51,9 +44,8 @@
 
 
     function checkFile(fileSystem, fileName) {
-      var path = fileSystem || _defaultFileSystem;
       //delegate to cordovaFile
-      return $cordovaFile.checkFile(path, fileName)
+      return $cordovaFile.checkFile(fileSystem, fileName)
         .then(handleSuccess, handleError);
 
       //////
@@ -69,9 +61,8 @@
     }
 
     function getFile(fileSystem, fileName) {
-      var path = fileSystem || _defaultFileSystem;
 
-      return cordovaFileExtension.getFile(path, fileName).then(handleSuccess, handleError);
+      return cordovaFileExtension.getFile(fileSystem, fileName).then(handleSuccess, handleError);
 
       //////
       function handleSuccess(value) {
@@ -86,9 +77,8 @@
     }
 
     function checkDir(fileSystem, dir) {
-      var path = fileSystem || _defaultFileSystem;
 
-      return $cordovaFile.checkDir(path, dir).then(handleSuccess, handleError);
+      return $cordovaFile.checkDir(fileSystem, dir).then(handleSuccess, handleError);
 
       //////
       function handleSuccess(value) {
@@ -103,9 +93,8 @@
     }
 
     function createDir(fileSystem, dir, canReplace) {
-      var path = fileSystem || _defaultFileSystem;
 
-      return $cordovaFile.createDir(path, dir, canReplace).then(handleSuccess, handleError);
+      return $cordovaFile.createDir(fileSystem, dir, canReplace).then(handleSuccess, handleError);
 
       //////
       function handleSuccess(value) {
@@ -119,9 +108,18 @@
       }
     }
 
-    function createPath(fileSystem, subPath) {
-      var path = fileSystem || _defaultFileSystem;
-      //
+
+    function writeFile(fileSystem, fileName, data, replace) {
+
+      return $cordovaFile.
+        writeFile(fileSystem, fileName, data, replace)
+        .then(function (value) {
+          console.log('writeFile() Success: ' + JSON.stringify(value));
+          return value;
+        }, function (error) {
+          console.log('writeFile() Error: ' + JSON.stringify(error));
+          return $q.reject(error);
+        });
     }
   }
 }());

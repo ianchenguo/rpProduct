@@ -17,7 +17,7 @@
       args = init || {endTimeStamp: '', type: '', quiz: '', state: STATE.created, docType: DOC_TYPE.question};
       now = new Date().toJSON();
 
-      this._id = 'question_' + now + Math.random();
+      this._id = 'level_' + now + Math.random();
       this._rev = '';
       this.startTimeStamp = now;
       this.endTimeStamp = args.endTimeStamp;
