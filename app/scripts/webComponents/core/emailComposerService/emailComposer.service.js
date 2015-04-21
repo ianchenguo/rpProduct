@@ -10,9 +10,11 @@
 
   emailComposerService.$inject = [
     '$cordovaEmailComposer',
+    '$cordovaFile',
     'readableLogService',
     'audioRecordingService'];
   function emailComposerService($cordovaEmailComposer,
+                                $cordovaFile,
                                 readableLogService,
                                 audioRecordingService) {
 
@@ -81,28 +83,44 @@
         function _composeEmail() {
           var attachments = [logFilePath];
 
-          if(audioRecordingService.isRecorded) {
-            attachments.push(audioRecordingService.getFilePath());
+          var formatter = R.pipe(R.replace(/:/g, '_'), R.replace(/-/g, '_'), R.replace(/\./g, '_'));
+          var fileName = formatter(quizId) + '.m4a';
+          $cordovaFile.checkFile(cordova.file.documentsDirectory, fileName)
+            .then(function (success) {
+              // success
+              attachments.push(fileName);
+              compose(attachments);
+            }, function (error) {
+              // error
+              compose(attachments);
+            });
+
+          //if(audioRecordingService.isRecorded) {
+          //  attachments.push(audioRecordingService.getFilePath());
+          //}
+
+          function compose(attachments) {
+            var email = {
+              to: '',
+              cc: '',
+              bcc: [],
+              attachments: attachments,
+              subject: '[CE] quiz log for ' + quizId,
+              body: 'quiz log for ' + quizId,
+              isHtml: true
+            };
+            $cordovaEmailComposer
+              .open(email)
+              .then(function (value) {
+                console.log(value);
+
+              }, function (error) {
+                // user cancelled email
+                console.log(error);
+              });
           }
 
-          var email = {
-            to: '',
-            cc: '',
-            bcc: [],
-            attachments: attachments,
-            subject: '[CE] quiz log for ' + quizId,
-            body: 'quiz log for ' + quizId,
-            isHtml: true
-          };
-          $cordovaEmailComposer
-            .open(email)
-            .then(function (value) {
-              console.log(value);
 
-            }, function (error) {
-              // user cancelled email
-              console.log(error);
-            });
         }
 
       }, false);

@@ -7,9 +7,9 @@
     .module('core.audioRecording')
     .factory('audioRecordingService', audioRecordingService);
 
-  audioRecordingService.$inject = ['$q', '$ionicPlatform', '$cordovaMedia'];
+  audioRecordingService.$inject = ['$q', '$ionicPlatform', '$cordovaMedia', '$cordovaFile', 'quizService'];
 
-  function audioRecordingService($q, $ionicPlatform, $cordovaMedia) {
+  function audioRecordingService($q, $ionicPlatform, $cordovaMedia,$cordovaFile, quizService) {
 
     var _src;
     var _media;
@@ -60,6 +60,21 @@
       _media.release();
       _isRecording = false;
       _isRecorded = true;
+
+      var quizId = quizService.getLocalQuiz()._id;
+      var formatter = R.pipe(R.replace(/:/g, '_'), R.replace(/-/g, '_'), R.replace(/\./g, '_'));
+      var fileName = formatter(quizId) + '.m4a';
+
+      return $cordovaFile.moveFile(cordova.file.documentsDirectory, "tempQuizAudio.m4a",
+        cordova.file.documentsDirectory, fileName)
+        .then(function (success) {
+          // success
+          console.log(JSON.stringify(success));
+        }, function (error) {
+          // error
+          console.log(JSON.stringify(error));
+        });
+
     }
 
     function play() {

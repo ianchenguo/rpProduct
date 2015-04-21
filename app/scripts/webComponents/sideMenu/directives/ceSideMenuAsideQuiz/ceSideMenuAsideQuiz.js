@@ -54,8 +54,9 @@
 
     function _stopRecording() {
       if (audioRecordingService.isRecording()) {
-        audioRecordingService.stopRecord();
-        _showRecordEndingToast();
+        audioRecordingService.stopRecord().then(function(){
+          _showRecordEndingToast();
+        });
       }
     }
 
