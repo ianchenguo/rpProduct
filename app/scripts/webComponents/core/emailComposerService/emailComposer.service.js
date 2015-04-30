@@ -60,7 +60,7 @@
           return readableLogService.getQuizLogs(quizId)
             .then(function (value) {
               return value;
-          });
+            });
         }
 
         function _createLogFile(value) {
@@ -74,7 +74,7 @@
           //return readableLogService.createLogFile(stringBuffer, fileName);
           return readableLogService
             .createLogFile(fileName, stringBuffer)
-            .then(function(value){
+            .then(function (value) {
               logFilePath = value;
               return value;
             });
@@ -88,7 +88,7 @@
           $cordovaFile.checkFile(cordova.file.documentsDirectory, fileName)
             .then(function (success) {
               // success
-              attachments.push(fileName);
+              attachments.push(cordova.file.documentsDirectory + fileName);
               compose(attachments);
             }, function (error) {
               // error

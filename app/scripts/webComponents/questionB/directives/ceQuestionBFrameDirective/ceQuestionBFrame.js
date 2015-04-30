@@ -21,8 +21,6 @@
     }
     //////
     function controller(){
-      console.log('i am in');
-
       var vm = this;
 
     }

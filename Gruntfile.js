@@ -325,21 +325,25 @@ module.exports = function (grunt) {
         //frameworks: ['mocha', 'chai', 'sinon'],
         frameworks: ['jasmine'],
         files: [
+
+          '<%= yeoman.app %>/bower_components/ramda/dist/ramda.js',
+          '<%= yeoman.app %>/bower_components/lodash/lodash.js',
           '<%= yeoman.app %>/bower_components/jquery/dist/jquery.js',
           '<%= yeoman.app %>/bower_components/angular/angular.js',
           '<%= yeoman.app %>/bower_components/angular-mocks/angular-mocks.js',
           '<%= yeoman.app %>/bower_components/angular-animate/angular-animate.js',
           '<%= yeoman.app %>/bower_components/angular-sanitize/angular-sanitize.js',
           '<%= yeoman.app %>/bower_components/angular-ui-router/release/angular-ui-router.js',
+          '<%= yeoman.app %>/bower_components/angular-aria/angular-aria.js',
+          '<%= yeoman.app %>/bower_components/angular-material/angular-material.js',
+          '<%= yeoman.app %>/bower_components/angular-messages/angular-messages.js',
           '<%= yeoman.app %>/bower_components/ionic/release/js/ionic.js',
           '<%= yeoman.app %>/bower_components/ionic/release/js/ionic-angular.js',
           '<%= yeoman.app %>/bower_components/ngCordova/dist/ng-cordova.js',
-          '<%= yeoman.app %>/bower_components/ngCordova/dist/ng-cordova-mocks.js',
           '<%= yeoman.app %>/bower_components/pouchdb/dist/pouchdb.js',
           '<%= yeoman.app %>/bower_components/angular-pouchdb/dist/angular-pouchdb.js',
           '<%= yeoman.app %>/bower_components/relational-pouch/dist/pouchdb.relational-pouch.js',
-          '<%= yeoman.app %>/bower_components/ramda/dist/ramda.js',
-
+          '<%= yeoman.app %>/bower_components/ui-router/release/angular-ui-router.js',
 
           '<%= yeoman.app %>/<%= yeoman.scripts %>/**/*.module.js',
           '<%= yeoman.app %>/*.js',

@@ -20,7 +20,8 @@
                   title="c.title"
                   droppable-id="c.droppableId"
                   should-match="{{vm.shouldMatch}}"
-                  class="ce-test-base">
+                  class="ce-test-base"
+                  id="{{c.id}}">
 
       <ce-card ng-if="vm.shouldShowCards() && c.title != 'X'"
                id={{c.card.id}}

@@ -8,11 +8,7 @@
     .module('app.questionCommon')
     .directive('ceTestArea', ceTestArea);
 
-  ceTestArea.$inject = [
-    'patternMatchService',
-    'patternRandomisationService'];
-  function ceTestArea(patternMatchService,
-                      patternRandomisationService) {
+  function ceTestArea() {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceTestArea/ceTestArea.html',
@@ -20,12 +16,12 @@
         question: '@',
         level: '@',
         levelCards:'=',
+        deployedCards:'=',
         shouldMatch: '@'
       },
       controller: controller,
       controllerAs: 'vm',
-      bindToController: true,
-      link: link
+      bindToController: true
 
     };
 
@@ -34,12 +30,12 @@
       var vm = this;
       var rawComponents = [
         [
-          {title: '1', droppable: true, droppableId: 'droppable1'},
-          {title: '2', droppable: true, droppableId: 'droppable2'},
-          {title: '3', droppable: true, droppableId: 'droppable3'}
+          {title: '1', droppable: true, droppableId: 'droppable1', id:'ce-test-base-1'},
+          {title: '2', droppable: true, droppableId: 'droppable2', id:'ce-test-base-2'},
+          {title: '3', droppable: true, droppableId: 'droppable3', id:'ce-test-base-3'}
         ],
         [
-          {title: 'X', droppable: true, droppableId: 'droppableX'}
+          {title: 'X', droppable: true, droppableId: 'droppableX', id:'ce-test-base-x'}
         ]
       ];
 
@@ -65,10 +61,7 @@
       }
 
       function prepareComponents() {
-        var deployedCards = patternRandomisationService.pickDeployedCards(vm.levelCards,vm.level);
-        patternMatchService.initMatch(deployedCards);
-        return populateComponents(deployedCards);
-
+        return populateComponents(vm.deployedCards);
       }
 
       function populateComponents(deployedCards) {
@@ -81,9 +74,7 @@
       }
     }
 
-    function link(scope, el, attrs) {
 
-    }
   }
 
 }());

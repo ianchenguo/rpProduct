@@ -9,17 +9,19 @@
 
   ceDraggable.$inject = [
     '$document',
+    '$rootScope',
     '$ionicGesture',
     'logService',
     'Touch',
-    'patternMatchService',
+    'cardBaseService',
     'readableLogService'];
 
   function ceDraggable($document,
+                       $rootScope,
                        $ionicGesture,
                        logService,
                        Touch,
-                       patternMatchService,
+                       cardBaseService,
                        readableLogService) {
 
     var _utils = {
@@ -156,7 +158,8 @@
             underneathEl.append(element[0]);
             isSucceeded = true;
 
-            _utils.matchPattern(underneathEl, targetId, cardId, sourceId);
+            $rootScope.$broadcast('dropSuccess',{cardId:element.attr('id')});
+            //_utils.matchPattern(underneathEl, targetId, cardId, sourceId);
           }
         }
 
@@ -257,7 +260,7 @@
     function _matchPattern(underneathEl, targetId, cardId, sourceId) {
       //console.log('should match: '+ underneathEl.attr('should-match'));
       if (underneathEl.attr('should-match') !== 'false') {
-        patternMatchService.testPattern(targetId, cardId, sourceId);
+        cardBaseService.testPattern(targetId, cardId, sourceId);
       }
     }
   }

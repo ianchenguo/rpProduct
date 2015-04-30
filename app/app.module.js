@@ -13,9 +13,7 @@
       'app.questionCommon',
       'app.questionA',
       'app.questionB',
-      'app.report',
-
-      'test.playground'
+      'app.report'
     ]);
 
 }());

@@ -25,28 +25,10 @@
         url: '/levels/:level',
         templateUrl: 'scripts/webComponents/questionB/questionB.html',
         controller: 'QuestionBController as vm',
-
-        //views: {
-        //  'result-area': {
-        //    templateUrl: 'scripts/webComponents/questionB/templates/resultArea.html',
-        //    controller: 'ResultAreaController'
-        //  },
-        //
-        //  'command-list': {
-        //    templateUrl: 'scripts/webComponents/questionB/templates/commandList.html',
-        //    controller: 'CommandListController'
-        //  }
-        //},
-
         resolve: {
           questionLevelPrepService:questionLevelPrepService
         }
-      })
-
-
-
-
-
+      });
   }
 
   //////

@@ -1,18 +1,30 @@
-<ion-header-bar class="bar-stable">
-  <h1 class="title">Test Area</h1>
-</ion-header-bar>
+<div layout="column"
+     layout-fill
+     layout-margin
+     layout-align="center"
+     class="ce-main-content">
+
+  <ce-card-set flex="25"
+               layout="row"
+
+               question="a"
+               level="{{vm.levelType}}"
+               level-cards="vm.levelCards">
+  </ce-card-set>
+
+  <!--droppable area for exploration level-->
+  <ce-test-area flex="75"
+                layout="column"
+
+                class="test-area"
+                question="a"
+                level="{{vm.levelType}}"
+                level-cards="vm.levelCards"
+                deployed-cards="vm.deployedCards"> <!--magic number should be replaced -->
+  </ce-test-area>
+  <!--droppable area for exploration level-->
+</div>
 
 
-<ion-content>
-  <ce-desired-pattern class="desired-pattern"
-                      ng-if="vm.levelType > 0"
-                      level="{{vm.levelType}}"
-                      level-cards="vm.levelCards">
-  </ce-desired-pattern>
 
-  <ce-populated-test-area class="test-area"
-                          level="{{vm.levelType}}"
-                          level-cards="vm.levelCards">
-  </ce-populated-test-area>
-</ion-content>
 

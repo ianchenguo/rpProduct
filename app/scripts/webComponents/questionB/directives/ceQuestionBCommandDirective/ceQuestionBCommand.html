@@ -2,7 +2,7 @@
   <div class="input-label">
     From Position
   </div>
-  <select ng-model="vm.fromPosition"
+  <select ng-model="vm.from"
           ng-options="pos as pos for pos in vm.positions"
           ng-change="vm.update()">
   </select>
@@ -13,7 +13,7 @@
   <div class="input-label">
     To Position
   </div>
-  <select ng-model="vm.toPosition"
+  <select ng-model="vm.to"
           ng-options="pos as pos for pos in vm.positions"
           ng-change="vm.update()">
   </select>

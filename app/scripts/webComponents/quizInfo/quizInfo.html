@@ -127,17 +127,17 @@
         <div layout="row"
              layout-align="space-around center">
 
-          <md-button ng-click="vm.submitInfo()"
-                     ng-disabled="quizInfoForm.$invalid"
-                     class="md-primary md-raised"
-                     flex>
-            Start Quiz
-          </md-button>
           <!--<md-button ng-click="vm.submitInfo()"-->
+                     <!--ng-disabled="quizInfoForm.$invalid"-->
                      <!--class="md-primary md-raised"-->
                      <!--flex>-->
             <!--Start Quiz-->
           <!--</md-button>-->
+          <md-button ng-click="vm.submitInfo()"
+                     class="md-primary md-raised"
+                     flex>
+            Start Quiz
+          </md-button>
 
           <md-button ui-sref="app.welcome"
                      class="md-raised"

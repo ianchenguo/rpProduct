@@ -12,7 +12,7 @@
     return {
       restrict: 'E',
       templateUrl:'scripts/webComponents/questionB/directives/ceQuestionBCommandListDirective/ceQuestionBCommandList.html',
-      scope: {},
+      scope: {level:'@'},
       controllerAs: 'vm',
       controller: controller,
       bindToController: true
@@ -21,10 +21,12 @@
 
     //////
     function controller(){
+
       var vm = this;
       vm.commands = [];
       vm.addCommand = addCommand;
       vm.deleteLastCommand = deleteLastCommand;
+      vm.runCommands = runCommands;
 
       //////
       function addCommand() {
@@ -34,6 +36,15 @@
 
       function deleteLastCommand() {
         vm.commands.pop();
+      }
+
+      function runCommands() {
+
+        console.log(vm.commands);
+        //vm.commands.forEach(
+        //
+        //)
+
       }
 
     }

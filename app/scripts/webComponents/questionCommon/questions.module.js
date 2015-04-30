@@ -5,6 +5,10 @@
 (function () {
   'use strict';
   angular
-    .module('app.questionCommon', []);
+    .module('app.questionCommon',
+    [
+      'app.core',
+      'app.quiz'
+    ]);
 
 }());

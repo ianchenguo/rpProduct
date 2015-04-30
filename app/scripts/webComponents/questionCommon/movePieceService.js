@@ -27,16 +27,12 @@
         sourceEl = $('#'+ fromId);
         destinationEl = $('#' + toId);
         //gets wrapped sourceCard and destination card, if presented
-        sourceChildCard = getChildCard(sourceEl);
-        destinationChildCard = getChildCard(destinationEl);
+        sourceChildCard = _getChildCard(sourceEl);
+        destinationChildCard = _getChildCard(destinationEl);
 
         //moves the piece if the source base is not empty and the target base is empty
         if (sourceChildCard[0] && !destinationChildCard[0]) {
-
-          console.log('start moving');
-          console.log(destinationEl.find('div'));
           destinationEl.find('div').append(sourceChildCard[0]);
-          console.log(destinationEl);
           return true;
         }
 
@@ -47,7 +43,7 @@
       });
     }
 
-    function getChildCard(el) {
+    function _getChildCard(el) {
       return el.find('.ce-card');
     }
 

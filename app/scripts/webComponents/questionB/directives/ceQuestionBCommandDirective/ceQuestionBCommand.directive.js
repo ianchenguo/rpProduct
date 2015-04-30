@@ -13,11 +13,15 @@
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBCommandDirective/ceQuestionBCommand.html',
-      scope: {},
+      scope: {
+        level: '@',
+        from: '=',
+        to: '='
+      },
       controllerAs: 'vm',
       controller: ['$scope', controller],
       bindToController: true
-    }
+    };
 
 
     //////
@@ -25,27 +29,25 @@
       var vm = this;
       //all available positions
       vm.positions = ['1', '2', '3', 'X'];
-      vm.fromPosition = '';
-      vm.toPosition = '';
       vm.update = update;
 
 
       //////
       function update() {
 
-        console.log('in update');
+        if (vm.level === 0) {
+          if (vm.from && vm.to) {
+            var fromId = 'droppable' + vm.from;
+            var toId = 'droppable' + vm.to;
+            var isMoved = movePieceService.movePiece(fromId, toId);
 
-        if (vm.fromPosition && vm.toPosition) {
-          var fromId = 'droppable' + vm.fromPosition;
-          var toId = 'droppable' + vm.toPosition;
-          var isMoved = movePieceService.movePiece(fromId, toId);
-
-          if (isMoved) {
-            $scope.$apply();
+            if (isMoved) {
+              $scope.$apply();
+            }
           }
-
         }
       }
+
     }
   }
 

@@ -8,8 +8,8 @@
     .module('app.questionA')
     .directive('ceQuestionAFrame', ceQuestionAFrame);
 
-  ceQuestionAFrame.$inject = ['patternRandomisationService','patternMatchService'];
-  function ceQuestionAFrame(patternRandomisationService, patternMatchService) {
+  ceQuestionAFrame.$inject = ['cardService','cardBaseService'];
+  function ceQuestionAFrame(cardService, cardBaseService) {
     return {
       restrict: 'E',
       scope: {
@@ -23,18 +23,21 @@
     //////
 
     function controller(){
-      console.log('i am in');
 
       var vm = this;
       vm.showDesiredPattern = vm.levelType > 0;
-      vm.showInitialArea = vm.levelType < 2;
+      //vm.showInitialArea = vm.levelType < 2;
       vm.levelCards=[];
+      vm.deployedCards = [];
 
       activate();
       //////
 
       function activate() {
-        vm.levelCards = patternRandomisationService.pickLevelCards(vm.levelType);
+        vm.levelCards = cardService.pickLevelCards(vm.levelType);
+        vm.deployedCards = vm.levelType > 0 ? cardService.pickDeployedCards(vm.levelCards, _.parseInt(vm.levelType)) : [];
+        cardBaseService.setDesiredPattern(vm.levelCards);
+        cardBaseService.setInitPattern(vm.deployedCards);
       }
     }
   }

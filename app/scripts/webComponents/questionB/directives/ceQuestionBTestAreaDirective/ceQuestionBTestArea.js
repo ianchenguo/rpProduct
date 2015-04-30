@@ -8,13 +8,13 @@
     .module('app.questionB')
     .directive('ceQuestionBTestArea', ceQuestionBTestArea);
 
-  ceQuestionBTestArea.$inject = ['patternRandomisationService'];
-  function ceQuestionBTestArea(patternRandomisationService){
+  ceQuestionBTestArea.$inject = ['cardService', 'cardBaseService'];
+  function ceQuestionBTestArea(cardService, cardBaseService) {
     return {
       restrict: 'E',
-      templateUrl:'scripts/webComponents/questionB/directives/ceQuestionBTestAreaDirective/ceQuestionBTestArea.html',
+      templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBTestAreaDirective/ceQuestionBTestArea.html',
       scope: {
-        levelType:"@"
+        levelType: "@"
       },
       controllerAs: 'vm',
       controller: controller,
@@ -23,16 +23,21 @@
 
 
     //////
-    function controller(){
+    function controller() {
       var vm = this;
       vm.showDesiredPattern = vm.levelType > 0;
-      vm.levelCards=[];
+      //vm.showInitialArea = vm.levelType < 2;
+      vm.levelCards = [];
+      vm.deployedCards = [];
 
       activate();
       //////
 
       function activate() {
-        vm.levelCards = patternRandomisationService.pickLevelCards(vm.levelType);
+        vm.levelCards = cardService.pickLevelCards(vm.levelType);
+        vm.deployedCards = vm.levelType > 0 ? cardService.pickDeployedCards(vm.levelCards, _.parseInt(vm.levelType)) : [];
+        cardBaseService.setDesiredPattern(vm.levelCards);
+        cardBaseService.setInitPattern(vm.deployedCards);
       }
     }
   }
