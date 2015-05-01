@@ -1,7 +1,10 @@
 <ion-content>
   <ion-list>
-    <ion-item ng-repeat="cmd in vm.commands">
-      <ce-question-b-command level="{{vm.level}}" from="cmd.from" to="cmd.to"></ce-question-b-command>
+    <ion-item ng-repeat="cmd in vm.commands"
+              ng-style="{'background-color':cmd.bgColor}">
+      <ce-question-b-command level="{{vm.level}}"
+                             from="cmd.from"
+                             to="cmd.to"></ce-question-b-command>
     </ion-item>
   </ion-list>
 </ion-content>
@@ -20,4 +23,9 @@
        ng-click="vm.runCommands()">
     Run Commands
   </div>
+
+  <!--<div class="button button-energized"-->
+       <!--ng-click="vm.reload()">-->
+    <!--Reload-->
+  <!--</div>-->
 </div>

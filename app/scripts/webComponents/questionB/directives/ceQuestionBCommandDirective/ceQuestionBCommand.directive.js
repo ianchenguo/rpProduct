@@ -29,6 +29,8 @@
       var vm = this;
       //all available positions
       vm.positions = ['1', '2', '3', 'X'];
+      vm.from = '1';
+      vm.to = '1';
       vm.update = update;
 
 
