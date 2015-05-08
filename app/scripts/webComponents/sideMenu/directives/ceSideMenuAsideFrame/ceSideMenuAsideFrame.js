@@ -7,9 +7,9 @@
   angular
     .module('app.sideMenu')
     .directive('ceSideMenuAsideFrame', ceSideMenuAsideFrame);
-  ceSideMenuAsideFrame.$inject = ['$state', 'APP_MODE', '$rootScope', 'sideMenuService'];
+  ceSideMenuAsideFrame.$inject = ['$state', 'APP_MODE', '$rootScope'];
 
-  function ceSideMenuAsideFrame($state, APP_MODE, $rootScope, sideMenuService) {
+  function ceSideMenuAsideFrame($state, APP_MODE, $rootScope) {
     return {
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuAsideFrame/ceSideMenuAsideFrame.html',
       replace: true,
