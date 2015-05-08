@@ -34,33 +34,43 @@
     ];
 
     var service = {
-      pickLevelCards:pickLevelCards,
-      pickDeployedCards:pickDeployedCards
+      pickLevelCards: pickLevelCards,
+      pickDeployedCards: pickDeployedCards
     };
 
     return service;
 
     //////
     function pickLevelCards(levelType) {
-      return _.shuffle(_cardSeed[levelType]);
+
+      var calcLevel = levelType > 3 ? levelType - 3 : levelType;
+
+      return _.shuffle(_cardSeed[calcLevel]);
     }
 
-    function pickDeployedCards(cards,level) {
+    function pickDeployedCards(cards, levelType) {
 
-      //level = _.parseInt();
+      var calcLevel = levelType > 3 ? levelType - 3 : levelType;
 
-      var shiftLeft = function() {return R.converge(R.append, R.head, R.tail)(cards)};
-      var shiftRight = function() {return R.converge(R.prepend, R.last, R.init)(cards)};
+      var shiftRight = function () {
+        return R.converge(R.append, R.head, R.tail)(cards)
+      };
+      var shiftLeft = function () {
+        return R.converge(R.prepend, R.last, R.init)(cards)
+      };
       //currently, only works for arrays with three elements
-      var swap = function() {return R.reverse(cards)};
+      var swap = function () {
+        return R.reverse(cards)
+      };
 
       var getCards = R.cond(
         [R.eq(1), shiftLeft],
         [R.eq(2), shiftRight],
-        [R.eq(3),swap]
+        [R.eq(3), swap],
+        [R.T,shiftLeft]
       );
 
-      return getCards(level);
+      return getCards(calcLevel);
     }
   }
 }());

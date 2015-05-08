@@ -8,10 +8,12 @@
     .module('app.questionA')
     .controller('QuestionAController', QuestionAController);
 
-  QuestionAController.$inject = ['$stateParams'];
-  function QuestionAController($stateParams) {
+  QuestionAController.$inject = ['$stateParams','QUESTION_TYPE'];
+  function QuestionAController($stateParams,QUESTION_TYPE) {
     var vm = this;
     vm.levelType = $stateParams.level;
+    vm.questionType = QUESTION_TYPE.a;
+
   }
 
 }());

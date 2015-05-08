@@ -1,12 +1,13 @@
 <ion-view>
 
   <ion-nav-title>
-    <h1 class="title">The 1st Level - Stage {{vm.levelType}}</h1>
+    <h1 class="title light">The 1st Level - Stage {{vm.levelType}}</h1>
   </ion-nav-title>
 
   <ion-content>
     <ce-question-a-frame class="question-frame"
-                         level-type="{{vm.levelType}}">
+                         level-type="{{vm.levelType}}"
+                         question-type="{{vm.questionType}}">
     </ce-question-a-frame>
   </ion-content>
 

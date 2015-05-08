@@ -10,7 +10,6 @@
       'pouchdb',
       'ngMaterial',
       'ngMessages',
-      'rx',
 
       'core.audioRecording',
       'core.file',

@@ -7,45 +7,59 @@
   angular
     .module('app.sideMenu')
     .directive('ceSideMenuAsideFrame', ceSideMenuAsideFrame);
+  ceSideMenuAsideFrame.$inject = ['$state', 'APP_MODE', '$rootScope', 'sideMenuService'];
 
-  function ceSideMenuAsideFrame() {
+  function ceSideMenuAsideFrame($state, APP_MODE, $rootScope, sideMenuService) {
     return {
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuAsideFrame/ceSideMenuAsideFrame.html',
-      replace:true,
-      scope:true,
+      replace: true,
+      scope: true,
       controllerAs: 'vm',
       controller: controller,
       bindToController: true
     }
     //////
-    controller.$inject = ['$state','APP_MODE', '$rootScope']
-    function controller($state,APP_MODE, $rootScope) {
+    function controller() {
+
       var vm = this;
-      vm.mode = APP_MODE.general;
 
+      var activate = function activate() {
+        //set initial side menu mode
+        setSideMenuMode($state.current.name);
+        //update side menu mode corresponding to navigation
+        $rootScope.$on('$stateChangeStart', onStateChange);
+      };
 
+      var onStateChange = function onStateChange(event, toState, toParams, fromState, fromParams) {
+        setSideMenuMode(toState.name);
+      };
 
-      $rootScope.$on('$stateChangeStart',
-        function(event, toState, toParams, fromState, fromParams){
-          //console.log($state.current.name);
-          //console.log(toState);
-          var modePrefix = toState.name.split('.')[1];
-          //console.log('modePrefix '+ modePrefix);
+      var setSideMenuMode = function (stateName) {
+        return R.pipe(
+          extractState,
+          chooseSideMenuMode,
+          changeSideMenuMode)(stateName);
+      };
 
-          if(modePrefix === 'quiz') {
-            vm.mode = APP_MODE.quiz;
-          } else if(modePrefix === 'replay') {
-            vm.mode = APP_MODE.replay;
-          } else {
-            vm.mode = APP_MODE.general;
-          }
-        })
+      var changeSideMenuMode = function changeSideMenuMode(mode) {
+        vm.mode = mode;
+        return mode;
+      };
 
+      var chooseSideMenuMode = R.cond(
+        [R.eq(APP_MODE.quiz), function () {
+          return APP_MODE.quiz
+        }],
+        [R.T, function () {
+          return APP_MODE.general
+        }]
+      );
 
+      var extractState = function getMajorStatePortion(stateName) {
+        return stateName.split('.')[1];
+      };
 
-
-
-
+      activate();
     }
   }
 

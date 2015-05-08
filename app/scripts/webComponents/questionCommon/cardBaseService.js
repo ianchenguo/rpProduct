@@ -32,7 +32,7 @@
       ]];
 
     var service = {
-
+      getCardBases: getCardBases,
       getDesiredPattern: getDesiredPattern,
       setDesiredPattern: setDesiredPattern,
       getCurrentPattern: getCurrentPattern,
@@ -47,6 +47,10 @@
 
 
     //////
+    function getCardBases() {
+      return R.clone(_cardBases);
+    }
+
     function getDesiredPattern() {
       return _desiredPattern;
     }

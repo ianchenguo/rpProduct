@@ -13,7 +13,8 @@
     return {
       restrict: 'E',
       scope: {
-        levelType: '@'
+        levelType: '@',
+        questionType: '@'
       },
       templateUrl: 'scripts/webComponents/questionA/directives/ceQuestionAFrameDirective/ceQuestionAFrame.html',
       controller: controller,
@@ -26,7 +27,6 @@
 
       var vm = this;
       vm.showDesiredPattern = vm.levelType > 0;
-      //vm.showInitialArea = vm.levelType < 2;
       vm.levelCards=[];
       vm.deployedCards = [];
 

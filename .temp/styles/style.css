@@ -96,6 +96,14 @@
   float:left;
 }
 
+.ce-menu-button-text-right {
+  float:right;
+}
+
+.ce-list-item-active {
+  background-color:rgba(0, 0, 0, 0.12);
+}
+
 img {
   max-width: 100%;
   height: auto;

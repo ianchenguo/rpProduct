@@ -6,8 +6,8 @@
 
   <ce-card-set flex="25"
                layout="row"
-
-               question="a"
+               ng-if="vm.levelType > 0"
+               question="{{vm.questionType}}"
                level="{{vm.levelType}}"
                level-cards="vm.levelCards">
   </ce-card-set>
@@ -17,8 +17,8 @@
                 layout="column"
 
                 class="test-area"
-                question="a"
                 level="{{vm.levelType}}"
+                question="{{vm.questionType}}"
                 level-cards="vm.levelCards"
                 deployed-cards="vm.deployedCards"> <!--magic number should be replaced -->
   </ce-test-area>

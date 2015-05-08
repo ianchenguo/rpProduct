@@ -8,9 +8,9 @@
     .module('app.questionCommon')
     .factory('movePieceService', movePieceService);
 
-  movePieceService.$inject = ['$rootScope'];
+  movePieceService.$inject = ['$timeout', '$rootScope', '$q'];
 
-  function movePieceService($rootScope) {
+  function movePieceService($timeout, $rootScope, $q) {
     var service = {
       movePiece: movePiece
     };
@@ -18,14 +18,15 @@
     return service;
 
     //////
-    function movePiece(fromId, toId) {
-      var isSucceeded = false;
-      $(document).ready(function () {
+    function movePiece(fromId, toId, idx) {
 
-        var sourceEl;
-        var destinationEl;
-        var sourceChildCard;
-        var destinationChildCard;
+      var deferred = $q.defer();
+      var sourceEl;
+      var destinationEl;
+      var sourceChildCard;
+      var destinationChildCard;
+
+      $(document).ready(function () {
 
         //gets wrapped source element and destination element
         sourceEl = $('#' + fromId);
@@ -36,55 +37,43 @@
         //moves the piece if the source base is not empty and the target base is empty
         if (sourceChildCard[0] && !destinationChildCard[0]) {
           //destinationEl.find('div').append(sourceChildCard[0]);
+          var storedElPositionX = sourceChildCard.offset().left;
+          var storedElPositionY = sourceChildCard.offset().top;
+          var destinationPositionX = destinationEl.offset().left;
+          var destinationPositionY = destinationEl.offset().top;
+          var dx = destinationPositionX - storedElPositionX;
+          var dy = destinationPositionY - storedElPositionY;
 
-          console.log(sourceChildCard);
-
-          console.log(destinationEl.position().left);
-          console.log(destinationEl.position().top);
           sourceChildCard.css({
-            transform: 'scale(1.1)',
-            webkitTransform: 'scale(1.1)',
-            transition: 'all 5s',
-            webkitTransition: 'all 5s',
-            opacity: 0.8,
-            zIndex: 99,
-            position: 'absolute',
-            left: destinationEl.position().left,
-            top: destinationEl.position().top
+            display: 'block',
+            '-webkit-transform': 'translate(' + dx + 'px,' + dy + 'px)',
+            '-webkit-transition': 'all 0.5s ease'
           });
-          //
-          //console.log(sourceChildCard.css());
 
+          $timeout(
+            function () {
+              sourceChildCard.css({
+                display: '',
+                '-webkit-transform': '',
+                '-webkit-transition': ''
+              });
+              destinationEl.find('div').append(sourceChildCard[0]);
+              $rootScope.$broadcast('dropSuccess', {cardId: sourceChildCard.attr('id')});
+              deferred.resolve({idx: idx, isSuccess: true});
 
-          sourceChildCard.appendTo(destinationEl);
+            }, 501);
 
-
-          //sourceChildCard.css({
-          //  transform: '',
-          //  webkitTransform: '',
-          //  transition: '',
-          //  webkitTransition: '',
-          //  opacity: '',
-          //  zIndex: '',
-          //  position: '',
-          //  left: '',
-          //  top: ''
-          //});
-
-          $rootScope.$broadcast('dropSuccess', {cardId: sourceChildCard.attr('id')});
-
-          isSucceeded = true;
         } else {
-          isSucceeded = false;
+          deferred.reject({idx: idx, isSuccess: false});
         }
       });
-      return isSucceeded;
+
+      return deferred.promise;
     }
 
     function _getChildCard(el) {
       return el.find('.ce-card');
     }
-
   }
 }());
 

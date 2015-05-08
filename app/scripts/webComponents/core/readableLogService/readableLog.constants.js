@@ -19,13 +19,26 @@
         levelEnd: 'stage end',
         dragStart: 'drag start',
         dragEndSuccess: 'succeeded drag end',
-        dragEndFailed: 'failed drag end'
+        dragEndFailed: 'failed drag end',
+        commandAdd:'command added',
+        commandRemove: 'command removed',
+        commandsExecute: 'commands executing',
+        commandExecuteError: 'command failed',
+        commandsExecuteFinish:'commands executed',
+        commandsReload: 'commands reload',
+        fromPositionSpecified:'from position specified',
+        toPositionSpecified: 'to position specified',
+        audioRecordingStart: 'audio recording started',
+        audioRecordingFinished: 'audio recording finished'
       },
       READABLE_LOG_DETAIL_SUBJECT: {
         quiz: 'quiz',
         question: 'level',
         level: 'stage',
-        drag: 'element'
+        drag: 'element',
+        command:'command',
+        fromPosition:'fromPosition',
+        toPosition:'toPosition'
       },
       READABLE_LOG_DETAIL_PREP: {
         dragStart: 'FROM',

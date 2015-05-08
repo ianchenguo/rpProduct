@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
   <!-- endbower -->
   <!-- endbuild -->
-  <link href="bower_components/ionic-material/ionic.material.min.css">
+  <link href="bower_components/ionic-material/ionic.material.min.css" rel="stylesheet">
   <link href="styles/style.css" rel="stylesheet">
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -38,41 +38,6 @@
   <script src="bower_components/angular-material/angular-material.js"></script>
   <script src="bower_components/angular-messages/angular-messages.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
-  <script src="bower_components/rxjs/dist/rx.all.js"></script>
-  <script src="bower_components/rxjs/dist/rx.all.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.all.compat.js"></script>
-  <script src="bower_components/rxjs/dist/rx.all.compat.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.js"></script>
-  <script src="bower_components/rxjs/dist/rx.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.compat.js"></script>
-  <script src="bower_components/rxjs/dist/rx.compat.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.aggregates.js"></script>
-  <script src="bower_components/rxjs/dist/rx.aggregates.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.async.js"></script>
-  <script src="bower_components/rxjs/dist/rx.async.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.async.compat.js"></script>
-  <script src="bower_components/rxjs/dist/rx.async.compat.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.backpressure.js"></script>
-  <script src="bower_components/rxjs/dist/rx.backpressure.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.binding.js"></script>
-  <script src="bower_components/rxjs/dist/rx.binding.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.coincidence.js"></script>
-  <script src="bower_components/rxjs/dist/rx.coincidence.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.experimental.js"></script>
-  <script src="bower_components/rxjs/dist/rx.experimental.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.lite.js"></script>
-  <script src="bower_components/rxjs/dist/rx.lite.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.lite.compat.js"></script>
-  <script src="bower_components/rxjs/dist/rx.lite.compat.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.joinpatterns.js"></script>
-  <script src="bower_components/rxjs/dist/rx.joinpatterns.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.testing.js"></script>
-  <script src="bower_components/rxjs/dist/rx.testing.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.time.js"></script>
-  <script src="bower_components/rxjs/dist/rx.time.min.js"></script>
-  <script src="bower_components/rxjs/dist/rx.virtualtime.js"></script>
-  <script src="bower_components/rxjs/dist/rx.virtualtime.min.js"></script>
-  <script src="bower_components/angular-rx/dist/rx.angular.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -83,6 +48,8 @@
   <!-- build:js scripts/scripts.js -->
 
   <!--app module-->
+  <script src="bower_components/ionic-material/ionic.material.min.js"></script>
+
   <script src="app.module.js"></script>
   <script src="app.run.js"></script>
   <script src="app.router.js"></script>
@@ -128,6 +95,7 @@
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideFrame/ceSideMenuAsideFrame.js"></script>
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.js"></script>
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideGeneral/ceSideMenuAsideGeneral.js"></script>
+  <script src="scripts/webComponents/sideMenu/sideMenuService.js"></script>
 
 
   <!--welcome module-->
@@ -144,6 +112,7 @@
   <script src="scripts/webComponents/quiz/services/quiz.service.js"></script>
   <script src="scripts/webComponents/quiz/services/question.service.js"></script>
   <script src="scripts/webComponents/quiz/services/questionLevel.service.js"></script>
+  <script src="scripts/webComponents/quiz/services/switchStage.service.js"></script>
 
   <script src="scripts/webComponents/quiz/services/quizLocalDAOs/quiz.localDAO.module.js"></script>
   <script src="scripts/webComponents/quiz/services/quizLocalDAOs/quiz.db.service.js"></script>
@@ -176,7 +145,6 @@
   <script src="scripts/webComponents/questionCommon/directives/ceDraggable/ceDraggable.js"></script>
   <script src="scripts/webComponents/questionCommon/cardBaseService.js"></script>
   <script src="scripts/webComponents/questionCommon/cardService.js"></script>
-  <script src="scripts/webComponents/questionCommon/eventService.js"></script>
   <script src="scripts/webComponents/questionCommon/movePieceService.js"></script>
 
   <!--questionA module-->
@@ -189,6 +157,7 @@
   <script src="scripts/webComponents/questionB/questionB.module.js"></script>
   <script src="scripts/webComponents/questionB/questionB.router.js"></script>
   <script src="scripts/webComponents/questionB/QuestionB.controller.js"></script>
+  <script src="scripts/webComponents/questionB/questionBService.js"></script>
   <script src="scripts/webComponents/questionB/directives/ceQuestionBFrameDirective/ceQuestionBFrame.js"></script>
   <script src="scripts/webComponents/questionB/directives/ceQuestionBCommandDirective/ceQuestionBCommand.directive.js"></script>
   <script src="scripts/webComponents/questionB/directives/ceQuestionBCommandListDirective/ceQuestionBCommandList.directive.js"></script>

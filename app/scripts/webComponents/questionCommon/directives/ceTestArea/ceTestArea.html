@@ -23,16 +23,20 @@
                   class="ce-test-base"
                   id="{{c.id}}">
 
-      <ce-card ng-if="vm.shouldShowCards() && c.title != 'X'"
+      <ce-card ng-if="vm.shouldShowCards() && c.title !== 'X' && vm.question === 'a'"
                id={{c.card.id}}
                card-img-url="{{c.card.cardImgUrl}}"
                class="ce-card"
                ce-draggable>
       </ce-card>
 
+      <ce-card ng-if="vm.shouldShowCards() && c.title !== 'X' && vm.question !== 'a'"
+               id={{c.card.id}}
+               card-img-url="{{c.card.cardImgUrl}}"
+               class="ce-card">
+      </ce-card>
     </ce-test-base>
   </div>
-
 
 </md-whiteframe>
 

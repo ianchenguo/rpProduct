@@ -16,10 +16,10 @@
         url: '/questionA',
         abstract: true,
         template: '<ion-nav-view></ion-nav-view>',
-        controller: 'QuestionAController as vm',
-        resolve: {
-          questionPrepService: questionPrepService
-        }
+        controller: 'QuestionAController as vm'
+        //resolve: {
+        //  questionPrepService: questionPrepService
+        //}
       })
       .state('app.quiz.questionA.levels', {
         url: '/levels/:level',
@@ -32,41 +32,17 @@
   }
 
   //////
-  questionPrepService.$inject = ['questionService', 'QUESTION_TYPE'];
-  function questionPrepService(questionService, QUESTION_TYPE) {
+  questionPrepService.$inject = ['QUESTION_TYPE','switchStageService'];
+  function questionPrepService(QUESTION_TYPE,switchStageService) {
 
-    //creates new question object in question service, if the current question object is null
-    if (!questionService.getLocalQuestion()) {
-      return questionService.createQuestion(QUESTION_TYPE.a);
-    }
-    //finishes current question and creates a new question, if the current question exists
-    else {
-      return questionService
-        .finishQuestion()
-        .then(function () {
-          return questionService.createQuestion(QUESTION_TYPE.a);
-        });
-    }
+    return switchStageService.switchQuestion(QUESTION_TYPE.a);
   }
 
-  questionLevelPrepService.$inject = ['questionLevelService', '$stateParams'];
-  function questionLevelPrepService(questionLevelService, $stateParams) {
+  questionLevelPrepService.$inject = ['QUESTION_TYPE','$stateParams', 'switchStageService'];
+  function questionLevelPrepService(QUESTION_TYPE, $stateParams, switchStageService) {
 
-    if (!questionLevelService.getLocalQuestionLevel()) {
-      return questionLevelService.createQuestionLevel($stateParams.level);
-    }
-    else {
-      return questionLevelService
-        .finishQuestionLevel()
-        .then(function () {
-          return questionLevelService.createQuestionLevel($stateParams.level);
-        });
-    }
+    //return switchStageService.switchLevel($stateParams.level);
+    return switchStageService.switchStage(QUESTION_TYPE.a, $stateParams.level);
   }
-
-  //directionPrepare.$inject = ['$stateParams','patternMatchService'];
-  //function directionPrepare($stateParams,patternMatchService){
-  //  return patternMatchService.initMatch('',$stateParams.direction);
-  //}
 
 }());

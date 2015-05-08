@@ -36,6 +36,7 @@
       createQuestionLog: createQuestionLog,
       createLevelLog: createLevelLog,
       createDragLog: createDragLog,
+      createCommandLog: createCommandLog,
       createLogBuffer: createLogBuffer,
       createLogFile: createLogFile,
       saveLog: saveLog,
@@ -104,7 +105,7 @@
     function createQuestionLog(question) {
       var questionContent = {};
       questionContent.quiz = memory.quizId;
-      questionContent.detail = _concatStructuralDetail('question',question.type,question._id);
+      questionContent.detail = _concatStructuralDetail('question', question.type, question._id);
 
 
       var createQuestionStartLog = function createQuestionStartLog() {
@@ -130,7 +131,7 @@
     function createLevelLog(level) {
       var levelContent = {};
       levelContent.quiz = memory.quizId;
-      levelContent.detail = _concatStructuralDetail('level',level.type,level._id);
+      levelContent.detail = _concatStructuralDetail('level', level.type, level._id);
 
       var createLevelStartLog = function createLevelStartLog() {
         levelContent.timeStamp = level.startTimeStamp;
@@ -178,7 +179,7 @@
           READABLE_LOG_DETAIL_SUBJECT.drag + ' ' +
           drag.elId + ' ' +
           READABLE_LOG_DETAIL_PREP.dragEnd + ' ' +
-          drag.toParent;
+          drag.toParent || 'background';
 
         if (drag.isSucceeded) {
           dragContent.event = READABLE_LOG_EVENTS.dragEndSuccess;
@@ -250,9 +251,65 @@
     function createLogFile(fileName, logBuffer) {
       return fileService
         .writeFile(cordova.file.dataDirectory, fileName, logBuffer, true)
-        .then(function(){
+        .then(function () {
           return cordova.file.dataDirectory + '/' + fileName;
         });
+    }
+
+    function createCommandLog(type, detail) {
+      var content = {};
+      content.timeStamp = new Date().toJSON();
+      content.quiz = memory.quizId;
+      content.detail = _concatCommandLog(detail.commandCount);
+
+      switch (type) {
+        case 'commandAdd':
+          content.event = READABLE_LOG_EVENTS.commandAdd;
+          break;
+
+        case 'commandRemove':
+          content.event = READABLE_LOG_EVENTS.commandRemove;
+          break;
+
+        case 'commandsExecute':
+          content.event = READABLE_LOG_EVENTS.commandsExecute;
+          break;
+
+        case 'commandsExecuteFinish':
+          content.event = READABLE_LOG_EVENTS.commandsExecuteFinish;
+          break;
+
+        case 'commandsReload':
+          content.event = READABLE_LOG_EVENTS.commandsReload;
+          break;
+
+        case 'commandFromSelection':
+          content.event = READABLE_LOG_EVENTS.fromPositionSpecified;
+          content.detail = _concatCommandPositionLog(detail.from,detail.to,detail.idx);
+          break;
+
+        case 'commandToSelection' :
+          content.event = READABLE_LOG_EVENTS.toPositionSpecified;
+          content.detail = _concatCommandPositionLog(detail.from,detail.to,detail.idx);
+          break;
+
+        case 'commandExecuteError' :
+          content.event = READABLE_LOG_EVENTS.commandExecuteError;
+          content.detail = _concatCommandPositionLog(detail.from,detail.to,detail.idx);
+          break;
+
+
+      }
+
+      return new ReadableLogEntry(content);
+    }
+
+    function _concatCommandLog(count) {
+      return 'current command list size: ' + count + ' command(s)';
+    }
+
+    function _concatCommandPositionLog(from,to,idx) {
+      return 'command index: ' + idx + ' from: ' + from + ' to ' + to || 'empty';
     }
   }
 }());

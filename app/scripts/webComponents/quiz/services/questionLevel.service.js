@@ -84,10 +84,13 @@
 
 
     function finishQuestionLevel() {
-      _questionLevel.endTimeStamp = new Date().toJSON();
-      _questionLevel.state = STATE.finished;
-      return questionLevelDbService.putQuestionLevel(_questionLevel, _questionLevel._id, _questionLevel._rev)
-        .then(_utils.postProcess);
+
+      if(_questionLevel.state !== STATE.finished) {
+        _questionLevel.endTimeStamp = new Date().toJSON();
+        _questionLevel.state = STATE.finished;
+        return questionLevelDbService.putQuestionLevel(_questionLevel, _questionLevel._id, _questionLevel._rev)
+          .then(_utils.postProcess);
+      }
     }
   }
 

@@ -1,183 +1,77 @@
-<!--<div class="list">-->
+<md-list>
 
-<!--<div class="item item-divider">-->
-<!--Quiz-->
-<!--</div>-->
+  <md-subheader class="md-no-sticky">Quiz Settings</md-subheader>
 
-<!--<a menu-close class="item">-->
-<!--Modify Quiz Info-->
-<!--</a>-->
+  <md-list-item layout>
+    <md-button menu-close
+               flex ng-disabled="true">
+      <span class="ce-menu-button-text">Quiz Info</span>
 
-
-<!--<div class="item item-divider">-->
-<!--Level A-->
-<!--</div>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionA.levels({level:0})">-->
-<!--Stage Exploration-->
-<!--</a>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionA.levels({level:1})">-->
-<!--Stage Left Shift-->
-<!--</a>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionA.levels({level:2})">-->
-<!--Stage Right Shift-->
-<!--</a>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionA.levels({level:3})">-->
-<!--Stage Symmetry Swap-->
-<!--</a>-->
-
-<!--<div class="item item-divider">-->
-<!--Level B-->
-<!--</div>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionB.levels({level:0})">-->
-<!--Stage Exploration-->
-<!--</a>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionB.levels({level:1})">-->
-<!--Stage Left Shift-->
-<!--</a>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionB.levels({level:2})">-->
-<!--Stage Right Shift-->
-<!--</a>-->
-
-<!--<a class="item item-button-right" menu-close-->
-<!--ui-sref="app.quiz.questionB.levels({level:3})">-->
-<!--Stage Symmetry Swap-->
-<!--</a>-->
-
-<!--<a menu-close class="item" ng-click="vm.endQuiz()">-->
-<!--End Quiz-->
-<!--</a>-->
-
-<!--</div>-->
+    </md-button>
+  </md-list-item>
 
 
-<md-whiteframe class="md-whiteframe-z2"
-               flex
-               layout="column">
-  <md-list>
+  <div ng-repeat="question in vm.questions">
 
-    <md-subheader class="md-no-sticky">Quiz Settings</md-subheader>
-
-    <md-list-item layout>
-      <md-button menu-close
-                 flex ng-disabled="true">
-        <span class="ce-menu-button-text">Quiz Info</span>
-
-      </md-button>
-    </md-list-item>
-
-    <md-subheader class="md-no-sticky">Stages</md-subheader>
-
+    <md-subheader class="md-no-sticky">{{question.name}}</md-subheader>
     <md-divider></md-divider>
 
-    <md-subheader class="md-no-sticky">Level A</md-subheader>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionA.levels({level:0})">
-        <span class="ce-menu-button-text">Exploration Stage</span>
-      </md-button>
-    </md-list-item>
-
-    <md-divider></md-divider>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionA.levels({level:1})">
-        <span class="ce-menu-button-text">Left Shift Stage</span>
-      </md-button>
-    </md-list-item>
-
-    <md-divider></md-divider>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionA.levels({level:2})">
-        <span class="ce-menu-button-text">Right Shift Stage</span>
-
-      </md-button>
-    </md-list-item>
-
-    <md-divider></md-divider>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionA.levels({level:3})">
-        <span class="ce-menu-button-text">Symmetry Swap Stage</span>
-      </md-button>
-    </md-list-item>
-
-    <md-subheader class="md-no-sticky">Level B</md-subheader>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionB.levels({level:0})">
-        <span class="ce-menu-button-text">Exploration Stage</span>
-      </md-button>
-    </md-list-item>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionB.levels({level:1})">
-        <span class="ce-menu-button-text">Left Shift Stage</span>
-      </md-button>
-    </md-list-item>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionB.levels({level:2})">
-        <span class="ce-menu-button-text">Right Shift Stage</span>
-      </md-button>
-    </md-list-item>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ui-sref="app.quiz.questionB.levels({level:3})">
-        <span class="ce-menu-button-text">Symmetry Swap Stage</span>
-      </md-button>
-    </md-list-item>
+    <div ng-repeat="stage in question.stages">
 
 
-    <md-subheader class="md-no-sticky">Level C</md-subheader>
-
-    <md-divider></md-divider>
-
-    <md-list-item layout>
-      <md-button flex
-                 menu-close
-                 ng-click="vm.endQuiz()"
-                 class="md-warn">
-        <span class="ce-menu-button-text">End Quiz</span>
-      </md-button>
-    </md-list-item>
-
-    <!--<md-button class="md-raised md-primary" style="float:right;"-->
-    <!--ng-click="vm.test()">-->
-    <!--toastr-->
-    <!--</md-button>-->
-
-  </md-list>
+      <md-list-item layout
+                    ng-if="stage.name === 'exploration stage'">
+        <md-button flex>
+            <span class="ce-menu-button-text"
+                  ui-sref="{{stage.link}}"
+                  menu-close>
+              {{stage.name}}
+            </span>
+        </md-button>
+      </md-list-item>
 
 
-</md-whiteframe>
+      <md-list-item layout
+                    ng-class="{'ce-list-item-active':vm.isStageShown(stage)}"
+                    ng-if="stage.name !== 'exploration stage'">
+        <md-button flex>
+            <span class="ce-menu-button-text"
+                  ng-click="vm.toggleStage(stage)">
+              {{stage.name}}
+            </span>
+        </md-button>
+      </md-list-item>
+
+      <md-divider></md-divider>
+
+      <md-list-item layout
+                    ng-repeat="subStage in stage.subStages"
+                    ng-if="stage.name !== 'exploration stage'"
+                    ng-show="vm.isStageShown(stage)">
+        <md-button flex
+                   menu-close
+                   ui-sref="{{subStage.link}}">
+          <span class="ce-menu-button-text ce-menu-button-text-right">{{subStage.name}}</span>
+        </md-button>
+      </md-list-item>
+
+      <md-divider></md-divider>
+
+    </div>
+  </div>
+
+  <md-list-item layout>
+    <md-button flex
+               menu-close
+               ng-click="vm.endQuiz()"
+               class="md-warn">
+      <span class="ce-menu-button-text">End Quiz</span>
+    </md-button>
+  </md-list-item>
+
+  <!--<md-button class="md-raised md-primary" style="float:right;"-->
+  <!--ng-click="vm.test()">-->
+  <!--toastr-->
+  <!--</md-button>-->
+
+</md-list>

@@ -12,15 +12,16 @@
     return {
       restrict: 'E',
       scope: {
-        levelType: '@'
+        levelType: '@',
+        questionType: '@'
       },
       templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBFrameDirective/ceQuestionBFrame.html',
       controller: controller,
       controllerAs: 'vm',
-      bindToController:true
+      bindToController: true
     }
     //////
-    function controller(){
+    function controller() {
       var vm = this;
 
     }

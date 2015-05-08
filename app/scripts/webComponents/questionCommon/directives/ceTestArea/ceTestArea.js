@@ -8,15 +8,16 @@
     .module('app.questionCommon')
     .directive('ceTestArea', ceTestArea);
 
-  function ceTestArea() {
+  ceTestArea.$inject = ['cardBaseService'];
+  function ceTestArea(cardBaseService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionCommon/directives/ceTestArea/ceTestArea.html',
       scope: {
         question: '@',
         level: '@',
-        levelCards:'=',
-        deployedCards:'=',
+        levelCards: '=',
+        deployedCards: '=',
         shouldMatch: '@'
       },
       controller: controller,
@@ -28,19 +29,10 @@
     //////
     function controller() {
       var vm = this;
-      var rawComponents = [
-        [
-          {title: '1', droppable: true, droppableId: 'droppable1', id:'ce-test-base-1'},
-          {title: '2', droppable: true, droppableId: 'droppable2', id:'ce-test-base-2'},
-          {title: '3', droppable: true, droppableId: 'droppable3', id:'ce-test-base-3'}
-        ],
-        [
-          {title: 'X', droppable: true, droppableId: 'droppableX', id:'ce-test-base-x'}
-        ]
-      ];
+      var rawComponents = cardBaseService.getCardBases();
 
       vm.shouldMatch = vm.level > 0;
-      vm.testComponents = [[],[]];
+      vm.testComponents = [[], []];
       vm.shouldShowCards = shouldShowCards;
 
       activate();
@@ -48,11 +40,14 @@
       //////
 
       function shouldShowCards() {
-         return vm.question == 'a' && vm.level > 0;
+        if (vm.question == 'a' && vm.level == 0) {
+          return false;
+        }
+        return true;
       }
 
       function activate() {
-        if(vm.question == 'a' && vm.level > 0) {
+        if ((vm.question == 'a' && vm.level > 0) || vm.question !== 'a') {
           vm.testComponents[0] = prepareComponents();
           vm.testComponents[1] = rawComponents[1];
         } else {
@@ -66,10 +61,11 @@
 
       function populateComponents(deployedCards) {
 
-        function attachCard(value,index) {
+        function attachCard(value, index) {
           value.card = deployedCards[index];
           return value;
         }
+
         return rawComponents[0].map(attachCard);
       }
     }

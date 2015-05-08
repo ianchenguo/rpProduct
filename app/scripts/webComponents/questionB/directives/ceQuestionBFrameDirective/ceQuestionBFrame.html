@@ -1,14 +1,3 @@
-<!--<div class="row ce-question-b-frame-row">-->
-
-
-<!--&lt;!&ndash;col end&ndash;&gt;-->
-
-
-<!--&lt;!&ndash;col end&ndash;&gt;-->
-
-<!--</div>&lt;!&ndash;row end&ndash;&gt;-->
-
-
 <div layout="row"
      layout-fill
      layout-margin
@@ -17,11 +6,13 @@
 
   <ce-question-b-test-area flex
                            class="ce-question-b-test-area"
-                           level-type="{{vm.levelType}}">
+                           level-type="{{vm.levelType}}"
+                           question-type="{{vm.questionType}}">
   </ce-question-b-test-area>
 
   <ce-question-b-command-list flex
-                              class="ce-question-b-command-list">
+                              class="ce-question-b-command-list"
+                              level="{{vm.levelType}}">
   </ce-question-b-command-list>
 
 

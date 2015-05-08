@@ -11,7 +11,13 @@
   function ceSideMenuMainContent() {
     return {
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuMainContent/ceSideMenuMainContent.html',
-      replace: true
+      replace: true,
+      controller: controller,
+      controllerAs: 'vm'
+    }
+
+    function controller(){
+      ionic.material.ink.displayEffect();
     }
   }
 }());

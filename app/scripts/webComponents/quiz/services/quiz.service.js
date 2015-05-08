@@ -95,10 +95,13 @@
     }
 
     function finishQuiz() {
-      _quiz.endTimeStamp = new Date().toJSON();
-      _quiz.state = STATE.finished;
-
-      return quizDbService.putQuiz(_quiz, _quiz._id, _quiz._rev).then(_utils.postProcess);
+      if(_quiz.state !== STATE.finished) {
+        _quiz.endTimeStamp = new Date().toJSON();
+        _quiz.state = STATE.finished;
+        return quizDbService.
+          putQuiz(_quiz, _quiz._id, _quiz._rev).
+          then(_utils.postProcess);
+      }
     }
 
     function getLocalQuiz() {
