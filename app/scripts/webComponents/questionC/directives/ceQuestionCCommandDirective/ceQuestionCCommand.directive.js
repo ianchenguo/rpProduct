@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.questionB')
-    .directive('ceQuestionBCommand', ceQuestionBCommand);
+    .module('app.questionC')
+    .directive('ceQuestionCCommand', ceQuestionCCommand);
 
-  ceQuestionBCommand.$inject = ['movePieceService', 'readableLogService'];
-  function ceQuestionBCommand(movePieceService, readableLogService) {
+  ceQuestionCCommand.$inject = ['movePieceService', 'readableLogService'];
+  function ceQuestionCCommand(movePieceService, readableLogService) {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBCommandDirective/ceQuestionBCommand.html',
+      templateUrl: 'scripts/webComponents/questionC/directives/ceQuestionCCommandDirective/ceQuestionCCommand.html',
       scope: {
         level: '@',
         from: '=',

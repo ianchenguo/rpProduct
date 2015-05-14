@@ -5,17 +5,17 @@
 (function () {
   'use strict';
   angular
-    .module('app.questionB')
-    .directive('ceQuestionBFrame', ceQuestionBFrame);
+    .module('app.questionC')
+    .directive('ceQuestionCFrame', ceQuestionCFrame);
 
-  function ceQuestionBFrame() {
+  function ceQuestionCFrame() {
     return {
       restrict: 'E',
       scope: {
         levelType: '@',
         questionType: '@'
       },
-      templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBFrameDirective/ceQuestionBFrame.html',
+      templateUrl: 'scripts/webComponents/questionC/directives/ceQuestionCFrameDirective/ceQuestionCFrame.html',
       controller: controller,
       controllerAs: 'vm',
       bindToController: true

@@ -63,13 +63,14 @@
 
 }
 
-.ce-main-content, .ce-question-b-frame-row, .ce-question-b-command-list, .ce-question-b-test-area {
+.ce-main-content, .ce-question-b-frame-row, .ce-question-b-command-list, .ce-question-b-test-area, 
+.ce-question-c-frame-row, .ce-question-c-command-list, .ce-question-c-test-area {
   position: relative;
   height: 100%;
 }
 
-.ce-question-b-command-list {
-  background-color: lightgrey;
+.ce-question-b-command-list, .ce-question-c-command-list {
+  background-color: rgba(135,135,135, 0.95);
 }
 
 .ce-nav-bar {

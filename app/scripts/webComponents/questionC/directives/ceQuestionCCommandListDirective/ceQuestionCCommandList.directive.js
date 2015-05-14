@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.questionB')
-    .directive('ceQuestionBCommandList', ceQuestionBCommandList);
+    .module('app.questionC')
+    .directive('ceQuestionCCommandList', ceQuestionCCommandList);
 
-  ceQuestionBCommandList.$inject = ['$mdDialog', '$q', '$state', 'movePieceService', 'questionBService', 'readableLogService'];
-  function ceQuestionBCommandList($mdDialog, $q, $state, movePieceService, questionBService, readableLogService) {
+  ceQuestionCCommandList.$inject = ['$mdDialog', '$q', '$state', 'movePieceService', 'questionCService', 'readableLogService'];
+  function ceQuestionCCommandList($mdDialog, $q, $state, movePieceService, questionCService, readableLogService) {
     return {
       restrict: 'E',
-      templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBCommandListDirective/ceQuestionBCommandList.html',
+      templateUrl: 'scripts/webComponents/questionC/directives/ceQuestionCCommandListDirective/ceQuestionCCommandList.html',
       scope: {level: '@'},
       controllerAs: 'vm',
       controller: ['$scope', controller],
@@ -26,14 +26,14 @@
       var vm = this;
 
       vm.commands = function () {
-        if (questionBService.retrievePreviousLevel() != vm.level || vm.level == 0 || vm.level > 3) {
-          questionBService.storeCurrentLevel(vm.level);
+        if (questionCService.retrievePreviousLevel() != vm.level || vm.level == 0 || vm.level > 3) {
+          questionCService.storeCurrentLevel(vm.level);
           return [{from: '', to: ''}];
         }
 
         else {
-          questionBService.storeCurrentLevel(vm.level);
-          return questionBService.retrievePreviousCommands();
+          questionCService.storeCurrentLevel(vm.level);
+          return questionCService.retrievePreviousCommands();
         }
       }();
 
@@ -83,7 +83,7 @@
       };
 
       var storeCurrentCommandList = function storeCurrentCommandList(commands) {
-        questionBService.storeCurrentCommands(commands);
+        questionCService.storeCurrentCommands(commands);
         return commands;
       };
 

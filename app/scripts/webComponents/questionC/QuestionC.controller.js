@@ -5,14 +5,14 @@
 (function () {
   'use strict';
   angular
-    .module('app.questionB')
-    .controller('QuestionBController', QuestionBController);
+    .module('app.questionC')
+    .controller('QuestionCController', QuestionCController);
 
-  QuestionBController.$inject = ['$stateParams','QUESTION_TYPE'];
-  function QuestionBController($stateParams,QUESTION_TYPE) {
+  QuestionCController.$inject = ['$stateParams','QUESTION_TYPE'];
+  function QuestionCController($stateParams,QUESTION_TYPE) {
     var vm = this;
     vm.levelType = $stateParams.level;
-    vm.questionType = QUESTION_TYPE.b;
+    vm.questionType = QUESTION_TYPE.c;
   }
 
 }());

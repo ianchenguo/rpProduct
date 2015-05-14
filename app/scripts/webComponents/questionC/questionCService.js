@@ -6,10 +6,10 @@
   'use strict';
 
   angular
-    .module('app.questionB')
-    .factory('questionBService', questionBService);
+    .module('app.questionC')
+    .factory('questionCService', questionCService);
 
-  function questionBService() {
+  function questionCService() {
 
     var _storedCommands = [{from: '', to: ''}];
     var _storedLevel = 0;
