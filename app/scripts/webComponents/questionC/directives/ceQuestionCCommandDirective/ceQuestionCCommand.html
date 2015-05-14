@@ -25,23 +25,25 @@
   <!--</select>-->
   <!--</label>-->
 
+  <!-- segment of From division in the front of moving command -->
   <div>From</div>
-  <md-select ng-model="vm.from" ng-change="vm.updateFrom()">
+      <md-select ng-model="vm.from" ng-change="vm.updateFrom()">
 
-    <md-option ng-value="opt"
-               ng-repeat="opt in vm.positions">
-      {{opt}}
-    </md-option>
-  </md-select>
+          <md-option ng-value="opt"
+                     ng-repeat="opt in vm.positions">
+            {{opt}}
+          </md-option>
+      </md-select>
 
+  <!-- segment of To division at the end of moving command -->
   <Div>To</Div>
-  <md-select ng-model="vm.to" ng-change="vm.updateTo()">
+      <md-select ng-model="vm.to" ng-change="vm.updateTo()">
 
-    <md-option ng-value="opt"
-               ng-repeat="opt in vm.positions">
-      {{opt}}
-    </md-option>
-  </md-select>
+          <md-option ng-value="opt"
+                     ng-repeat="opt in vm.positions">
+            {{opt}}
+          </md-option>
+      </md-select>
 
 </md-whiteframe>
 

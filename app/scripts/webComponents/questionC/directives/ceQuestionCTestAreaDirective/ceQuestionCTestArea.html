@@ -4,6 +4,7 @@
      layout-align="center"
      class="ce-main-content">
 
+  <!-- test card -->
   <ce-card-set flex="25"
                layout="row"
                ng-if="vm.levelType > 0"
@@ -13,6 +14,7 @@
   </ce-card-set>
 
   <!--droppable area for exploration level-->
+  <!-- test images slices area -->
   <ce-test-area flex="75"
                 layout="column"
 
@@ -20,7 +22,8 @@
                 level="{{vm.levelType}}"
                 question="{{vm.questionType}}"
                 level-cards="vm.levelCards"
-                deployed-cards="vm.deployedCards"> <!--magic number should be replaced -->
+                deployed-cards="vm.deployedCards">
+                <!--magic number should be replaced -->
   </ce-test-area>
   <!--droppable area for exploration level-->
 </div>
