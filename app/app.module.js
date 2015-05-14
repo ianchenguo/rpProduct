@@ -13,6 +13,7 @@
       'app.questionCommon',
       'app.questionA',
       'app.questionB',
+      'app.questionC',
       'app.report'
     ]);
 

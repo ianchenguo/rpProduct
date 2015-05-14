@@ -1,0 +1,114 @@
+<!--<ion-content>-->
+<!--<ion-list>-->
+<!--<ion-item ng-repeat="cmd in vm.commands"-->
+<!--ng-style="{'background-color':cmd.bgColor}">-->
+<!--<ce-question-b-command level="{{vm.level}}"-->
+<!--from="cmd.from"-->
+<!--to="cmd.to"-->
+<!--idx="{{$index}}"></ce-question-b-command>-->
+<!--</ion-item>-->
+<!--</ion-list>-->
+<!--</ion-content>-->
+
+<!--<div class="bar bar-footer bar-stable" ng-if="vm.level != 0">-->
+<!--<div class="button button-positive"-->
+<!--ng-click="vm.addCommand(vm.commands)">-->
+<!--Add-->
+<!--</div>-->
+<!--<div class="button button-energized"-->
+<!--ng-click="vm.deleteLastCommand(vm.commands)">-->
+<!--Delete Last-->
+<!--</div>-->
+
+<!--<div class="button button-energized"-->
+<!--ng-click="vm.runCommands($event)">-->
+<!--Run Commands-->
+<!--</div>-->
+
+<!--<div class="button button-energized"-->
+<!--ng-click="vm.reload(vm.commands)">-->
+<!--Reload-->
+<!--</div>-->
+<!--</div>-->
+
+<div layout="column"
+     layout-fill
+     layout-margin
+     layout-align="center"
+     class="ce-main-content">
+
+  <!--<ion-content flex="90" layout>-->
+  <!--<ion-list>-->
+  <!--<ion-item ng-repeat="cmd in vm.commands"-->
+  <!--ng-style="{'background-color':cmd.bgColor}">-->
+  <!--<ce-question-b-command level="{{vm.level}}"-->
+  <!--from="cmd.from"-->
+  <!--to="cmd.to"-->
+  <!--idx="{{$index}}"></ce-question-b-command>-->
+  <!--</ion-item>-->
+  <!--</ion-list>-->
+  <!--</ion-content>-->
+
+  <div flex="90" layout>
+    <ion-content flex>
+      <!--<ion-list>-->
+      <!--<ion-item ng-repeat="cmd in vm.commands"-->
+      <!--ng-style="{'background-color':cmd.bgColor}">-->
+      <!--<ce-question-b-command level="{{vm.level}}"-->
+      <!--from="cmd.from"-->
+      <!--to="cmd.to"-->
+      <!--idx="{{$index}}"></ce-question-b-command>-->
+      <!--</ion-item>-->
+      <!--</ion-list>-->
+
+      <md-list>
+
+        <ce-question-b-command
+          ng-repeat="cmd in vm.commands"
+          ng-style="{'background-color':cmd.bgColor}"
+          level="{{vm.level}}"
+          from="cmd.from"
+          to="cmd.to"
+          idx="{{$index}}"
+          layout>
+
+        </ce-question-b-command>
+      </md-list>
+
+
+    </ion-content>
+  </div>
+
+
+  <!--<div flex="10"-->
+  <!--layout-->
+  <!--ng-if="vm.level != 0">-->
+  <!--<div class="button button-positive"-->
+  <!--ng-click="vm.addCommand(vm.commands)">-->
+  <!--Add-->
+  <!--</div>-->
+  <!--<div class="button button-energized"-->
+  <!--ng-click="vm.deleteLastCommand(vm.commands)">-->
+  <!--Delete Last-->
+  <!--</div>-->
+
+  <!--<div class="button button-energized"-->
+  <!--ng-click="vm.runCommands($event)">-->
+  <!--Run Commands-->
+  <!--</div>-->
+
+  <!--<div class="button button-energized"-->
+  <!--ng-click="vm.reload(vm.commands)">-->
+  <!--Reload-->
+  <!--</div>-->
+  <!--</div>-->
+  <section flex="10"
+           layout="row"
+           layout-align="center center"
+           ng-if="vm.level != 0">
+    <md-button class="md-raised" ng-click="vm.addCommand(vm.commands)">Add</md-button>
+    <md-button class="md-raised md-warn" ng-click="vm.deleteLastCommand(vm.commands)">Delete Last</md-button>
+    <md-button class="md-raised md-primary" ng-click="vm.runCommands($event)">Run</md-button>
+    <md-button class="md-raised md-warn" ng-click="vm.reload(vm.commands)">Reload</md-button>
+  </section>
+</div>

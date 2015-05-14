@@ -1,0 +1,30 @@
+<div layout="column"
+     layout-fill
+     layout-margin
+     layout-align="center"
+     class="ce-main-content">
+
+  <ce-card-set flex="25"
+               layout="row"
+               ng-if="vm.levelType > 0"
+               question="{{vm.questionType}}"
+               level="{{vm.levelType}}"
+               level-cards="vm.levelCards">
+  </ce-card-set>
+
+  <!--droppable area for exploration level-->
+  <ce-test-area flex="75"
+                layout="column"
+
+                class="test-area"
+                level="{{vm.levelType}}"
+                question="{{vm.questionType}}"
+                level-cards="vm.levelCards"
+                deployed-cards="vm.deployedCards"> <!--magic number should be replaced -->
+  </ce-test-area>
+  <!--droppable area for exploration level-->
+</div>
+
+
+
+
