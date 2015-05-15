@@ -70,7 +70,19 @@
 }
 
 .ce-question-b-command-list, .ce-question-c-command-list {
-  background-color: rgba(135,135,135, 0.95);
+  background-color: rgba(135, 135, 135, 0.95);
+}
+
+.ce-question-c-command-collection {
+  background-color: rgba(80, 210, 240, 0.7);
+}
+
+#level-three-blue-command-add-button {
+    background-color: transparent;
+    color: rgba(50,55,165, 0.8);
+    border-radius: 10px;
+    font-size: 40px;
+    padding: 0px;
 }
 
 .ce-nav-bar {
