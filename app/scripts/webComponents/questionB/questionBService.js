@@ -14,6 +14,8 @@
     var _storedCommands = [{from: '', to: ''}];
     var _storedLevel = 0;
 
+    var _commandHistory = [];
+
     var storeCurrentCommands = function storeCurrentCommands(cmds) {
       _storedCommands = R.clone(cmds);
       return R.clone(_storedCommands);
@@ -34,11 +36,33 @@
 
 
 
+
+    var addToCommandHistory = function addToCommandHistory(cmd) {
+      _commandHistory.push(cmd);
+    };
+
+    var removeFromCommandHistory = function removeFromCommandHistory() {
+      _commandHistory.pop();
+    };
+
+    var getCommandHistory = function getCommandHistory() {
+      return R.clone(_commandHistory);
+    };
+
+    var clearCommandHistory = function clearCommandHistory() {
+      _commandHistory = [];
+    };
+
     var service = {
       storeCurrentCommands:storeCurrentCommands,
       retrievePreviousCommands:retrievePreviousCommands,
       storeCurrentLevel:storeCurrentLevel,
-      retrievePreviousLevel:retrievePreviousLevel
+      retrievePreviousLevel:retrievePreviousLevel,
+
+      addToCommandHistory:addToCommandHistory,
+      removeFromCommandHistory:removeFromCommandHistory,
+      getCommandHistory:getCommandHistory,
+      clearCommandHistory:clearCommandHistory
     };
 
 

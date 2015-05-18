@@ -8,8 +8,8 @@
     .module('app.questionB')
     .directive('ceQuestionBCommand', ceQuestionBCommand);
 
-  ceQuestionBCommand.$inject = ['movePieceService', 'readableLogService'];
-  function ceQuestionBCommand(movePieceService, readableLogService) {
+  ceQuestionBCommand.$inject = ['questionBService','movePieceService', 'readableLogService'];
+  function ceQuestionBCommand(questionBService,movePieceService, readableLogService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBCommandDirective/ceQuestionBCommand.html',
@@ -17,7 +17,8 @@
         level: '@',
         from: '=',
         to: '=',
-        idx: '@'
+        idx: '@',
+        pressed: '='
       },
       controllerAs: 'vm',
       controller: ['$scope', controller],
@@ -34,6 +35,7 @@
       vm.positions = ['', '1', '2', '3', 'X'];
       vm.updateFrom = updateFrom;
       vm.updateTo = updateTo;
+      vm.runCommand = runCommand;
 
       var logCommandFromSelection = function logCommandFromSelection(from, to, idx) {
         readableLogService.saveLog(
@@ -67,34 +69,32 @@
       //////
       function updateFrom() {
         logCommandFromSelection(vm.from, vm.to, vm.idx);
-        move();
       }
 
 
       function updateTo() {
         logCommandToSelection(vm.from, vm.to, vm.idx);
-        move();
       }
 
-      function move() {
-        if (vm.level == 0) {
+      function runCommand() {
+        vm.bgColor = '';
+        if (vm.from && vm.to) {
 
-          vm.bgColor = '';
-          if (vm.from && vm.to) {
-
-            logCommandsExecution();
-            var fromId = 'droppable' + vm.from;
-            var toId = 'droppable' + vm.to;
-            movePieceService.movePiece(fromId, toId, vm.idx)
-              .catch(function () {
-                vm.bgColor = 'red';
-                logCommandsExecutionError(vm.from, vm.to, 0);
-              })
-              .finally(function(){
-                logCommandsExecutionFinished();
-              });
-
-          }
+          logCommandsExecution();
+          var fromId = 'droppable' + vm.from;
+          var toId = 'droppable' + vm.to;
+          movePieceService.movePiece(fromId, toId, vm.idx)
+            .then(function () {
+              vm.pressed = true;
+              questionBService.addToCommandHistory({from:toId,to:fromId,target:vm.idx});
+            })
+            .catch(function () {
+              vm.bgColor = 'red';
+              logCommandsExecutionError(vm.from, vm.to, 0);
+            })
+            .finally(function () {
+              logCommandsExecutionFinished();
+            });
         }
 
       }

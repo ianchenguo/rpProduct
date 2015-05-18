@@ -4,29 +4,11 @@
                layout="row"
                layout-align="space-around center">
 
-  <!--<label class="item item-input item-select">-->
-  <!--<div class="input-label">-->
-  <!--From Position-->
-  <!--</div>-->
-  <!--<select ng-model="vm.from"-->
-  <!--ng-options="pos as pos for pos in vm.positions"-->
-  <!--ng-change="vm.updateFrom()">-->
-  <!--</select>-->
-  <!--</label>-->
-
-
-  <!--<label class="item item-input item-select">-->
-  <!--<div class="input-label">-->
-  <!--To Position-->
-  <!--</div>-->
-  <!--<select ng-model="vm.to"-->
-  <!--ng-options="pos as pos for pos in vm.positions"-->
-  <!--ng-change="vm.updateTo()">-->
-  <!--</select>-->
-  <!--</label>-->
 
   <div>From</div>
-  <md-select ng-model="vm.from" ng-change="vm.updateFrom()">
+  <md-select ng-model="vm.from"
+             ng-change="vm.updateFrom()"
+             ng-disabled="vm.level > 0 && vm.pressed">
 
     <md-option ng-value="opt"
                ng-repeat="opt in vm.positions">
@@ -35,13 +17,23 @@
   </md-select>
 
   <Div>To</Div>
-  <md-select ng-model="vm.to" ng-change="vm.updateTo()">
+  <md-select ng-model="vm.to"
+             ng-change="vm.updateTo()"
+             ng-disabled="vm.level > 0 && vm.pressed">
 
     <md-option ng-value="opt"
                ng-repeat="opt in vm.positions">
       {{opt}}
     </md-option>
   </md-select>
+
+
+  <md-button class="md-raised md-primary"
+             ng-click="vm.runCommand()"
+             ng-if="vm.level<4"
+             ng-disabled="vm.level > 0 && vm.pressed">
+    Run
+  </md-button>
 
 </md-whiteframe>
 

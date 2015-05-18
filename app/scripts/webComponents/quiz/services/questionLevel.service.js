@@ -49,7 +49,6 @@
 
       var quizId = quizService.getLocalQuiz()._id;
       var questionId = questionService.getLocalQuestion()._id;
-      console.log('quizId: ' + quizId);
 
       _questionLevel = new QuestionLevel({
         endTimeStamp: '',

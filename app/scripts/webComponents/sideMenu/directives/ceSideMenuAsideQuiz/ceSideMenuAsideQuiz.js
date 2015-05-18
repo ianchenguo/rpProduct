@@ -167,7 +167,9 @@
       vm.endQuiz = endQuiz;
       vm.toggleStage = curriedConditionalToggle(toggleStage);
       vm.isStageShown = isStageShown;
-      //vm.test = _showRecordEndingToast;
+      vm.reload = function reloadState() {
+        $state.go($state.current, {}, {reload: true});
+      };
     }
 
     //////

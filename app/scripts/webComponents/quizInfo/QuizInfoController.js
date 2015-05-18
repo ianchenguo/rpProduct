@@ -8,13 +8,13 @@
     .module('app.quizInfo')
     .controller('QuizInfoController', QuizInfoController);
 
-  QuizInfoController.$inject = ['$q', '$state', 'quizService','LEVEL_TYPE'];
-  function QuizInfoController($q, $state, quizService,LEVEL_TYPE) {
+  QuizInfoController.$inject = ['$ionicViewSwitcher', '$q', '$state', 'quizService', 'LEVEL_TYPE'];
+  function QuizInfoController($ionicViewSwitcher, $q, $state, quizService, LEVEL_TYPE) {
     var vm = this;
 
     vm.child = {firstName: '', lastName: '', age: '', gender: ''};
     vm.observer = {firstName: '', lastName: '', email: ''};
-    vm.gender = ['male','female'];
+    vm.gender = ['male', 'female'];
 
     vm.submitInfo = submitInfo;
 
@@ -27,7 +27,8 @@
 
       ///
       function handleSuccess(value) {
-        $state.go('app.quiz.questionA.levels',{level:LEVEL_TYPE.zero});
+        $ionicViewSwitcher.nextTransition('none');
+        $state.go('app.quiz.questionA.levels', {level: LEVEL_TYPE.zero});
 
         return value;
       }

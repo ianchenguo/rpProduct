@@ -49,7 +49,7 @@
             transform: 'translate3D(' + dx + 'px, ' + dy + 'px, 0px) scale(1.1)',
             '-webkit-transform': 'translate3D(' + dx + 'px, ' + dy + 'px, 0px) scale(1.1)',
             transition: 'all 0.5s ease',
-            '-webkit-transition': 'all 0.5s ease'
+            '-webkit-transition': 'all 0.5s'
           });
 
           $timeout(

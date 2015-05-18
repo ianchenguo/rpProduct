@@ -26,7 +26,7 @@
         templateUrl: 'scripts/webComponents/report/components/quizList.html',
         controller: 'QuizListController as vm',
         resolve: {
-          quizList:prepareQuizList
+          quizList: prepareQuizList
         }
       })
       .state('app.report.quizDetail', {
@@ -34,28 +34,35 @@
         templateUrl: 'scripts/webComponents/report/components/quizDetail.html',
         controller: 'QuizDetailController as vm',
         resolve: {
-          quizReport:prepareQuizReport
+          quizReport: prepareQuizReport
         }
       });
 
-    prepareQuizList.$inject = ['reportService'];
-    function prepareQuizList(reportService) {
+    prepareQuizList.$inject = ['$ionicLoading', 'reportService'];
+    function prepareQuizList($ionicLoading, reportService) {
+
+      $ionicLoading.show({
+        template: 'loading'
+      });
+
       return reportService.listAllEndedQuizzes()
-        .then(function(value) {
+        .then(function (value) {
+          $ionicLoading.hide();
           return value;
         });
     }
 
-    prepareQuizReport.$inject = ['reportService','$stateParams'];
-    //function prepareQuizReport(reportService,$stateParams) {
-    //  return reportService.getQuizDetail($stateParams.quizId)
-    //    .then(function(value) {
-    //      return reportService.createReport(value);
-    //    });
-    //}
-    function prepareQuizReport(reportService,$stateParams) {
+    prepareQuizReport.$inject = ['$ionicLoading', 'reportService', '$stateParams'];
+
+    function prepareQuizReport($ionicLoading, reportService, $stateParams) {
+
+      $ionicLoading.show({
+        template: 'loading'
+      });
+
       return reportService.loadSingQuizReport($stateParams.quizId)
-        .then(function(value) {
+        .then(function (value) {
+          $ionicLoading.hide();
           return value;
         });
     }

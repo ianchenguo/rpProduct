@@ -16,7 +16,7 @@
                               quizList,
                               emailComposerService) {
     var vm = this;
-    vm.quizList = quizList;
+    vm.quizList = R.reverse(quizList);
 
     vm.showDetail = showDetail;
     vm.sendEmail = sendEmail;

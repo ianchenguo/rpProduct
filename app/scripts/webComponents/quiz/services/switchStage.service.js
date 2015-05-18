@@ -51,7 +51,7 @@
     };
 
     var service = {
-      switchStage: switchStage,
+      switchStage: switchStage
     };
 
     return service;
