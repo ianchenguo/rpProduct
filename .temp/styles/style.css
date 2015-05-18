@@ -1,51 +1,36 @@
 /* Empty. Add your own CSS if you like */
-
 .scroll-content > .scroll {
   height: 100%;
 }
-
 .scroll-content > .scroll > .question-frame {
   height: 100%;
 }
-
 .scroll-content > .scroll > .ce-aside-frame {
   height: 100%;
 }
-
 .question-frame {
   height: 100%;
   width: 100%;
   position: absolute;
   background-color: #C5CAE9;
 }
-
 .desired-pattern {
   position: relative;
-
 }
-
 .test-area {
   position: relative;
-
 }
-
 .initial-area {
   position: relative;
-
 }
-
-.ce-card-parent {
-}
-
 .ce-card {
   position: relative;
 }
-
 /*ce-test-base*/
-.ce-test-base, .ce-test-base-droppable-area {
+.ce-test-base,
+.ce-test-base-droppable-area {
   position: relative;
 }
-
 .ce-test-base-title {
   color: white;
   background-color: rgba(0, 0, 0, 0.54);
@@ -54,69 +39,117 @@
   margin: 0;
   padding: 0;
 }
-
 .ce-test-base-droppable-area {
   background-color: rgba(0, 0, 0, 0.12);
   margin: 0 0 0 0;
   padding: 0;
   min-height: 100px;
-
 }
-
-.ce-main-content, .ce-question-b-frame-row, .ce-question-b-command-list, .ce-question-b-test-area, 
-.ce-question-c-frame-row, .ce-question-c-command-list, .ce-question-c-test-area {
+.ce-main-content,
+.ce-question-b-frame-row,
+.ce-question-b-command-list,
+.ce-question-b-test-area,
+.ce-question-c-frame-row,
+.ce-question-c-command-list,
+.ce-question-c-test-area {
   position: relative;
   height: 100%;
 }
-
-.ce-question-b-command-list, .ce-question-c-command-list {
+.ce-question-b-command-list,
+.ce-question-c-command-list {
   background-color: rgba(135, 135, 135, 0.95);
 }
-
+div.wrap-command-div-container {
+  padding: 0px;
+  margin: 0 auto;
+}
+div.wrap-command-div-container table {
+  border-collapse: collapse;
+  border: 0px;
+}
+div.wrap-command-div-container table thead tr th div#ionic-header-div-command-list-slab {
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  position: relative;
+  top: 24%;
+}
+div.wrap-command-div-container table tbody tr.command-tr-repeated-container {
+  border-collapse: collapse;
+  width: 100%;
+  height: auto;
+  outline: none;
+  margin: 0px auto;
+  color: rgba(50, 60, 165, 0.9);
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  -webkit-text-shadow: 1px 1px rgba(30, 30, 25, 0.5);
+  -moz-text-shadow: 1px 1px rgba(30, 30, 25, 0.5);
+  -ms-text-shadow: 1px 1px rgba(30, 30, 25, 0.5);
+  -o-text-shadow: 1px 1px rgba(30, 30, 25, 0.5);
+  text-shadow: 1px 1px rgba(30, 30, 25, 0.5);
+}
+div.wrap-command-div-container table tbody tr.command-tr-repeated-container td {
+  width: 20%;
+  height: auto;
+  outline: none;
+  padding: 0px;
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 5%;
+}
+div.wrap-command-div-container table tbody tr.command-tr-repeated-container td:last-child button#level-three-blue-command-add-button {
+  position: relative;
+  right: 2%;
+}
 .ce-question-c-command-collection {
-  background-color: rgba(80, 210, 240, 0.7);
+  background-color: rgba(135, 135, 135, 0.95);
 }
-
+.ce-question-c-command-collection #ionic-header-collection-command {
+  display: table-row;
+  text-align: center;
+  vertical-align: middle;
+}
+.ce-question-c-command-collection #ionic-header-collection-command div#ionic-header-div-command-collection {
+  position: relative;
+  top: 24%;
+}
 #level-three-blue-command-add-button {
-    background-color: transparent;
-    color: rgba(50,55,165, 0.8);
-    border-radius: 10px;
-    font-size: 40px;
-    padding: 0px;
+  background-color: transparent;
+  color: rgba(50, 55, 165, 0.8);
+  border-radius: 10px;
+  font-size: 40px;
+  padding: 0px;
 }
-
 .ce-nav-bar {
   background-color: #3F51B5 !important;
 }
-
 .ce-title-stripe {
   background-color: rgba(0, 0, 0, 0.12);
 }
-
 /*.ce-test-base {*/
 /*position: relative;*/
 /*width:180px;*/
 /*height:90px;*/
 /*background-color:red;*/
 /*}*/
-
-.ce-card-set, ce-test-area {
+.ce-card-set,
+ce-test-area {
   background-color: rgba(0, 0, 0, 0.12);
   position: relative;
 }
-
 .ce-menu-button-text {
-  float:left;
+  float: left;
 }
-
 .ce-menu-button-text-right {
-  float:right;
+  float: right;
 }
-
 .ce-list-item-active {
-  background-color:rgba(0, 0, 0, 0.12);
+  background-color: rgba(0, 0, 0, 0.12);
 }
-
 img {
   max-width: 100%;
   height: auto;
