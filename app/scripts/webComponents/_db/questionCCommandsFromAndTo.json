@@ -1,0 +1,14 @@
+[
+	{"fval": "1", "tval": "2"},
+	{"fval": "1", "tval": "3"},
+	{"fval": "1", "tval": "X"},
+	{"fval": "2", "tval": "1"},
+	{"fval": "2", "tval": "3"},
+	{"fval": "2", "tval": "X"},
+	{"fval": "3", "tval": "1"},
+	{"fval": "3", "tval": "2"},
+	{"fval": "3", "tval": "X"},
+	{"fval": "X", "tval": "1"},
+	{"fval": "X", "tval": "2"},
+	{"fval": "X", "tval": "3"}
+]

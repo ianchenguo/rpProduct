@@ -1,0 +1,23 @@
+<div layout="row"
+     layout-fill
+     layout-margin
+     layout-align="center"
+     class="ce-main-content">
+
+  <ce-question-c-test-area flex="50"
+                           class="ce-question-c-test-area"
+                           level-type="{{vm.levelType}}"
+                           question-type="{{vm.questionType}}">
+  </ce-question-c-test-area>
+
+  <ce-question-c-command-collection flex = "25"
+                              class="ce-question-c-command-collection"
+                              level="{{vm.levelType}}">
+  </ce-question-c-command-collection>
+
+  <ce-question-c-command-list flex="25"
+                              class="ce-question-c-command-list"
+                              level="{{vm.levelType}}">
+  </ce-question-c-command-list>
+
+</div>
