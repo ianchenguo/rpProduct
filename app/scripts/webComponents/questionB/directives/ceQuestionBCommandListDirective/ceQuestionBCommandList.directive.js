@@ -136,6 +136,8 @@
       };
 
       var runCommands = function runCommands() {
+        questionBService.moveBackToInitState();
+
         logCommandsExecution(R.clone(vm.commands));
 
         initColor(vm.commands);

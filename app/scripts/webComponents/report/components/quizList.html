@@ -1,5 +1,24 @@
 <ion-view view-title="Report - Quiz List">
   <ion-content>
+    <!--<div class="list list-inset">-->
+
+    <!--<div class="item" ng-repeat="item in vm.quizList">-->
+    <!--Start:-->
+    <!--{{vm.formatTimeStamp(item.doc.startTimeStamp)}}-->
+    <!--<hr/>-->
+    <!--End:-->
+    <!--{{vm.formatTimeStamp(item.doc.endTimeStamp)}}-->
+
+    <!--<md-button class="md-raised"-->
+    <!--ng-click="vm.showDetail(item.id)">-->
+    <!--Detail-->
+    <!--</md-button>-->
+    <!--<md-button class="md-raised md-primary"-->
+    <!--ng-click="vm.sendEmail(item.id)">-->
+    <!--Send Email-->
+    <!--</md-button>-->
+    <!--</div>-->
+    <!--</div>-->
 
     <md-list layout="column"
              layout-margin
@@ -23,7 +42,10 @@
                layout-align="space-between center">
             <div>
               <p>Start timestamp: {{vm.formatTimeStamp(item.doc.startTimeStamp)}}</p>
+
               <p>End timestamp: {{vm.formatTimeStamp(item.doc.endTimeStamp)}}</p>
+              <p>Child Name / Code: {{item.doc.child.fullNameOrCode}}</p>
+              <p>Institution: {{item.doc.child.institution}}</p>
             </div>
 
             <div>
@@ -35,6 +57,12 @@
               <md-button class="md-raised md-primary"
                          ng-click="vm.sendEmail(item.id)">
                 Send Email
+              </md-button>
+
+
+              <md-button class="md-raised md-warn"
+                         ng-click="vm.deleteQuiz(item.id,$event)">
+                Delete
               </md-button>
             </div>
           </div>

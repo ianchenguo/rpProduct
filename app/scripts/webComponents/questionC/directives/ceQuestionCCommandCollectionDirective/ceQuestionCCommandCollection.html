@@ -1,41 +1,61 @@
-     <!-- layout-fill
-     layout-margin
-     layout-align="center" -->
-
 <div flex
-     layout
+     layout="column"
+     layout-fill
+     layout-margin
+     layout-align="center"
      class="ce-main-content">
 
-    <div flex>
-        <ion-header-bar align-title="center" class="bar-positive" id = "ionic-header-collection-command">
-            <div id="ionic-header-div-command-collection" class="command">Commands Collection</div>
-        </ion-header-bar>
-        <ion-content flex>
-            <ion-list>
-                <ion-item>
-                    Here
-                </ion-item>
-            </ion-list>
-        </ion-content>
-    </div>
+  <ion-pane flex="90" layout>
+    <ion-content flex delegate-handle="commandCollectionScroll">
 
+      <md-list>
+        <md-list-item ng-repeat="cmd in vm.commands">
+
+
+          <md-whiteframe class="md-whiteframe-z1"
+                         ng-style="{'background-color':cmd.bgColor}"
+                         flex
+                         layout="row"
+                         layout-align="space-around center">
+
+            <div>
+              <p>{{cmd.text}}</p>
+            </div>
+
+            <md-button class="md-raised md-primary"
+                       ng-click="vm.runCommand(cmd,$index)"
+                       ng-if="vm.level < 4"
+                       ng-disabled="cmd.pressed">
+              Run
+            </md-button>
+          </md-whiteframe>
+
+        </md-list-item>
+      </md-list>
+
+
+    </ion-content>
+  </ion-pane>
+
+  <div class="bar bar-footer"
+       flex="10"
+       layout="row"
+       layout-align="space-around center">
+
+    <span>i: {{vm.i}}</span>
+
+    <md-button class="md-raised md-warn"
+               ng-click="vm.deleteLastCommand(vm.commands)"
+               ng-disabled="vm.deleteLock || vm.disableDelete(vm.commands)">
+      Delete Last
+    </md-button>
+
+    <md-button class="md-raised md-primary"
+               ng-click="vm.executeCommands($event)"
+               ng-if="vm.level > 3"
+               ng-disabled="vm.commands.length === 0">
+      Run
+    </md-button>
+
+  </div>
 </div>
-
-
-
-
-            <!-- ordered command list -->
-            <!-- <md-list>
-
-              <ce-question-c-command-collection-component
-                ng-repeat="cmd in vm.commands"
-                ng-style="{'background-color':cmd.bgColor}"
-                level="{{vm.level}}"
-                from="cmd.from"
-                to="cmd.to"
-                idx="{{$index}}"
-                class="ce-question-c-command-collection-component"
-                layout>
-
-              </ce-question-c-command-collection-component>
-            </md-list> -->

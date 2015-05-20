@@ -55,7 +55,9 @@
 
 
     function startQuiz(ev) {
-      _showConfirm(ev);
+      //_showConfirm(ev);
+      $state.go('app.quizInfo');
+
     }
 
 

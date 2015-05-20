@@ -13,6 +13,7 @@
 
     var _storedCommands = [{from: '', to: ''}];
     var _storedLevel = 0;
+    var _initState = [];
 
     var _commandHistory = [];
 
@@ -53,6 +54,19 @@
       _commandHistory = [];
     };
 
+    var memoriseInitState = function memoriseInitState(deployedCards) {
+      _initState = R.clone(deployedCards);
+    };
+
+    var moveBackToInitState = function moveBackToInitState() {
+      $(document).ready(function () {
+        _initState.forEach(function (el, idx) {
+          var n = idx + 1;
+          $('#droppable' + n).find('div').append($('.test-area').find('#' + el.id));
+        })
+      });
+    };
+
     var service = {
       storeCurrentCommands:storeCurrentCommands,
       retrievePreviousCommands:retrievePreviousCommands,
@@ -62,7 +76,11 @@
       addToCommandHistory:addToCommandHistory,
       removeFromCommandHistory:removeFromCommandHistory,
       getCommandHistory:getCommandHistory,
-      clearCommandHistory:clearCommandHistory
+      clearCommandHistory:clearCommandHistory,
+
+
+      memoriseInitState: memoriseInitState,
+      moveBackToInitState: moveBackToInitState
     };
 
 

@@ -8,13 +8,15 @@
     .module('app.quiz.localDAO')
     .factory('reportDbService', reportDbService);
 
-  reportDbService.$inject = ['dbService'];
+  reportDbService.$inject = ['$q', 'dbService'];
 
-  function reportDbService(dbService) {
+  function reportDbService($q, dbService) {
 
     var service = {
       listAllEndedQuizzes: listAllEndedQuizzes,
-      getQuizDetailById: getQuizDetailById
+      getQuizDetailById: getQuizDetailById,
+      listAllDocOfQuiz: listAllDocOfQuiz,
+      deleteDocsOfQuiz: deleteDocsOfQuiz
     };
     return service;
     //////
@@ -87,8 +89,6 @@
         }).catch(function (error) {
           throw new Error(error);
         });
-
-
       //return dbService.db
       //  .query(function (doc) {
       //    if (doc.state === 'finished' && doc.docType === 'quiz') {
@@ -106,6 +106,74 @@
       //  });
     }
 
+    function listAllDocOfQuiz(quizId) {
+      //var ddoc2 = {
+      //
+      //  _id: '_design/doc_quiz_id',
+      //  views: {
+      //    by_quiz: {
+      //      map: function (doc) {
+      //        emit(doc.quiz);
+      //      }.toString()
+      //    }
+      //  }
+      //};
+      //
+      //// save the design doc
+      //return dbService.db
+      //  .put(ddoc2).catch(function (err) {
+      //    if (err.status !== 409) {
+      //      throw err;
+      //    }
+      //    // ignore if doc already exists
+      //  })
+      //  .then(function () {
+      //
+      //    return dbService.db
+      //      .query('doc_quiz_id/by_quiz', {
+      //        include_docs: true,
+      //        key: quizId
+      //      });
+      //  }).then(function (value) {
+      //    // handle result
+      //    console.log(value);
+      //    return value.rows;
+      //  }).catch(function (error) {
+      //    throw new Error(error);
+      //  });
+
+      return dbService.db.allDocs({
+        include_docs: true,
+        startkey: quizId,
+        endkey: quizId + '\uffff'
+      })
+        .then(function (value) {
+          return value.rows;
+        })
+        .catch(function (error) {
+          throw new Error(error);
+        });
+    }
+
+    function deleteDocsOfQuiz(quizId) {
+      return listAllDocOfQuiz(quizId)
+        .then(function (values) {
+          var docs = values.map(function (doc) {
+            doc.doc._deleted = true;
+            return doc.doc;
+          });
+
+          console.log(docs);
+
+          return dbService.db.bulkDocs(docs);
+        })
+        .then(function () {
+          return dbService.db.compact();
+        })
+        .catch(function (error) {
+          return $q.reject(error);
+        })
+    }
   }
 }());
 

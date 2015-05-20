@@ -30,7 +30,7 @@
   <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
   <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
   <script src="bower_components/pouchdb/dist/pouchdb.js"></script>
-  <script src="bower_components/angular-pouchdb/angular-pouchdb.js"></script>
+  <script src="bower_components/angular-pouchdb/dist/angular-pouchdb.js"></script>
   <script src="bower_components/relational-pouch/dist/pouchdb.relational-pouch.js"></script>
   <script src="bower_components/ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/ramda/dist/ramda.js"></script>
@@ -48,6 +48,8 @@
   <!-- build:js scripts/scripts.js -->
 
   <!--app module-->
+
+  <script src="scripts/ramda-fantasy-bundle.js"></script>
   <script src="bower_components/ionic-material/ionic.material.min.js"></script>
 
   <script src="app.module.js"></script>
@@ -91,6 +93,7 @@
   <script src="scripts/webComponents/sideMenu/sideMenu.constants.js"></script>
   <script src="scripts/webComponents/sideMenu/sideMenu.router.js"></script>
   <script src="scripts/webComponents/sideMenu/SideMenuController.js"></script>
+  <script src="scripts/webComponents/sideMenu/sideMenuService.js"></script>
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuMainContent/ceSideMenuMainContent.js"></script>
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideFrame/ceSideMenuAsideFrame.js"></script>
   <script src="scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.js"></script>
@@ -169,16 +172,10 @@
       <script src="scripts/webComponents/questionC/questionCService.js"></script>
 
       <script src="scripts/webComponents/questionC/directives/ceQuestionCFrameDirective/ceQuestionCFrame.js"></script>
-      <script src="scripts/webComponents/questionC/directives/ceQuestionCCommandDirective/ceQuestionCCommand.directive.js"></script>
       <script src="scripts/webComponents/questionC/directives/ceQuestionCCommandListDirective/ceQuestionCCommandList.directive.js"></script>
       <script src="scripts/webComponents/questionC/directives/ceQuestionCCommandCollectionDirective/ceQuestionCCommandCollection.directive.js"></script>
       <script src="scripts/webComponents/questionC/directives/ceQuestionCTestAreaDirective/ceQuestionCTestArea.js"></script>
 
-      <!-- qc Database Service -->
-      <script type="text/javascript" language = "javascript" src="scripts/webComponents/_db/qcDatabaseService.module.js"></script>
-      <script type="text/javascript" language = "javascript" src="scripts/webComponents/_db/questionCDatabaseService.js"></script>
-      <!-- <script type="text/javascript" language = "javascript" src="scripts/webComponents/_db/questionCCommandsFromAndTo.json"></script> -->
-  
   <!--report module-->
   <script src="scripts/webComponents/report/report.module.js"></script>
   <script src="scripts/webComponents/report/router/report.router.module.js"></script>

@@ -8,13 +8,15 @@
     .module('app.report')
     .factory('reportService', reportService);
 
-  reportService.$inject = ['ReportRecord', 'reportDbService', 'readableLogService'];
-  function reportService(ReportRecord, reportDbService,readableLogService) {
+  reportService.$inject = ['DOC_TYPE', 'STATE', 'quizDbService', 'ReportRecord', 'reportDbService', 'readableLogService'];
+  function reportService(DOC_TYPE, STATE, quizDbService, ReportRecord, reportDbService, readableLogService) {
     var service = {
       listAllEndedQuizzes: listAllEndedQuizzes,
       createReport: createReport,
       getQuizDetail: getQuizDetail,
-      loadSingQuizReport:loadSingQuizReport
+      loadSingQuizReport: loadSingQuizReport,
+      getAllDocsOfQuiz: getAllDocsOfQuiz,
+      deleteAllDocsOfQuiz:deleteAllDocsOfQuiz
     };
 
     return service;
@@ -165,7 +167,16 @@
     }
 
     function listAllEndedQuizzes() {
-      return reportDbService.listAllEndedQuizzes();
+      return quizDbService.listAllQuizzes().then(
+        function (value) {
+          var filtered = value.filter(function (el) {
+            return el.doc.docType === DOC_TYPE.quiz;
+          });
+
+          return R.clone(filtered);
+        }
+      );
+      //return reportDbService.listAllEndedQuizzes();
     }
 
     function getQuizDetail(id) {
@@ -174,6 +185,14 @@
 
     function loadSingQuizReport(quizId) {
       return readableLogService.getQuizLogs(quizId);
+    }
+
+    function getAllDocsOfQuiz(quizId) {
+      return reportDbService.listAllDocOfQuiz(quizId);
+    }
+
+    function deleteAllDocsOfQuiz(quizId) {
+      return reportDbService.deleteDocsOfQuiz(quizId);
     }
   }
 }());

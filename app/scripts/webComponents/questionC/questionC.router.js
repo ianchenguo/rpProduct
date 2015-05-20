@@ -17,9 +17,6 @@
         abstract: true,
         template: '<ion-nav-view></ion-nav-view>',
         controller: 'QuestionCController as vm'
-        //resolve: {
-        //  questionPrepService: questionPrepService
-        //}
       })
       .state('app.quiz.questionC.levels', {
         url: '/levels/:level',
@@ -32,17 +29,19 @@
   }
 
   //////
-  questionPrepService.$inject = ['QUESTION_TYPE','switchStageService'];
-  function questionPrepService(QUESTION_TYPE,switchStageService) {
+  questionLevelPrepService.$inject = ['$ionicLoading', 'QUESTION_TYPE', '$stateParams', 'switchStageService'];
+  function questionLevelPrepService($ionicLoading, QUESTION_TYPE, $stateParams, switchStageService) {
 
-    return switchStageService.switchQuestion(QUESTION_TYPE.c);
-  }
+    $ionicLoading.show({
+      template: 'loading'
+    });
 
-  questionLevelPrepService.$inject = ['QUESTION_TYPE','$stateParams', 'switchStageService'];
-  function questionLevelPrepService(QUESTION_TYPE, $stateParams, switchStageService) {
-
-    //return switchStageService.switchLevel($stateParams.level);
-    return switchStageService.switchStage(QUESTION_TYPE.c, $stateParams.level);
+    return switchStageService
+      .switchStage(QUESTION_TYPE.c, $stateParams.level)
+      .then(function(value){
+        $ionicLoading.hide();
+        return value;
+      });
   }
 
 }());

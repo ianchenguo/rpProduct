@@ -14,7 +14,6 @@
       'app.questionA',
       'app.questionB',
       'app.questionC',
-      'app.questionCDatabaseServiceJson',
       'app.report'
     ]);
 

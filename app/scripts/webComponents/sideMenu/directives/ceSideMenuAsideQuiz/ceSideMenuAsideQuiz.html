@@ -37,9 +37,11 @@
                     layout-align="space-between"
                     layout-margin
                     layout-padding
-                    ng-if="stage.name === 'exploration stage'">
+                    ng-if="stage.name === 'exploration stage'"
+                    ng-class="{'ce-list-item-active':stage.isActive}">
         <md-button flex
-                   ui-sref="{{stage.link}}">
+                   ui-sref="{{stage.link}}"
+                   ng-click="vm.activateStage(stage)">
             <span class="ce-menu-button-text"
                   menu-close
                   nav-transition="none">
@@ -67,10 +69,12 @@
                     layout-align="space-between"
                     ng-repeat="subStage in stage.subStages"
                     ng-if="stage.name !== 'exploration stage'"
+                    ng-class="{'ce-list-item-active':subStage.isActive}"
                     ng-show="vm.isStageShown(stage)">
         <md-button flex
                    menu-close
                    ui-sref="{{subStage.link}}"
+                   ng-click="vm.activateStage(subStage)"
                    nav-transition="none">
           <span class="ce-menu-button-text ce-menu-button-text-right">{{subStage.name}}</span>
         </md-button>

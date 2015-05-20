@@ -8,8 +8,8 @@
     .module('app.questionC')
     .directive('ceQuestionCTestArea', ceQuestionCTestArea);
 
-  ceQuestionCTestArea.$inject = ['cardService', 'cardBaseService'];
-  function ceQuestionCTestArea(cardService, cardBaseService) {
+  ceQuestionCTestArea.$inject = ['questionCService', 'cardService', 'cardBaseService'];
+  function ceQuestionCTestArea(questionCService, cardService, cardBaseService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionC/directives/ceQuestionCTestAreaDirective/ceQuestionCTestArea.html',
@@ -38,6 +38,10 @@
         vm.deployedCards = cardService.pickDeployedCards(vm.levelCards, _.parseInt(vm.levelType));
         cardBaseService.setDesiredPattern(vm.levelCards);
         cardBaseService.setInitPattern(vm.deployedCards);
+
+        if (vm.levelType > 3) {
+          questionCService.memoriseInitState(vm.deployedCards);
+        }
       }
     }
   }

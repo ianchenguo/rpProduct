@@ -14,12 +14,14 @@
     'questionService',
     'quizService',
     'audioRecordingService',
+    'sideMenuService',
     '$mdToast'];
   function ceSideMenuAsideQuiz($state,
                                questionLevelService,
                                questionService,
                                quizService,
                                audioRecordingService,
+                               sideMenuService,
                                $mdToast) {
     return {
       restrict: 'E',
@@ -34,118 +36,6 @@
 
       var vm = this;
 
-      vm.questions = [
-        {
-          name: 'Level 1',
-          stages: [
-            {
-              name: 'exploration stage',
-              subStages: [],
-              link: 'app.quiz.questionA.levels({level:0})'
-            },
-            {
-              name: 'intermediate stage',
-              subStages: [
-                {
-                  name: 'left shift',
-                  link: 'app.quiz.questionA.levels({level:1})'
-                }, {
-                  name: 'right shift',
-                  link: 'app.quiz.questionA.levels({level:2})'
-                }, {
-                  name: 'asymmetry swap',
-                  link: 'app.quiz.questionA.levels({level:3})'
-                }
-              ],
-              link: ''
-            }
-          ]
-        },
-        {
-          name: 'Level 2',
-          stages: [
-            {
-              name: 'exploration stage',
-              subStages: [],
-              link: 'app.quiz.questionB.levels({level:0})'
-            },
-            {
-              name: 'intermediate stages',
-              subStages: [
-                {
-                  name: 'left shift',
-                  link: 'app.quiz.questionB.levels({level:1})'
-                }, {
-                  name: 'right shift',
-                  link: 'app.quiz.questionB.levels({level:2})'
-                }, {
-                  name: 'asymmetry swap',
-                  link: 'app.quiz.questionB.levels({level:3})'
-                }
-              ],
-              link: ''
-            },
-            {
-              name: 'advanced stages',
-              subStages: [
-                {
-                  name: 'left shift',
-                  link: 'app.quiz.questionB.levels({level:4})'
-                }, {
-                  name: 'right shift',
-                  link: 'app.quiz.questionB.levels({level:5})'
-                }, {
-                  name: 'asymmetry swap',
-                  link: 'app.quiz.questionB.levels({level:6})'
-                }
-              ],
-              link: ''
-            }
-          ]
-        },
-        {
-          name: 'Level 3',
-          stages: [
-            {
-              name: 'exploration stage',
-              subStages: [],
-              link: 'app.quiz.questionC.levels({level:0})'
-            },
-            {
-              name: 'intermediate stages',
-              subStages: [
-                {
-                  name: 'left shift',
-                  link: 'app.quiz.questionC.levels({level:1})'
-                }, {
-                  name: 'right shift',
-                  link: 'app.quiz.questionC.levels({level:2})'
-                }, {
-                  name: 'asymmetry swap',
-                  link: 'app.quiz.questionC.levels({level:3})'
-                }
-              ],
-              link: ''
-            },
-            {
-              name: 'advanced stages',
-              subStages: [
-                {
-                  name: 'left shift',
-                  link: 'app.quiz.questionC.levels({level:4})'
-                }, {
-                  name: 'right shift',
-                  link: 'app.quiz.questionC.levels({level:5})'
-                }, {
-                  name: 'asymmetry swap',
-                  link: 'app.quiz.questionC.levels({level:6})'
-                }
-              ],
-              link: ''
-            }
-          ]
-        }
-      ];
 
       var toggleStage = function toggleStage(stage) {
         stage.isShown = !stage.isShown;
@@ -164,11 +54,16 @@
         return stage.isShown;
       };
 
+
+
+      vm.questions = sideMenuService.getAllStages();
+      vm.activateStage = sideMenuService.activateStage;
       vm.endQuiz = endQuiz;
       vm.toggleStage = curriedConditionalToggle(toggleStage);
       vm.isStageShown = isStageShown;
       vm.reload = function reloadState() {
         $state.go($state.current, {}, {reload: true});
+
       };
     }
 
@@ -200,8 +95,6 @@
       $mdToast.show(
         $mdToast.simple()
           .content('Audio recording finished!')
-          .position('false true false true')
-          .hideDelay(3000)
       );
     }
   }

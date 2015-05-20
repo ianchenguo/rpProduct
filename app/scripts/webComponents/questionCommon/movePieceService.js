@@ -28,6 +28,10 @@
 
       $(document).ready(function () {
 
+        console.log('i am in move piece');
+        console.log(fromId);
+        console.log(toId);
+
         //gets wrapped source element and destination element
         sourceEl = $('#' + fromId);
         destinationEl = $('#' + toId);
@@ -49,7 +53,7 @@
             transform: 'translate3D(' + dx + 'px, ' + dy + 'px, 0px) scale(1.1)',
             '-webkit-transform': 'translate3D(' + dx + 'px, ' + dy + 'px, 0px) scale(1.1)',
             transition: 'all 0.5s ease',
-            '-webkit-transition': 'all 0.5s'
+            '-webkit-transition': 'all 0.1s'
           });
 
           $timeout(
@@ -63,7 +67,7 @@
               });
               destinationEl.find('div').append(sourceChildCard[0]);
               $rootScope.$broadcast('dropSuccess', {cardId: sourceChildCard.attr('id')});
-              deferred.resolve({idx: idx, isSuccess: true});
+              deferred.resolve({idx: idx, isSuccess: true, from:fromId, to:toId});
 
             }, 501);
 

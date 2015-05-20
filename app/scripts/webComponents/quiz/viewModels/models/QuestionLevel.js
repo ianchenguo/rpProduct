@@ -24,7 +24,8 @@
       };
       now = new Date().toJSON();
 
-      this._id = 'stage_' + now + Math.random();
+      //this._id = 'stage_' + now + Math.random();
+      this._id = args.quiz + '_stage_' + now + Math.random();
       this._rev = '';
       this.startTimeStamp = now;
       this.endTimeStamp = args.endTimeStamp;

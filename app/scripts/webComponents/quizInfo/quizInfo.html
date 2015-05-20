@@ -11,7 +11,8 @@
 
 
       <form name="quizInfoForm"
-            flex="60">
+            flex="60"
+            novalidate>
 
 
         <md-whitefram class="md-whiteframe-z1 ce-title-stripe"
@@ -29,31 +30,21 @@
                       layout-align="center center">
 
           <md-input-container flex="100">
-            <label>First Name</label>
-            <input required name="observerFirstName" ng-model="vm.observer.firstName">
+            <label>Full Name / Code</label>
+            <input required name="observerFullNameOrCode" ng-model="vm.observer.fullNameOrCode">
 
-            <div ng-messages="quizInfoForm.observerFirstName.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-messages="quizInfoForm.observerFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
-
-
-          <md-input-container flex="100">
-            <label>Last Name</label>
-            <input required name="observerLastName" ng-model="vm.observer.lastName">
-
-            <div ng-messages="quizInfoForm.observerLastName.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
-
 
           <md-input-container flex="100">
             <label>Email</label>
-            <input required name="observerEmail" ng-model="vm.observer.email">
+            <input required type="email" name="observerEmail" ng-model="vm.observer.email">
 
             <div ng-messages="quizInfoForm.observerEmail.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
+              <div ng-message="email">This should be an email address.</div>
             </div>
           </md-input-container>
         </md-whitefram>
@@ -75,20 +66,20 @@
                       layout-align="center center">
 
           <md-input-container flex="100">
-            <label>First Name</label>
-            <input required name="childFirstName" ng-model="vm.child.firstName">
+            <label>Full Name / Code</label>
+            <input required name="childFullNameOrCode" ng-model="vm.child.fullNameOrCode">
 
-            <div ng-messages="quizInfoForm.childFirstName.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-messages="quizInfoForm.childFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
 
 
           <md-input-container flex="100">
-            <label>Last Name</label>
-            <input required name="childLastName" ng-model="vm.child.lastName">
+            <label>Institution</label>
+            <input required name="childInstitution" ng-model="vm.child.institution">
 
-            <div ng-messages="quizInfoForm.childLastName.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-messages="quizInfoForm.childInstitution.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
             </div>
           </md-input-container>
@@ -96,11 +87,13 @@
 
           <md-input-container flex="100">
             <label>Age</label>
-            <input required name="childAge" ng-model="vm.child.age">
+            <input required name="childAge" ng-model="vm.child.age" ng-pattern="/^\d+$/">
 
             <div ng-messages="quizInfoForm.childAge.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
+              <div ng-message="pattern">This should be an integer.</div>
             </div>
+
           </md-input-container>
 
 
@@ -111,8 +104,7 @@
                        required>
 
               <md-option ng-value="opt"
-                         ng-repeat="opt in vm.gender"
-                >
+                         ng-repeat="opt in vm.gender">
                 {{ opt }}
               </md-option>
             </md-select>
@@ -133,7 +125,7 @@
                      <!--flex>-->
             <!--Start Quiz-->
           <!--</md-button>-->
-          <md-button ng-click="vm.submitInfo()"
+          <md-button ng-click="vm.go($event)"
                      class="md-primary md-raised"
                      flex>
             Start Quiz

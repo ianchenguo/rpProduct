@@ -12,8 +12,9 @@
 
     var Observer = function Observer(init) {
 
-      this.firstName = init.firstName;
-      this.lastName = init.lastName;
+      //this.firstName = init.firstName;
+      //this.lastName = init.lastName;
+      this.fullNameOrCode = init.fullNameOrCode;
       this.email = init.email;
     };
 
