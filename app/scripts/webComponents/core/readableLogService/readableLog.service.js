@@ -260,7 +260,7 @@
       var content = {};
       content.timeStamp = new Date().toJSON();
       content.quiz = memory.quizId;
-      content.detail = _concatCommandLog(detail.commandCount);
+      content.detail = _concatCommandLog(detail);
 
       switch (type) {
         case 'commandAdd':
@@ -271,8 +271,16 @@
           content.event = READABLE_LOG_EVENTS.commandRemove;
           break;
 
+        case 'commandExecute':
+          content.event = READABLE_LOG_EVENTS.commandExecute;
+          break;
+
         case 'commandsExecute':
           content.event = READABLE_LOG_EVENTS.commandsExecute;
+          break;
+
+        case 'commandExecuteFinish':
+          content.event = READABLE_LOG_EVENTS.commandExecuteFinish;
           break;
 
         case 'commandsExecuteFinish':
@@ -285,17 +293,20 @@
 
         case 'commandFromSelection':
           content.event = READABLE_LOG_EVENTS.fromPositionSpecified;
-          content.detail = _concatCommandPositionLog(detail.from,detail.to,detail.idx);
+          content.detail = _concatCommandPositionLog(detail.from, detail.to, detail.idx);
           break;
 
         case 'commandToSelection' :
           content.event = READABLE_LOG_EVENTS.toPositionSpecified;
-          content.detail = _concatCommandPositionLog(detail.from,detail.to,detail.idx);
+          content.detail = _concatCommandPositionLog(detail.from, detail.to, detail.idx);
           break;
 
         case 'commandExecuteError' :
           content.event = READABLE_LOG_EVENTS.commandExecuteError;
-          content.detail = _concatCommandPositionLog(detail.from,detail.to,detail.idx);
+
+          console.log(detail);
+          content.detail = _concatCommandErrorLog(detail.content.from,
+            detail.content.to, detail.content.idx, detail.content.content);
           break;
 
 
@@ -304,12 +315,36 @@
       return new ReadableLogEntry(content);
     }
 
-    function _concatCommandLog(count) {
-      return 'current command list size: ' + count + ' command(s)';
+    function _concatCommandLog(content) {
+      //requires refactor
+      var c = content.content ? 'command: ' + content.content : '';
+      var c1 = content.commandCount ? 'command list size: ' + content.commandCount : '';
+
+      var c2 = '';
+
+      if (R.isEmpty(c) && !R.isEmpty(c1)) c2 = c;
+      if (!R.isEmpty(c) && !R.isEmpty(c1)) c2 = c + ' ' + c1;
+      if (!R.isEmpty(c) && R.isEmpty(c1)) c2 = c1;
+
+      return c2;
     }
 
-    function _concatCommandPositionLog(from,to,idx) {
-      return 'command index: ' + idx + ' from: ' + from + ' to ' + to || 'empty';
+    function _concatCommandPositionLog(from, to, idx) {
+      var f = R.isEmpty(from) ? 'empty' : to;
+      var t = R.isEmpty(to) ? 'empty' : to;
+
+      console.log(R.isEmpty(to));
+      console.log(t);
+      return 'command index: ' + idx + ' content: from ' + f + ' to ' + t;
+    }
+
+    function _concatCommandErrorLog(from,to,idx,content) {
+
+      if(R.isNil(content)){
+        return _concatCommandPositionLog(from,to,idx);
+      } else {
+        return 'command index: ' + idx + ' content: ' + content;
+      }
     }
   }
 }());

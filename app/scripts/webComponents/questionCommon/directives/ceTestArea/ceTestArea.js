@@ -17,8 +17,7 @@
         question: '@',
         level: '@',
         levelCards: '=',
-        deployedCards: '=',
-        shouldMatch: '@'
+        deployedCards: '='
       },
       controller: controller,
       controllerAs: 'vm',
@@ -34,7 +33,7 @@
       vm.shouldMatch = vm.level > 0;
       vm.testComponents = [[], []];
       vm.shouldShowCards = shouldShowCards;
-
+      vm.shouldMatch = false;
       activate();
 
       //////
@@ -53,6 +52,8 @@
         } else {
           vm.testComponents = rawComponents;
         }
+
+        if(vm.level > 0) vm.shouldMatch = true;
       }
 
       function prepareComponents() {

@@ -19,7 +19,7 @@
   <Div>To</Div>
   <md-select ng-model="vm.to"
              ng-change="vm.updateTo()"
-             ng-disabled="vm.level > 0 && vm.pressed">
+             ng-disabled="vm.level > 0 && vm.level < 4 && vm.pressed">
 
     <md-option ng-value="opt"
                ng-repeat="opt in vm.positions">

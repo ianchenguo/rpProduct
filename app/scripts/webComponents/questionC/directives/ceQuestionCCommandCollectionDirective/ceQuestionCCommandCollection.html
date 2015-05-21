@@ -1,61 +1,69 @@
 <div flex
      layout="column"
-     layout-fill
-     layout-margin
      layout-align="center"
      class="ce-main-content">
 
-  <ion-pane flex="90" layout>
-    <ion-content flex delegate-handle="commandCollectionScroll">
+  <div flex="90" class="ce-question-command-list-pane-parent">
+    <ion-pane class="ce-question-command-list-pane">
+      <ion-content flex delegate-handle="commandCollectionScroll">
 
-      <md-list>
-        <md-list-item ng-repeat="cmd in vm.commands">
+        <md-list>
+          <md-list-item ng-repeat="cmd in vm.commands">
+
+            <md-whiteframe class="md-whiteframe-z1 ce-question-c-command"
+                           ng-style="{'background-color':cmd.bgColor}"
+                           flex
+                           layout="row"
+                           layout-padding
+                           layout-align="space-between center">
+
+              <div>
+                <p>{{cmd.text}}</p>
+              </div>
+
+              <md-button class="md-raised md-primary"
+                         ng-click="vm.runCommand(cmd,$index)"
+                         ng-if="vm.level < 4"
+                         ng-disabled="cmd.pressed">
+                Run
+              </md-button>
+            </md-whiteframe>
+
+          </md-list-item>
+        </md-list>
 
 
-          <md-whiteframe class="md-whiteframe-z1"
-                         ng-style="{'background-color':cmd.bgColor}"
-                         flex
-                         layout="row"
-                         layout-align="space-around center">
-
-            <div>
-              <p>{{cmd.text}}</p>
-            </div>
-
-            <md-button class="md-raised md-primary"
-                       ng-click="vm.runCommand(cmd,$index)"
-                       ng-if="vm.level < 4"
-                       ng-disabled="cmd.pressed">
-              Run
-            </md-button>
-          </md-whiteframe>
-
-        </md-list-item>
-      </md-list>
-
-
-    </ion-content>
-  </ion-pane>
-
-  <div class="bar bar-footer"
-       flex="10"
-       layout="row"
-       layout-align="space-around center">
-
-    <span>i: {{vm.i}}</span>
-
-    <md-button class="md-raised md-warn"
-               ng-click="vm.deleteLastCommand(vm.commands)"
-               ng-disabled="vm.deleteLock || vm.disableDelete(vm.commands)">
-      Delete Last
-    </md-button>
-
-    <md-button class="md-raised md-primary"
-               ng-click="vm.executeCommands($event)"
-               ng-if="vm.level > 3"
-               ng-disabled="vm.commands.length === 0">
-      Run
-    </md-button>
+      </ion-content>
+    </ion-pane>
 
   </div>
+
+  <div flex="10"
+       layout
+       layout-align="center">
+    <div
+      flex
+      layout="row"
+      layout-align="space-around center">
+
+      <span>i: {{vm.i}}</span>
+
+      <md-button class="md-raised md-warn"
+                 ng-click="vm.deleteLastCommand(vm.commands)"
+                 ng-disabled="vm.deleteLock || vm.disableDelete(vm.commands)">
+        Delete Last
+      </md-button>
+
+      <md-button class="md-raised md-primary"
+                 ng-click="vm.executeCommands($event)"
+                 ng-if="vm.level > 3"
+                 ng-disabled="vm.commands.length === 0">
+        Run
+      </md-button>
+
+    </div>
+
+  </div>
+
+
 </div>

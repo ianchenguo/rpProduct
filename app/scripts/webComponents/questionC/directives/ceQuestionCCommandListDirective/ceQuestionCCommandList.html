@@ -5,15 +5,25 @@
      class="ce-main-content">
 
 
-      <md-list>
-        <md-list-item ng-repeat="cmd in vm.commands">
-          <p>{{cmd.text}}</p>
-          <md-button class="md-raised md-primary"
-          ng-click="vm.addCommand().runIO(cmd)"
-            ng-disabled="vm.getDisableAdd()">
-          Add
-          </md-button>
-        </md-list-item>
+  <md-list>
+    <md-list-item ng-repeat="cmd in vm.commands">
+      <md-whiteframe class="md-whiteframe-z1  ce-question-c-command"
+                     flex
+                     layout="row"
+                     layout-padding
+                     layout-align="space-between center">
 
-      </md-list>
+        <p>{{cmd.text}}</p>
+
+        <md-button class="md-raised md-primary"
+                   ng-click="vm.addCommand().runIO(cmd)"
+                   ng-disabled="vm.getDisableAdd()">
+          Add
+        </md-button>
+
+      </md-whiteframe>
+
+    </md-list-item>
+
+  </md-list>
 </div>

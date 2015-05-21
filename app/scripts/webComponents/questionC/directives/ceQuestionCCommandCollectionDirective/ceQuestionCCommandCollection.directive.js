@@ -12,11 +12,16 @@
     '$ionicScrollDelegate',
     '$mdDialog',
     '$q',
-    '$state',
     'movePieceService',
     'questionCService',
-    'readableLogService'];
-  function ceQuestionCCommandCollection($timeout, $ionicScrollDelegate, $mdDialog, $q, $state, movePieceService, questionCService, readableLogService) {
+    'logQuestionExecutionService'];
+  function ceQuestionCCommandCollection($timeout,
+                                        $ionicScrollDelegate,
+                                        $mdDialog,
+                                        $q,
+                                        movePieceService,
+                                        questionCService,
+                                        logQuestionExecutionService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionC/directives/ceQuestionCCommandCollectionDirective/ceQuestionCCommandCollection.html',
@@ -32,45 +37,9 @@
       var vm = this;
       var iHistory = [0];
 
-
-      var logCommandAdd = function logCommandAdd() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandAdd', {commandCount: vm.commands.length})
-        );
-      };
-
-      var logCommandRemove = function logCommandRemove() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandRemove', {commandCount: vm.commands.length})
-        );
-      };
-
-      var logCommandsExecution = function logCommandsExecution() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandsExecute', {commandCount: vm.commands.length})
-        );
-      };
-
-      var logCommandsExecutionFinished = function logCommandsExecutionFinished() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandsExecuteFinish', {commandCount: vm.commands.length})
-        );
-      };
-
-      var logCommandsExecutionError = function logCommandsExecutionError(from, to, idx) {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandExecuteError', {from: from, to: to, idx: idx})
-        );
-      };
-
-      var logCommandsReload = function logCommandsReload() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandsReload', {commandCount: vm.commands.length})
-        );
-      };
-
-
       var runCommand = function runCommand(cmd, idx) {
+
+        if (vm.level < 4) logQuestionExecutionService.logCommandExecution(cmd.text);
 
         vm.deleteLock = true;
 
@@ -92,10 +61,9 @@
             deferred.resolve(null);
             cmd.bgColor = '';
             if (vm.level < 4) questionCService.enableAdd();
-
+            if (vm.level < 4) logQuestionExecutionService.logCommandExecutionFinished();
+            vm.deleteLock = false;
           }, 100);
-
-          vm.deleteLock = false;
 
           return deferred.promise;
         }
@@ -108,38 +76,51 @@
               cmd.pressed = true;
               console.log(value);
               questionCService.addToCommandHistory({from: value.to, to: value.from, idx: idx});
+              if (vm.level < 4) logQuestionExecutionService.logCommandExecutionFinished();
             })
-            .catch(function () {
-              cmd.bgColor = 'red';
+            .catch(function (error) {
+
+              if (!R.isNil(error) && !R.isNil(error.idx)) {
+                vm.commands[error.idx].bgColor = 'red';
+                logQuestionExecutionService.logCommandExecutionError({idx: error.idx, content: cmd.text});
+              }
+
               return $q.reject(null);
-              //logCommandsExecutionError(vm.from, vm.to, 0);
             })
             .finally(function () {
-              //logCommandsExecutionFinished();
               vm.deleteLock = false;
               if (vm.level < 4) questionCService.enableAdd();
             });
+
         }
       };
 
       var revertCommandList = function revertCommandList(commands) {
 
+        var update = R.compose(
+          logQuestionExecutionService.logCommandRemove,
+          updateCommandList,
+          R.init
+        );
+
         if (R.last(commands).pressed) {
           if (R.last(commands).type === 'i') {
             vm.i = iHistory.pop();
-            return updateCommandList(R.init(commands));
+            return update(commands);
           }
           else if (R.last(commands).type === 'm') {
             var lastStep = R.last(questionCService.getCommandHistory());
-            return movePieceService.movePiece(lastStep.from, lastStep.to, lastStep.target)
+            return movePieceService
+              .movePiece(lastStep.from, lastStep.to, lastStep.target)
               .then(function () {
                 questionCService.removeFromCommandHistory();
-                return updateCommandList(R.init(commands));
+                return update(commands);
+
               })
           }
         }
         else {
-          return updateCommandList(R.init(commands));
+          return update(commands);
         }
       };
 
@@ -151,19 +132,19 @@
       };
 
       var deleteLastCommand = R.composeP(
-        //logCommandRemove,
         R.tap(function () {
           vm.deleteLock = false;
         }),
         revertCommandList,
         R.tap(function () {
           vm.deleteLock = true;
-        }));
+        })
+      );
 
 
       $scope.$on('questionCCommandAdded', function (ev, param) {
-        console.log(param);
         updateCommandList(R.append(param, vm.commands));
+        logQuestionExecutionService.logCommandAdd(vm.commands.length, param.text);
         if (vm.level < 4) questionCService.disableAdd();
       });
 
@@ -177,7 +158,7 @@
       var runCommands = function runCommands() {
         vm.i = 0;
         questionCService.moveBackToInitState();
-        //logCommandsExecution(R.clone(vm.commands));
+        logQuestionExecutionService.logCommandsExecution(vm.commands.length);
         questionCService.disableAdd();
         initColor(vm.commands);
 
@@ -193,13 +174,11 @@
                   .then(function () {
                     cmd.pressed = true;
                     cmd.bgColor = '';
-                    //questionBService.addToCommandHistory({from: formattedTo, to: formattedFrom, target: vm.idx});
                   });
               })
               .catch(function (error) {
                 if (!R.isNil(error) && !R.isNil(error.idx)) {
                   cmd.bgColor = 'red';
-                  //logCommandsExecutionError(el.from, el.to, idx);
                 }
                 return $q.reject(null);
               });
@@ -207,7 +186,7 @@
         );
 
         promise.finally(function () {
-          logCommandsExecutionFinished(vm.commands);
+          logQuestionExecutionService.logCommandsExecutionFinished(vm.commands.length);
           questionCService.enableAdd();
         });
       };
@@ -244,6 +223,10 @@
       vm.i = 0;
       vm.deleteLock = false;
 
+      var activate = function () {
+        questionCService.emptyCommands();
+        questionCService.clearCommandHistory();
+      }();
     }
   }
 

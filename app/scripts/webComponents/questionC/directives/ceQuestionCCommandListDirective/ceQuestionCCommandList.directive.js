@@ -35,7 +35,7 @@
 
       var getDisableAdd = function() {
         return questionCService.getDisableAdd();
-      }
+      };
 
       vm.commands = [
         {
@@ -107,6 +107,10 @@
 
       vm.addCommand = addCommand;
       vm.getDisableAdd = getDisableAdd;
+
+      var activate = function() {
+        questionCService.enableAdd(false);
+      }();
     }
   }
 

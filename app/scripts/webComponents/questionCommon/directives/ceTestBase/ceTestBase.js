@@ -33,7 +33,10 @@
     }
 
     function link($scope, $el, $attrs) {
-      $scope.$on('dropSuccess', _dropSuccessListener);
+
+      if ($scope.vm.shouldMatch === 'true') {
+        $scope.$on('dropSuccess', _dropSuccessListener);
+      }
 
       function _dropSuccessListener() {
 
@@ -58,6 +61,7 @@
           $el.attr('id'),
           $el.find('.ce-card').attr('id')
         );
+
       }
     }
   }

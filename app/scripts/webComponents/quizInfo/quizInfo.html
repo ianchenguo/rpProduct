@@ -40,7 +40,7 @@
 
           <md-input-container flex="100">
             <label>Email</label>
-            <input required type="email" name="observerEmail" ng-model="vm.observer.email">
+            <input required name="observerEmail" ng-model="vm.observer.email">
 
             <div ng-messages="quizInfoForm.observerEmail.$error" ng-if="quizInfoForm.$dirty">
               <div ng-message="required">This is required.</div>
@@ -119,17 +119,17 @@
         <div layout="row"
              layout-align="space-around center">
 
-          <!--<md-button ng-click="vm.submitInfo()"-->
-                     <!--ng-disabled="quizInfoForm.$invalid"-->
-                     <!--class="md-primary md-raised"-->
-                     <!--flex>-->
-            <!--Start Quiz-->
-          <!--</md-button>-->
-          <md-button ng-click="vm.go($event)"
+          <md-button ng-click="vm.submitInfo()"
+                     ng-disabled="quizInfoForm.$invalid"
                      class="md-primary md-raised"
                      flex>
             Start Quiz
           </md-button>
+          <!--<md-button ng-click="vm.go($event)"-->
+                     <!--class="md-primary md-raised"-->
+                     <!--flex>-->
+            <!--Start Quiz-->
+          <!--</md-button>-->
 
           <md-button ui-sref="app.welcome"
                      class="md-raised"

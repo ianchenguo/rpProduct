@@ -8,8 +8,8 @@
     .module('app.questionB')
     .directive('ceQuestionBCommand', ceQuestionBCommand);
 
-  ceQuestionBCommand.$inject = ['questionBService','movePieceService', 'readableLogService'];
-  function ceQuestionBCommand(questionBService,movePieceService, readableLogService) {
+  ceQuestionBCommand.$inject = ['logQuestionExecutionService','questionBService','movePieceService', 'readableLogService'];
+  function ceQuestionBCommand(logQuestionExecutionService,questionBService,movePieceService, readableLogService) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/questionB/directives/ceQuestionBCommandDirective/ceQuestionBCommand.html',
@@ -37,50 +37,21 @@
       vm.updateTo = updateTo;
       vm.runCommand = runCommand;
 
-      var logCommandFromSelection = function logCommandFromSelection(from, to, idx) {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandFromSelection', {from: from, to: to, idx: idx})
-        );
-      };
-
-      var logCommandToSelection = function logCommandToSelection(from, to, idx) {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandToSelection', {from: from, to: to, idx: idx})
-        );
-      };
-      var logCommandsExecution = function logCommandsExecution() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandsExecute', {commandCount: 1})
-        );
-      };
-
-      var logCommandsExecutionFinished = function logCommandsExecutionFinished() {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandsExecuteFinish', {commandCount: 1})
-        );
-      };
-
-      var logCommandsExecutionError = function logCommandsExecutionError(from, to, idx) {
-        readableLogService.saveLog(
-          readableLogService.createCommandLog('commandExecuteError', {from: from, to: to, idx: idx})
-        );
-      };
-
       //////
       function updateFrom() {
-        logCommandFromSelection(vm.from, vm.to, vm.idx);
+        logQuestionExecutionService.logCommandFromSelection(vm.from, vm.to, vm.idx);
       }
 
 
       function updateTo() {
-        logCommandToSelection(vm.from, vm.to, vm.idx);
+        logQuestionExecutionService.logCommandToSelection(vm.from, vm.to, vm.idx);
       }
 
       function runCommand() {
         vm.bgColor = '';
         if (vm.from && vm.to) {
 
-          logCommandsExecution();
+          logQuestionExecutionService.logCommandExecution();
           var fromId = 'droppable' + vm.from;
           var toId = 'droppable' + vm.to;
           movePieceService.movePiece(fromId, toId, vm.idx)
@@ -90,11 +61,16 @@
             })
             .catch(function () {
               vm.bgColor = 'red';
-              logCommandsExecutionError(vm.from, vm.to, 0);
+              logQuestionExecutionService.logCommandExecutionError({from:vm.from, to:vm.to, idx:vm.idx});
             })
             .finally(function () {
-              logCommandsExecutionFinished();
+              logQuestionExecutionService.logCommandExecutionFinished();
             });
+        }
+
+        else {
+          vm.bgColor = 'red';
+          logQuestionExecutionService.logCommandExecutionError({from:vm.from, to:vm.to, idx:vm.idx});
         }
 
       }

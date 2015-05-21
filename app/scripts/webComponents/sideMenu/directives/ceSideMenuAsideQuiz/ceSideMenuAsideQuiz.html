@@ -39,6 +39,7 @@
                     layout-padding
                     ng-if="stage.name === 'exploration stage'"
                     ng-class="{'ce-list-item-active':stage.isActive}">
+
         <md-button flex
                    ui-sref="{{stage.link}}"
                    ng-click="vm.activateStage(stage)">
@@ -48,6 +49,7 @@
               {{stage.name}}
             </span>
         </md-button>
+
       </md-list-item>
 
 
