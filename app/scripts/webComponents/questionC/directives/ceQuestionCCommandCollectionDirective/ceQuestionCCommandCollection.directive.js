@@ -120,10 +120,11 @@
           }
         }
         else {
-          return R.compose(questionCService.enableAdd(), update(commands));
+          return R.compose(questionCService.enableAdd, update)(commands);
         }
       };
 
+      
       var updateCommandList = function updateCommandList(commands) {
         vm.commands = R.clone(commands);
 
