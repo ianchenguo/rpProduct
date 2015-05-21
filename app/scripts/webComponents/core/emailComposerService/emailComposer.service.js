@@ -69,7 +69,7 @@
           var stringBuffer = readableLogService.createLogBuffer(value);
           console.log(stringBuffer);
           var formatter = R.pipe(R.replace(/:/g, '_'), R.replace(/-/g, '_'), R.replace(/\./g, '_'));
-          var fileName = formatter(quizId);
+          var fileName = formatter(quizId) + '.txt';
           console.log(fileName);
           //return readableLogService.createLogFile(stringBuffer, fileName);
           return readableLogService

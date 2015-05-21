@@ -8,7 +8,8 @@
     .module('app.sideMenu')
     .directive('ceSideMenuAsideGeneral', ceSideMenuAsideGeneral);
 
-  function ceSideMenuAsideGeneral(){
+  ceSideMenuAsideGeneral.$inject=['$ionicScrollDelegate'];
+  function ceSideMenuAsideGeneral($ionicScrollDelegate){
     return {
       restrict: 'E',
       templateUrl:'scripts/webComponents/sideMenu/directives/ceSideMenuAsideGeneral/ceSideMenuAsideGeneral.html',
@@ -24,6 +25,8 @@
       var vm = this;
 
       ionic.material.ink.displayEffect();
+      $ionicScrollDelegate.$getByHandle('sideMenuScroll').scrollTop();
+
     }
   }
 

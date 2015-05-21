@@ -120,7 +120,7 @@
           }
         }
         else {
-          return update(commands);
+          return R.compose(questionCService.enableAdd(), update(commands));
         }
       };
 

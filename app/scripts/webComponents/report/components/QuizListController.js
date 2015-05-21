@@ -37,14 +37,16 @@
         .cancel('No')
         .targetEvent(ev);
       $mdDialog.show(confirm).then(function () {
-
+        $ionicLoading.show({
+          template: 'deleting'
+        });
         return deleteQuizDocs(quizId)
           .then(function () {
+            $ionicLoading.hide();
+
             _showRecordEndingToast('Successfully deleted!');
 
-            //$ionicLoading.show({
-            //  template: 'refreshing'
-            //});
+
             //
             //return reportService.listAllEndedQuizzes()
             //  .then(function (value) {
