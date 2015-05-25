@@ -10,6 +10,7 @@
 
   function sideMenuService(){
     var _activeStage = {};
+    var _expandedStage = {};
 
     var _stages = [
       {
@@ -40,7 +41,8 @@
                 isActive:false
               }
             ],
-            link: ''
+            link: '',
+            isExpanded:false
           }
         ]
       },
@@ -70,7 +72,8 @@
                 isActive:false
               }
             ],
-            link: ''
+            link: '',
+            isExpanded:false
           },
           {
             name: 'advanced stages',
@@ -89,7 +92,8 @@
                 isActive:false
               }
             ],
-            link: ''
+            link: '',
+            isExpanded:false
           }
         ]
       },
@@ -119,7 +123,8 @@
                 isActive:false
               }
             ],
-            link: ''
+            link: '',
+            isExpanded:false
           },
           {
             name: 'advanced stages',
@@ -139,6 +144,7 @@
               }
             ],
             link: ''
+
           }
         ]
       }
@@ -165,11 +171,32 @@
       setActiveStage(stage);
     };
 
+    var getExpandedStage = function getExpandedStage() {
+      return _expandedStage;
+    };
+
+    var setExpandedStage = function setExpandedStage(stage) {
+      _expandedStage = stage;
+    };
+
+    var expandStage = function expandStage(stage){
+
+      if(!R.isNil(getExpandedStage())) {
+        getExpandedStage().isExpended = false;
+      }
+      stage.isExpended = true;
+      setExpandedStage(stage);
+    };
+
+
+
     var service = {
       getActiveStage:getActiveStage,
       setActiveStage:setActiveStage,
       getAllStages:getAllStages,
-      activateStage:activateStage
+      activateStage:activateStage,
+      getExpandedStage:getExpandedStage,
+      setExpandedStage:setExpandedStage
     };
 
     return service;

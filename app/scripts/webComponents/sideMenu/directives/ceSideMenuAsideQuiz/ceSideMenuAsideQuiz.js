@@ -15,6 +15,7 @@
     'quizService',
     'audioRecordingService',
     'sideMenuService',
+    'readableLogService',
     '$mdToast'];
   function ceSideMenuAsideQuiz($state,
                                questionLevelService,
@@ -22,6 +23,7 @@
                                quizService,
                                audioRecordingService,
                                sideMenuService,
+                               readableLogService,
                                $mdToast) {
     return {
       restrict: 'E',
@@ -34,11 +36,25 @@
 
     function controller() {
 
+      //(function activate() {
+      //  console.log('SIDE MENU START');
+      //  sideMenuService.getExpandedStage().isShown = false;
+      //  sideMenuService.setExpandedStage({});
+      //}());
+
       var vm = this;
 
 
       var toggleStage = function toggleStage(stage) {
         stage.isShown = !stage.isShown;
+
+        if(stage.isShown == true) {
+          if(stage != sideMenuService.getExpandedStage()){
+            sideMenuService.getExpandedStage().isShown = false;
+            sideMenuService.setExpandedStage(stage);
+          }
+        }
+
       };
 
       var conditionalToggle = function conditionalToggle(toggleFunc, stage) {
@@ -55,7 +71,6 @@
       };
 
 
-
       vm.questions = sideMenuService.getAllStages();
       vm.activateStage = sideMenuService.activateStage;
       vm.endQuiz = endQuiz;
@@ -66,6 +81,7 @@
 
       };
     }
+
 
     //////
     function endQuiz() {
@@ -86,6 +102,9 @@
     function _stopRecording() {
       if (audioRecordingService.isRecording()) {
         audioRecordingService.stopRecord().then(function () {
+          readableLogService.saveLog(
+            readableLogService.createAudioLog('audioRecordingFinished', {})
+          );
           _showRecordEndingToast();
         });
       }

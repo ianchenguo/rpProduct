@@ -40,10 +40,10 @@
       vm.commands = [
         {
           type: 'i',
-          text: 'i equals 0',
+          text: 'i equals 1',
           pressed: false,
           func: function () {
-            return 0;
+            return 1;
           }
         },
         {

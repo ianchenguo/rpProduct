@@ -39,7 +39,7 @@
         sourceChildCard = _getChildCard(sourceEl);
         destinationChildCard = _getChildCard(destinationEl);
         //moves the piece if the source base is not empty and the target base is empty
-        if (sourceChildCard[0] && !destinationChildCard[0]) {
+        if (sourceEl[0] && destinationEl[0] && sourceChildCard[0] && !destinationChildCard[0]) {
           //destinationEl.find('div').append(sourceChildCard[0]);
           var storedElPositionX = sourceChildCard.offset().left;
           var storedElPositionY = sourceChildCard.offset().top;

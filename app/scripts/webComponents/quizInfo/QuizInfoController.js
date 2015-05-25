@@ -17,7 +17,8 @@
     'audioRecordingService',
     'quizService',
     'LEVEL_TYPE',
-    'sideMenuService'];
+    'sideMenuService',
+    'readableLogService'];
   function QuizInfoController($mdToast,
                               $mdDialog,
                               $ionicViewSwitcher,
@@ -26,7 +27,8 @@
                               audioRecordingService,
                               quizService,
                               LEVEL_TYPE,
-                              sideMenuService) {
+                              sideMenuService,
+                              readableLogService) {
     var vm = this;
 
     var _showConfirm = function (ev) {
@@ -42,7 +44,12 @@
       $mdDialog.show(confirm)
         .then(function () {
           audioRecordingService.startRecord('documents://tempQuizAudio.m4a');
+          readableLogService.saveLog(
+            readableLogService.createAudioLog('audioRecordingStart', {})
+          );
           _showRecordEndingToast();
+
+
         })
         .finally(function () {
           submitInfo();
@@ -56,7 +63,7 @@
       );
     }
 
-    vm.child = {fullNameOrCode: '', age: '', gender: '', institution:''};
+    vm.child = {fullNameOrCode: '', age: '', gender: '', institution: ''};
     vm.observer = {fullNameOrCode: '', email: ''};
     vm.gender = ['male', 'female'];
 
@@ -82,6 +89,9 @@
         sideMenuService.activateStage(
           sideMenuService.getAllStages()[0].stages[0]
         );
+
+        sideMenuService.getExpandedStage().isShown = false;
+        sideMenuService.setExpandedStage({});
 
         $ionicViewSwitcher.nextTransition('none');
         $state.go('app.quiz.questionA.levels', {level: LEVEL_TYPE.zero});

@@ -77,6 +77,7 @@
               console.log(value);
               questionCService.addToCommandHistory({from: value.to, to: value.from, idx: idx});
               if (vm.level < 4) logQuestionExecutionService.logCommandExecutionFinished();
+              if (vm.level < 4) questionCService.enableAdd();
             })
             .catch(function (error) {
 
@@ -89,7 +90,7 @@
             })
             .finally(function () {
               vm.deleteLock = false;
-              if (vm.level < 4) questionCService.enableAdd();
+
             });
 
         }
@@ -124,7 +125,7 @@
         }
       };
 
-      
+
       var updateCommandList = function updateCommandList(commands) {
         vm.commands = R.clone(commands);
 

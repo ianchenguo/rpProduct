@@ -37,6 +37,7 @@
       createLevelLog: createLevelLog,
       createDragLog: createDragLog,
       createCommandLog: createCommandLog,
+      createAudioLog:createAudioLog,
       createLogBuffer: createLogBuffer,
       createLogFile: createLogFile,
       saveLog: saveLog,
@@ -333,8 +334,6 @@
       var f = R.isEmpty(from) ? 'empty' : to;
       var t = R.isEmpty(to) ? 'empty' : to;
 
-      console.log(R.isEmpty(to));
-      console.log(t);
       return 'command index: ' + idx + ' content: from ' + f + ' to ' + t;
     }
 
@@ -345,6 +344,24 @@
       } else {
         return 'command index: ' + idx + ' content: ' + content;
       }
+    }
+
+    function createAudioLog(type){
+      var content = {};
+      content.timeStamp = new Date().toJSON();
+      content.quiz = memory.quizId;
+
+      switch (type) {
+        case 'audioRecordingStart':
+          content.event = READABLE_LOG_EVENTS.audioRecordingStart;
+          break;
+
+        case 'audioRecordingFinished':
+          content.event = READABLE_LOG_EVENTS.audioRecordingFinished;
+          break;
+      }
+
+      return new ReadableLogEntry(content);
     }
   }
 }());

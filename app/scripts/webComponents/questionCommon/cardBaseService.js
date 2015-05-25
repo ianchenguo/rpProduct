@@ -11,10 +11,12 @@
   cardBaseService.$inject = [
     '$cordovaNativeAudio',
     '$ionicPlatform',
+    '$mdDialog',
     'readableLogService',
     'questionLevelService'];
   function cardBaseService($cordovaNativeAudio,
                            $ionicPlatform,
+                           $mdDialog,
                            readableLogService,
                            questionLevelService) {
 
@@ -95,26 +97,47 @@
     }
 
     function makeSound() {
-      $ionicPlatform.ready(function () {
-        //console.log('hardware ready');
-        //buggy!!!!
-        $cordovaNativeAudio.unload('click');
-        $cordovaNativeAudio
-          .preloadSimple('click', 'media/audio.mp3')
-          .then(function (msg) {
-            //console.log('msg: ');
-            //console.log(msg);
-            return $cordovaNativeAudio.play('click');
-          })
-          .then(function (msg) {
-            //console.log('msg: ');
-            //console.log(msg);
-            return $cordovaNativeAudio.unload('click');
-          })
-          .catch(function (error) {
-            //console.log('error: ' + JSON.stringify(error));
-          });
+      //$ionicPlatform.ready(function () {
+      //  //console.log('hardware ready');
+      //  //buggy!!!!
+      //  $cordovaNativeAudio.unload('click');
+      //  $cordovaNativeAudio
+      //    .preloadSimple('click', 'media/audio.mp3')
+      //    .then(function (msg) {
+      //      //console.log('msg: ');
+      //      //console.log(msg);
+      //      return $cordovaNativeAudio.play('click');
+      //    })
+      //    .then(function (msg) {
+      //      //console.log('msg: ');
+      //      //console.log(msg);
+      //      return $cordovaNativeAudio.unload('click');
+      //    })
+      //    .catch(function (error) {
+      //      //console.log('error: ' + JSON.stringify(error));
+      //    });
+      //});
+
+      //$mdDialog.show(
+      //  $mdDialog.alert()
+      //    .parent(angular.element(document.body))
+      //    .title('You Make it!')
+      //    .content('The desired pattern is matched!')
+      //    .ariaLabel('Pattern Match Alert')
+      //    .ok('Keep On!')
+      //);
+
+      var alert = $mdDialog.alert({
+        title: 'You Made it!',
+        content: 'The desired pattern is matched!',
+        ok: 'Keep On!'
       });
+
+      $mdDialog
+        .show( alert )
+        .finally(function() {
+          alert = undefined;
+        });
     }
   }
 }());
