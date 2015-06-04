@@ -55,7 +55,6 @@
 
     var addToCommandHistory = function addToCommandHistory(cmd) {
       _commandHistory.push(cmd);
-      console.log(_commandHistory);
     };
 
     var removeFromCommandHistory = function removeFromCommandHistory() {
@@ -94,8 +93,6 @@
       $(document).ready(function () {
         _initState.forEach(function (el, idx) {
           var n = idx + 1;
-          console.log('wawawawawa');
-          //console.log($('.test-area').find('#'+el.id));
           $('#droppable' + n).find('div').append($('.test-area').find('#' + el.id));
 
         })

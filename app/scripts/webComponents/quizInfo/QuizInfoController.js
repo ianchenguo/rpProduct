@@ -30,6 +30,7 @@
                               sideMenuService,
                               readableLogService) {
     var vm = this;
+    var isRecording = false;
 
     var _showConfirm = function (ev) {
       // Appending dialog to document.body to cover sidenav in docs app
@@ -44,12 +45,8 @@
       $mdDialog.show(confirm)
         .then(function () {
           audioRecordingService.startRecord('documents://tempQuizAudio.m4a');
-          readableLogService.saveLog(
-            readableLogService.createAudioLog('audioRecordingStart', {})
-          );
+          isRecording = true;
           _showRecordEndingToast();
-
-
         })
         .finally(function () {
           submitInfo();
@@ -70,6 +67,10 @@
     vm.submitInfo = submitInfo;
     vm.go = go;
 
+    var activate = function(){
+      isRecording = false;
+    }();
+
     //////
 
     function go(ev) {
@@ -85,6 +86,11 @@
 
       ///
       function handleSuccess(value) {
+        if(isRecording) {
+          readableLogService.saveLog(
+            readableLogService.createAudioLog('audioRecordingStart', {})
+          );
+        }
 
         sideMenuService.activateStage(
           sideMenuService.getAllStages()[0].stages[0]

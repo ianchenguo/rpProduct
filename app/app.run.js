@@ -8,7 +8,7 @@
     .module('app')
     .config(function ($ionicConfigProvider, $mdGestureProvider) {
       $ionicConfigProvider.views.maxCache(0);
-      $mdGestureProvider.skipClickHijack();
+      //$mdGestureProvider.skipClickHijack();
     })
     .run(function ($ionicPlatform) {
       $ionicPlatform.ready(function () {

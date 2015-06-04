@@ -18,7 +18,10 @@
       getFile: getFile,
       checkDir: checkDir,
       createDir: createDir,
-      writeFile: writeFile
+      writeFile: writeFile,
+      getAudioFilePath:getAudioFilePath,
+      getLogFilePath:getLogFilePath,
+      removeFile:removeFile
 
     };
     return service;
@@ -119,6 +122,30 @@
         }, function (error) {
           console.log('writeFile() Error: ' + JSON.stringify(error));
           return $q.reject(error);
+        });
+    }
+
+    function getAudioFilePath(quizId) {
+      var formatter = _formatter();
+      return formatter(quizId) + '.txt';
+    }
+
+    function getLogFilePath(quizId) {
+      var formatter = _formatter();
+      return formatter(quizId) + '.m4a';
+    }
+
+    function _formatter() {
+      return R.pipe(R.replace(/:/g, '_'), R.replace(/-/g, '_'), R.replace(/\./g, '_'));
+    }
+
+    function removeFile(path){
+      $cordovaFile.removeFile(cordova.file.documentsDirectory, path)
+        .then(function (success) {
+          // success
+          console.log(JSON.stringify(success));
+        }, function (error) {
+          console.log(JSON.stringify(error));
         });
     }
   }

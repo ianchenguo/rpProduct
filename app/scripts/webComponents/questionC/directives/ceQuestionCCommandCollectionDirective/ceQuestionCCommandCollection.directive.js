@@ -11,6 +11,7 @@
   ceQuestionCCommandCollection.$inject = ['$timeout',
     '$ionicScrollDelegate',
     '$mdDialog',
+    '$ionicPopup',
     '$q',
     'movePieceService',
     'questionCService',
@@ -18,6 +19,7 @@
   function ceQuestionCCommandCollection($timeout,
                                         $ionicScrollDelegate,
                                         $mdDialog,
+                                        $ionicPopup,
                                         $q,
                                         movePieceService,
                                         questionCService,
@@ -36,6 +38,7 @@
     function controller($scope) {
       var vm = this;
       var iHistory = [0];
+      var isRunning = false;
 
       var runCommand = function runCommand(cmd, idx) {
 
@@ -74,7 +77,6 @@
             .then(function (value) {
               cmd.bgColor = '';
               cmd.pressed = true;
-              console.log(value);
               questionCService.addToCommandHistory({from: value.to, to: value.from, idx: idx});
               if (vm.level < 4) logQuestionExecutionService.logCommandExecutionFinished();
               if (vm.level < 4) questionCService.enableAdd();
@@ -190,32 +192,81 @@
         promise.finally(function () {
           logQuestionExecutionService.logCommandsExecutionFinished(vm.commands.length);
           questionCService.enableAdd();
+          isRunning = false;
         });
       };
 
-      var executeCommands = function executeCommands() {
+      var executeCommands = function executeCommands(ev) {
         if (vm.level > 3) {
-          showConfirm();
+          showConfirm(ev);
         } else {
-          runCommands();
+          if(!isRunning) {
+            isRunning = true;
+            runCommands();
+
+          }
         }
       };
 
-      var showConfirm = function (ev) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        var confirm = $mdDialog.confirm()
-          .parent(angular.element(document.body))
-          .title('Confirm to run the command list?')
-          .content('The commands will be executed one by one')
-          .ariaLabel('Command List Execution Confirmation')
-          .ok('YES')
-          .cancel('NO')
-          .targetEvent(ev);
-        $mdDialog.show(confirm).then(function () {
-          runCommands();
-        }, function () {
+      //var showConfirm = function (ev) {
+      //  // Appending dialog to document.body to cover sidenav in docs app
+      //  var confirm = $mdDialog.confirm()
+      //    .parent(angular.element(document.body))
+      //    .title('Confirm to run the command list?')
+      //    .content('The commands will be executed one by one')
+      //    .ariaLabel('Command List Execution Confirmation')
+      //    .ok('YES')
+      //    .cancel('NO')
+      //    .targetEvent(ev);
+      //  $mdDialog.show(confirm).then(function () {
+      //    //if(!isRunning) {
+      //    //  isRunning = true;
+      //    //  runCommands();
+      //    //}
+      //  }, function () {
+      //  });
+      //};
+
+
+      function showConfirm() {
+        $mdDialog.show({
+          clickOutsideToClose: false,
+          scope: $scope,
+          preserveScope: true,
+          template:
+          '<md-dialog>' +
+          '  <md-dialog-content>' +
+          '<h3>Confirm to run the command list?</h3>' +
+          '<p>The commands will be executed one by one</p>' +
+          '   <div class="md-actions" data-tap-disabled="true">' +
+          '     <md-button ng-click="closeDialog()" class="md-warn">' +
+          '       NO' +
+          '     </md-button>' +
+          '     <md-button ng-click="run()" class="md-primary">' +
+          '       YES' +
+          '     </md-button>' +
+          '   </div>' +
+          '  </md-dialog-content>' +
+          '</md-dialog>',
+          controller: function DialogController($scope, $mdDialog) {
+            $scope.closeDialog = function() {
+              $mdDialog.cancel();
+            };
+            $scope.run = function(){
+
+              $mdDialog.hide().then(function(){
+                if(!isRunning) {
+                  isRunning = true;
+                  runCommands();
+                }
+              });
+            }
+          }
         });
-      };
+      }
+
+      var showConfirm = showConfirm;
+
 
       vm.commands = [];
       vm.runCommand = runCommand;

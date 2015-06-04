@@ -1,24 +1,11 @@
-<!--<ion-view view-title="The 2nd Level - Stage {{vm.levelType}}">-->
-<!--<ion-content>-->
-
-
-<!--&lt;!&ndash;<span id="cursor" ng-click="vm.test()" style="position:fixed;z-index:9999">cursor</span>&ndash;&gt;-->
-
-<!--<ce-question-b-frame-->
-<!--class="question-frame"-->
-<!--level-type="{{vm.levelType}}">-->
-<!--</ce-question-b-frame>-->
-<!--</ion-content>-->
-<!--</ion-view>-->
-
-
 <ion-view>
 
   <ion-nav-title>
     <h1 class="title light">The 3rd Level - Stage {{vm.levelType}}</h1>
   </ion-nav-title>
 
-  <ion-content>
+  <ion-content scroll="false"
+               has-bouncing="false">
     <ce-question-c-frame class="question-frame"
                          level-type="{{vm.levelType}}"
                          question-type="{{vm.questionType}}">

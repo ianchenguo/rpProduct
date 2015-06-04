@@ -28,10 +28,6 @@
 
       $(document).ready(function () {
 
-        console.log('i am in move piece');
-        console.log(fromId);
-        console.log(toId);
-
         //gets wrapped source element and destination element
         sourceEl = $('#' + fromId);
         destinationEl = $('#' + toId);

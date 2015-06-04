@@ -76,7 +76,6 @@
           reportRecords.push(tempQuizRecords.shift());
         }
       }
-      //console.log(reportRecords);
 
       return reportRecords;
       //////
@@ -144,7 +143,6 @@
 
           if (touch.evType === 'dragstart') {
             tempTouchStart = touch;
-            //console.log(tempTouchStart);
           }
 
           var record = new ReportRecord({
@@ -176,7 +174,6 @@
           return R.clone(filtered);
         }
       );
-      //return reportDbService.listAllEndedQuizzes();
     }
 
     function getQuizDetail(id) {

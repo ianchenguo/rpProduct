@@ -15,16 +15,17 @@
     '$state',
     'quizList',
     'emailComposerService',
-    'reportService'];
+    'reportService',
+    'fileService'];
   function QuizListController($ionicLoading,
                               $mdToast,
                               $mdDialog,
                               $state,
                               quizList,
                               emailComposerService,
-                              reportService) {
+                              reportService,
+                              fileService) {
     var vm = this;
-
 
     var _showConfirm = function (quizId, ev) {
       // Appending dialog to document.body to cover sidenav in docs app
@@ -42,22 +43,27 @@
         });
         return deleteQuizDocs(quizId)
           .then(function () {
+            fileService.removeFile(
+              fileService.getAudioFilePath(quizId)
+            );
+            fileService.removeFile(
+              fileService.getLogFilePath(quizId)
+            );
+          })
+          .then(function () {
             $ionicLoading.hide();
+
+            vm.quizList = R.reject(function (item) {
+              return item.id === quizId
+            }, vm.quizList);
 
             _showRecordEndingToast('Successfully deleted!');
 
 
-            //
-            //return reportService.listAllEndedQuizzes()
-            //  .then(function (value) {
-            //    vm.quizList = R.reverse(value);
-            //    $ionicLoading.hide();
-            //  });
-            $state.go($state.current, {}, {reload: true});
-
-
           })
           .catch(function () {
+            $ionicLoading.hide();
+
             _showRecordEndingToast('Error occurred!');
           });
       });

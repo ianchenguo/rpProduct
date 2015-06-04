@@ -46,7 +46,9 @@
       layout="row"
       layout-align="space-around center">
 
-      <span>i: {{vm.i}}</span>
+      <md-chips>
+        <md-chip>i: {{vm.i}}</md-chip>
+      </md-chips>
 
       <md-button class="md-raised md-warn"
                  ng-click="vm.deleteLastCommand(vm.commands)"
@@ -60,10 +62,6 @@
                  ng-disabled="vm.commands.length === 0">
         Run
       </md-button>
-
     </div>
-
   </div>
-
-
 </div>

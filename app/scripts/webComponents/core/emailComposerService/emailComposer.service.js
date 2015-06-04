@@ -38,25 +38,12 @@
             alert('Cannot compose the email: ' + error);
           });
 
-        //$cordovaEmailComposer
-        //  .isAvailable()
-        //  .then(_fetchLogDocuments(quizId))
-        //  .then(_createLogFile)
-        //  .then(_composeEmail)
-        //  .catch(function (error) {
-        //    // not available
-        //    console.log(error);
-        //    alert('email app/account is not available on this device.');
-        //  });
-
-
         //////
         function _checkEmailSettings() {
           return $cordovaEmailComposer.isAvailable();
         }
 
         function _fetchLogDocuments(quizId) {
-          console.log('quizId ' + quizId);
           return readableLogService.getQuizLogs(quizId)
             .then(function (value) {
               return value;
@@ -64,14 +51,10 @@
         }
 
         function _createLogFile(value) {
-          console.log('value: ' + value);
 
           var stringBuffer = readableLogService.createLogBuffer(value);
-          console.log(stringBuffer);
           var formatter = R.pipe(R.replace(/:/g, '_'), R.replace(/-/g, '_'), R.replace(/\./g, '_'));
           var fileName = formatter(quizId) + '.txt';
-          console.log(fileName);
-          //return readableLogService.createLogFile(stringBuffer, fileName);
           return readableLogService
             .createLogFile(fileName, stringBuffer)
             .then(function (value) {
@@ -95,10 +78,6 @@
               compose(attachments);
             });
 
-          //if(audioRecordingService.isRecorded) {
-          //  attachments.push(audioRecordingService.getFilePath());
-          //}
-
           function compose(attachments) {
             var email = {
               to: '',
@@ -119,8 +98,6 @@
                 console.log(error);
               });
           }
-
-
         }
 
       }, false);

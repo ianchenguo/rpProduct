@@ -251,9 +251,9 @@
 
     function createLogFile(fileName, logBuffer) {
       return fileService
-        .writeFile(cordova.file.dataDirectory, fileName, logBuffer, true)
+        .writeFile(cordova.file.documentsDirectory, fileName, logBuffer, true)
         .then(function () {
-          return cordova.file.dataDirectory + '/' + fileName;
+          return cordova.file.documentsDirectory + '/' + fileName;
         });
     }
 
@@ -305,7 +305,6 @@
         case 'commandExecuteError' :
           content.event = READABLE_LOG_EVENTS.commandExecuteError;
 
-          console.log(detail);
           content.detail = _concatCommandErrorLog(detail.content.from,
             detail.content.to, detail.content.idx, detail.content.content);
           break;

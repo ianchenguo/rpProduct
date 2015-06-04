@@ -4,7 +4,8 @@
     <h1 class="title light">The 1st Level - Stage {{vm.levelType}}</h1>
   </ion-nav-title>
 
-  <ion-content>
+  <ion-content scroll="false"
+               has-bouncing="false">
     <ce-question-a-frame class="question-frame"
                          level-type="{{vm.levelType}}"
                          question-type="{{vm.questionType}}">

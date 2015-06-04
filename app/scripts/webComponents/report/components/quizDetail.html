@@ -1,17 +1,5 @@
 <ion-view view-title="Report - Quiz Detail">
   <ion-content>
-    <!--<div class="list list-inset">-->
-
-    <!--<div class="item" ng-repeat="item in vm.quizReport">-->
-    <!--<strong>TimeStamp: </strong> {{item.timeStamp}}-->
-    <!--<br/>-->
-    <!--<strong>Event: </strong> {{item.event}}-->
-    <!--<br/>-->
-    <!--<strong>Detail: </strong> {{item.detail}}-->
-    <!--</div>-->
-
-
-    <!--</div>-->
 
     <md-list layout="column"
              layout-margin
@@ -19,7 +7,7 @@
              layout-align="center">
 
       <md-list-item layout="row"
-                    ng-repeat="item in vm.quizReport">
+                    collection-repeat="item in vm.quizReport">
 
         <md-divider></md-divider>
 
