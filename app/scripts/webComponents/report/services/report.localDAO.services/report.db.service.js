@@ -16,7 +16,8 @@
       listAllEndedQuizzes: listAllEndedQuizzes,
       getQuizDetailById: getQuizDetailById,
       listAllDocOfQuiz: listAllDocOfQuiz,
-      deleteDocsOfQuiz: deleteDocsOfQuiz
+      deleteDocsOfQuiz: deleteDocsOfQuiz,
+      compactDatabase: compactDatabase
     };
     return service;
     //////
@@ -124,6 +125,11 @@
           return $q.reject(error);
         })
     }
+
+    function compactDatabase(){
+      return dbService.db.compact();
+    }
+
   }
 }());
 

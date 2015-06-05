@@ -51,7 +51,6 @@
             );
           })
           .then(function () {
-            $ionicLoading.hide();
 
             vm.quizList = R.reject(function (item) {
               return item.id === quizId
@@ -59,12 +58,12 @@
 
             _showRecordEndingToast('Successfully deleted!');
 
-
           })
           .catch(function () {
+            _showRecordEndingToast('Error occurred in quiz deletion!');
+          })
+          .finally(function () {
             $ionicLoading.hide();
-
-            _showRecordEndingToast('Error occurred!');
           });
       });
     };
@@ -82,6 +81,7 @@
     vm.sendEmail = sendEmail;
     vm.formatTimeStamp = formatTimeStamp;
     vm.deleteQuiz = deleteQuiz;
+    vm.compactDatabase = compactDatabase;
     //////
     function showDetail(quizId) {
       $state.go('app.report.quizDetail', {quizId: quizId});
@@ -102,7 +102,34 @@
     function deleteQuizDocs(quizId) {
       return reportService.deleteAllDocsOfQuiz(quizId);
     }
+
+    function compactDatabase(ev) {
+      var confirm = $mdDialog.confirm()
+        .parent(angular.element(document.body))
+        .title('Are you sure to compact database?')
+        .content('Collect space from deleted quiz records.')
+        .ariaLabel('Database Compact Confirmation')
+        .ok('Yes')
+        .cancel('No')
+        .targetEvent(ev);
+
+      $mdDialog.show(confirm).then(function () {
+        $ionicLoading.show({
+          template: 'compacting'
+        });
+
+        reportService.compactDatabase()
+          .then(function () {
+            _showRecordEndingToast('Successfully compacted!');
+          })
+          .catch(function () {
+            _showRecordEndingToast('Error occurred in database compacting!');
+          })
+          .finally(function () {
+            $ionicLoading.hide();
+          });
+      });
+    }
+
   }
-
-
 }());

@@ -3,9 +3,13 @@
   <md-subheader class="md-no-sticky">Quiz Settings</md-subheader>
 
   <md-list-item layout>
-    <md-button menu-close
-               flex ng-disabled="true">
-      <span class="ce-menu-button-text">Quiz Info</span>
+    <md-button flex
+               ng-click="vm.modifyQuizInfo($event)">
+            <span class="ce-menu-button-text"
+                  menu-close
+                  nav-transition="none">
+              Quiz Info
+            </span>
     </md-button>
   </md-list-item>
 

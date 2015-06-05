@@ -1,0 +1,127 @@
+<md-dialog>
+  <md-dialog-content>
+    <form name="quizInfoForm"
+          flex="60"
+          novalidate>
+
+
+      <md-whitefram class="md-whiteframe-z1 ce-title-stripe"
+                    layout
+                    layout-margin
+                    layout-align="center center">
+        <h4 class="md-subhead">Observer Info</h4>
+      </md-whitefram>
+
+
+      <md-whitefram class="md-whiteframe-z1"
+                    layout
+                    layout-margin
+                    layout-wrap
+                    layout-align="center center">
+
+        <md-input-container flex="100">
+          <label>Full Name / Code</label>
+          <input required name="observerFullNameOrCode" ng-model="quiz.observer.fullNameOrCode">
+
+          <div ng-messages="quizInfoForm.observerFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="100">
+          <label>Email</label>
+          <input required name="observerEmail" ng-model="quiz.observer.email">
+
+          <div ng-messages="quizInfoForm.observerEmail.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="email">This should be an email address.</div>
+          </div>
+        </md-input-container>
+      </md-whitefram>
+
+
+      <md-whitefram class="md-whiteframe-z1 ce-title-stripe"
+                    layout
+                    layout-margin
+                    layout-align="center center">
+
+        <h4 class="md-subhead">Child Info</h4>
+      </md-whitefram>
+
+
+      <md-whitefram class="md-whiteframe-z1"
+                    layout
+                    layout-margin
+                    layout-wrap
+                    layout-align="center center">
+
+        <md-input-container flex="100">
+          <label>Full Name / Code</label>
+          <input required name="childFullNameOrCode" ng-model="quiz.child.fullNameOrCode">
+
+          <div ng-messages="quizInfoForm.childFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+
+        <md-input-container flex="100">
+          <label>Institution</label>
+          <input required name="childInstitution" ng-model="quiz.child.institution">
+
+          <div ng-messages="quizInfoForm.childInstitution.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+
+        <md-input-container flex="100">
+          <label>Age</label>
+          <input required name="childAge" ng-model="quiz.child.age" ng-pattern="/^\d+$/">
+
+          <div ng-messages="quizInfoForm.childAge.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-message="required">This is required.</div>
+            <div ng-message="pattern">This should be an integer.</div>
+          </div>
+
+        </md-input-container>
+
+
+        <md-input-container flex="100">
+          <md-select name="childGender"
+                     ng-model="quiz.child.gender"
+                     placeholder="Gender"
+                     required>
+
+            <md-option ng-value="opt"
+                       ng-repeat="opt in gender">
+              {{ opt }}
+            </md-option>
+          </md-select>
+
+          <div ng-messages="quizInfoForm.childGender.$error" ng-if="quizInfoForm.$dirty">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </md-whitefram>
+
+
+      <div layout="row"
+           layout-align="space-around center">
+
+        <md-button ng-click="closeDialog()"
+                   class="md-raised"
+                   flex>
+          Cancel
+        </md-button>
+
+        <md-button ng-click="run($event)"
+                   class="md-primary md-raised"
+                   ng-disabled="quizInfoForm.$invalid"
+                   flex>
+          Confirm
+        </md-button>
+      </div>
+    </form>
+  </md-dialog-content>
+</md-dialog>

@@ -33,17 +33,40 @@
       createObserver: _createObserver,
       postProcess: _postProcess,
       updateQuizStub: _updateQuizStub,
-      logQuiz: _logQuiz
+      logQuizInfoUpdate: _logQuizInfoUpdate,
+      logQuiz: _logQuiz,
+      updateQuizInfo: _updateQuizInfo
     };
 
     var service = {
       createQuiz: createQuiz,
       finishQuiz: finishQuiz,
+      updateQuizInfo: updateQuizInfo,
       getLocalQuiz: getLocalQuiz,
       queryQuizzesByState: queryQuizzesByState
     };
     return service;
     //////
+
+    function updateQuizInfo() {
+      return quizDbService.
+        putQuiz(_quiz, _quiz._id, _quiz._rev)
+        .then(_utils.updateQuizInfo);
+    }
+
+    function _updateQuizInfo(response) {
+      var stub = _updateQuizStub(response);
+
+      _utils.logQuizInfoUpdate();
+      return stub;
+    }
+
+    function _logQuizInfoUpdate() {
+      readableLogService.saveLog(
+        readableLogService.createObserverLog(_quiz))
+        .then(readableLogService.saveLog(
+          readableLogService.createChildLog(_quiz)));
+    }
 
     function createQuiz(childData, observerData) {
 
@@ -82,11 +105,22 @@
     function _logQuiz() {
 
       if (_quiz.state === STATE.created) {
-        readableLogService.saveLogs(
-          [readableLogService.createQuizLog(_quiz),
-            readableLogService.createObserverLog(_quiz),
-            readableLogService.createChildLog(_quiz)]
-        );
+        //readableLogService.saveLogs(
+        //  [,
+        //    readableLogService.createObserverLog(_quiz),
+        //    readableLogService.createChildLog(_quiz)]
+        //);
+        //
+        readableLogService.saveLog(
+          readableLogService.createQuizLog(_quiz)
+        )
+          .then(readableLogService.saveLog(
+            readableLogService.createObserverLog(_quiz)
+          ))
+          .then(readableLogService.saveLog(
+            readableLogService.createChildLog(_quiz)
+          ))
+
       } else if (_quiz.state === STATE.finished) {
         readableLogService.saveLog(
           readableLogService.createQuizLog(_quiz)
@@ -95,7 +129,7 @@
     }
 
     function finishQuiz() {
-      if(_quiz.state !== STATE.finished) {
+      if (_quiz.state !== STATE.finished) {
         _quiz.endTimeStamp = new Date().toJSON();
         _quiz.state = STATE.finished;
         return quizDbService.

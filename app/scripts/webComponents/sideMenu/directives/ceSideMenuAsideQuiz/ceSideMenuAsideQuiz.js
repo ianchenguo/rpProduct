@@ -16,7 +16,8 @@
     'audioRecordingService',
     'sideMenuService',
     'readableLogService',
-    '$mdToast'];
+    '$mdToast',
+    '$mdDialog'];
   function ceSideMenuAsideQuiz($state,
                                questionLevelService,
                                questionService,
@@ -24,23 +25,18 @@
                                audioRecordingService,
                                sideMenuService,
                                readableLogService,
-                               $mdToast) {
+                               $mdToast,
+                               $mdDialog) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.html',
       scope: {},
       controllerAs: 'vm',
-      controller: controller,
+      controller: ['$scope', controller],
       bindToController: true
     };
 
-    function controller() {
-
-      //(function activate() {
-      //  console.log('SIDE MENU START');
-      //  sideMenuService.getExpandedStage().isShown = false;
-      //  sideMenuService.setExpandedStage({});
-      //}());
+    function controller($scope) {
 
       var vm = this;
 
@@ -48,8 +44,8 @@
       var toggleStage = function toggleStage(stage) {
         stage.isShown = !stage.isShown;
 
-        if(stage.isShown == true) {
-          if(stage != sideMenuService.getExpandedStage()){
+        if (stage.isShown == true) {
+          if (stage != sideMenuService.getExpandedStage()) {
             sideMenuService.getExpandedStage().isShown = false;
             sideMenuService.setExpandedStage(stage);
           }
@@ -70,6 +66,31 @@
         return stage.isShown;
       };
 
+      function modifyQuizInfo() {
+        $mdDialog.show({
+          clickOutsideToClose: false,
+          scope: $scope,
+          preserveScope: true,
+          templateUrl: 'scripts/webComponents/quizInfo/popupQuizInfo.html',
+          controller: function DialogController($scope, $mdDialog) {
+
+            $scope.quiz = quizService.getLocalQuiz();
+            $scope.gender = ['male', 'female'];
+
+            $scope.closeDialog = function () {
+              $mdDialog.cancel();
+            };
+            $scope.run = function () {
+
+              $mdDialog.hide().then(function () {
+                  quizService.updateQuizInfo();
+              });
+            }
+          }
+        });
+      }
+
+      vm.modifyQuizInfo = modifyQuizInfo;
 
       vm.questions = sideMenuService.getAllStages();
       vm.activateStage = sideMenuService.activateStage;

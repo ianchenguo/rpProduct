@@ -1,6 +1,6 @@
 <ion-view>
   <ion-nav-title>
-    <h1 class="title">Quiz Info</h1>
+    <h1 class="title light">Quiz Info</h1>
   </ion-nav-title>
 
   <ion-content>
@@ -119,6 +119,12 @@
         <div layout="row"
              layout-align="space-around center">
 
+          <md-button ui-sref="app.welcome"
+                     class="md-raised"
+                     flex>
+            Back
+          </md-button>
+
           <md-button ng-click="vm.go($event)"
                      ng-disabled="quizInfoForm.$invalid"
                      class="md-primary md-raised"
@@ -126,16 +132,10 @@
             Start Quiz
           </md-button>
           <!--<md-button ng-click="vm.go($event)"-->
-                     <!--class="md-primary md-raised"-->
-                     <!--flex>-->
-            <!--Start Quiz-->
+          <!--class="md-primary md-raised"-->
+          <!--flex>-->
+          <!--Start Quiz-->
           <!--</md-button>-->
-
-          <md-button ui-sref="app.welcome"
-                     class="md-raised"
-                     flex>
-            Back
-          </md-button>
         </div>
 
       </form>

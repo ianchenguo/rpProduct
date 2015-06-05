@@ -16,7 +16,8 @@
       getQuizDetail: getQuizDetail,
       loadSingQuizReport: loadSingQuizReport,
       getAllDocsOfQuiz: getAllDocsOfQuiz,
-      deleteAllDocsOfQuiz:deleteAllDocsOfQuiz
+      deleteAllDocsOfQuiz:deleteAllDocsOfQuiz,
+      compactDatabase:compactDatabase
     };
 
     return service;
@@ -190,6 +191,10 @@
 
     function deleteAllDocsOfQuiz(quizId) {
       return reportDbService.deleteDocsOfQuiz(quizId);
+    }
+
+    function compactDatabase(){
+      return reportDbService.compactDatabase();
     }
   }
 }());

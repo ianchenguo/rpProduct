@@ -73,7 +73,7 @@
     function createObserverLog(quiz) {
 
       return new ReadableLogEntry({
-        timeStamp: quiz.startTimeStamp,
+        timeStamp: new Date().toJSON(),
         event: READABLE_LOG_EVENTS.observerInfoStored,
         detail: _concatPersonDetail(quiz.observer),
         quiz: memory.quizId
@@ -83,7 +83,7 @@
 
     function createChildLog(quiz) {
       return new ReadableLogEntry({
-        timeStamp: quiz.startTimeStamp,
+        timeStamp: new Date().toJSON(),
         event: READABLE_LOG_EVENTS.childInfoStored,
         detail: _concatPersonDetail(quiz.child),
         quiz: memory.quizId
