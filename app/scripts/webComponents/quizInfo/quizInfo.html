@@ -119,16 +119,20 @@
         <div layout="row"
              layout-align="space-around center">
 
-          <md-button ui-sref="app.welcome"
-                     class="md-raised"
-                     flex>
+          <md-button
+            nav-transition="none"
+            ui-sref="app.welcome"
+            class="md-raised"
+            flex>
             Back
           </md-button>
 
-          <md-button ng-click="vm.go($event)"
-                     ng-disabled="quizInfoForm.$invalid"
-                     class="md-primary md-raised"
-                     flex>
+          <md-button
+            nav-transition="none"
+            ng-click="vm.go($event)"
+            ng-disabled="quizInfoForm.$invalid"
+            class="md-primary md-raised"
+            flex>
             Start Quiz
           </md-button>
           <!--<md-button ng-click="vm.go($event)"-->
