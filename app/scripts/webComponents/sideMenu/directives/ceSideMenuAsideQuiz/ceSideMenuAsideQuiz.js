@@ -17,7 +17,7 @@
     'sideMenuService',
     'readableLogService',
     '$mdToast',
-    '$mdDialog'];
+    '$ionicModal'];
   function ceSideMenuAsideQuiz($state,
                                questionLevelService,
                                questionService,
@@ -26,7 +26,7 @@
                                sideMenuService,
                                readableLogService,
                                $mdToast,
-                               $mdDialog) {
+                               $ionicModal) {
     return {
       restrict: 'E',
       templateUrl: 'scripts/webComponents/sideMenu/directives/ceSideMenuAsideQuiz/ceSideMenuAsideQuiz.html',
@@ -66,31 +66,34 @@
         return stage.isShown;
       };
 
-      function modifyQuizInfo() {
-        $mdDialog.show({
-          clickOutsideToClose: false,
+      $scope.quiz = quizService.getLocalQuiz();
+
+      $ionicModal.fromTemplateUrl(
+        'scripts/webComponents/quizInfo/popupQuizInfo.html',
+        {
           scope: $scope,
-          preserveScope: true,
-          templateUrl: 'scripts/webComponents/quizInfo/popupQuizInfo.html',
-          controller: function DialogController($scope, $mdDialog) {
-
-            $scope.quiz = quizService.getLocalQuiz();
-            $scope.gender = ['male', 'female'];
-
-            $scope.closeDialog = function () {
-              $mdDialog.cancel();
-            };
-            $scope.run = function () {
-
-              $mdDialog.hide().then(function () {
-                  quizService.updateQuizInfo();
-              });
-            }
-          }
+          animation: 'slide-in-up'
+        }).then(function (modal) {
+          $scope.modal = modal
         });
-      }
 
-      vm.modifyQuizInfo = modifyQuizInfo;
+      $scope.modifyQuizInfo = function () {
+        $scope.modal.show()
+      };
+
+      $scope.closeModalWithYes = function () {
+        quizService.updateQuizInfo();
+        $scope.modal.hide();
+      };
+
+      $scope.closeModalWithNo = function () {
+        $scope.modal.remove();
+      };
+
+      $scope.$on('$destroy', function () {
+        $scope.modal.remove();
+      });
+
 
       vm.questions = sideMenuService.getAllStages();
       vm.activateStage = sideMenuService.activateStage;

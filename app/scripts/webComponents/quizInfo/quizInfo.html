@@ -11,9 +11,9 @@
 
 
       <form name="quizInfoForm"
+            class="quiz-info-form"
             flex="60"
             novalidate>
-
 
         <md-whitefram class="md-whiteframe-z1 ce-title-stripe"
                       layout
@@ -29,24 +29,34 @@
                       layout-wrap
                       layout-align="center center">
 
-          <md-input-container flex="100">
-            <label>Full Name / Code</label>
-            <input required name="observerFullNameOrCode" ng-model="vm.observer.fullNameOrCode">
+          <div class="list" flex="100">
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Full Name / Code</span>
+              <input type="text"
+                     placeholder="Full Name / Code"
+                     required
+                     name="observerFullNameOrCode"
+                     ng-model="vm.observer.fullNameOrCode">
 
-            <div ng-messages="quizInfoForm.observerFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
+              <div ng-messages="quizInfoForm.observerFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
+                <div ng-message="required" class="form-invalid-text"><span>This is required.</span></div>
+              </div>
+            </label>
 
-          <md-input-container flex="100">
-            <label>Email</label>
-            <input required name="observerEmail" ng-model="vm.observer.email">
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Email</span>
+              <input type="email"
+                     placeholder="Email"
+                     required
+                     name="observerEmail"
+                     ng-model="vm.observer.email">
 
-            <div ng-messages="quizInfoForm.observerEmail.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-              <div ng-message="email">This should be an email address.</div>
-            </div>
-          </md-input-container>
+              <div ng-messages="quizInfoForm.observerEmail.$error" ng-if="quizInfoForm.$dirty">
+                <div ng-message="required" class="form-invalid-text"><span>This is required.</span></div>
+                <div ng-message="email" class="form-invalid-text"><span>This should be an email address.</span></div>
+              </div>
+            </label>
+          </div>
         </md-whitefram>
 
 
@@ -65,54 +75,63 @@
                       layout-wrap
                       layout-align="center center">
 
-          <md-input-container flex="100">
-            <label>Full Name / Code</label>
-            <input required name="childFullNameOrCode" ng-model="vm.child.fullNameOrCode">
+          <div class="list" flex="100">
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Full Name / Code</span>
+              <input type="text"
+                     placeholder="Full Name / Code"
+                     required
+                     name="childFullNameOrCode"
+                     ng-model="vm.child.fullNameOrCode">
 
-            <div ng-messages="quizInfoForm.childFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
+              <div ng-messages="quizInfoForm.childFullNameOrCode.$error" ng-if="quizInfoForm.$dirty">
+                <div ng-message="required" class="form-invalid-text"><span>This is required.</span></div>
+              </div>
+            </label>
 
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Institution</span>
+              <input type="text"
+                     placeholder="Institution"
+                     required
+                     name="childInstitution"
+                     ng-model="vm.child.institution">
 
-          <md-input-container flex="100">
-            <label>Institution</label>
-            <input required name="childInstitution" ng-model="vm.child.institution">
+              <div ng-messages="quizInfoForm.childInstitution.$error" ng-if="quizInfoForm.$dirty">
+                <div ng-message="required" class="form-invalid-text"><span>This is required.</span></div>
+              </div>
+            </label>
 
-            <div ng-messages="quizInfoForm.childInstitution.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
+            <label class="item item-input item-floating-label">
+              <span class="input-label">Age</span>
+              <input type="text"
+                     placeholder="Age"
+                     required
+                     name="childAge"
+                     ng-model="vm.child.age"
+                     ng-pattern="/^\d+$/">
 
+              <div ng-messages="quizInfoForm.childAge.$error" ng-if="quizInfoForm.$dirty">
+                <div ng-message="required" class="form-invalid-text"><span>This is required.</span></div>
+                <div ng-message="pattern" class="form-invalid-text"><span>This should be an integer.</span></div>
+              </div>
+            </label>
 
-          <md-input-container flex="100">
-            <label>Age</label>
-            <input required name="childAge" ng-model="vm.child.age" ng-pattern="/^\d+$/">
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Gender
+              </div>
+              <select required name="childGender" ng-model="vm.child.gender">
+                <option ng-selected="quiz.child.gender === 'male'">Male</option>
+                <option ng-selected="quiz.child.gender === 'female'">Female</option>
+              </select>
 
-            <div ng-messages="quizInfoForm.childAge.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-              <div ng-message="pattern">This should be an integer.</div>
-            </div>
+              <div ng-messages="quizInfoForm.childGender.$error" ng-if="quizInfoForm.$dirty">
+                <div ng-message="required" class="form-invalid-text"><span>This is required.</span></div>
+              </div>
+            </label>
 
-          </md-input-container>
-
-
-          <md-input-container flex="100">
-            <md-select name="childGender"
-                       ng-model="vm.child.gender"
-                       placeholder="Gender"
-                       required>
-
-              <md-option ng-value="opt"
-                         ng-repeat="opt in vm.gender">
-                {{ opt }}
-              </md-option>
-            </md-select>
-
-            <div ng-messages="quizInfoForm.childGender.$error" ng-if="quizInfoForm.$dirty">
-              <div ng-message="required">This is required.</div>
-            </div>
-          </md-input-container>
+          </div>
         </md-whitefram>
 
 

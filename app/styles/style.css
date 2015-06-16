@@ -197,3 +197,7 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.form-invalid-text span {
+  color:red;
+}
